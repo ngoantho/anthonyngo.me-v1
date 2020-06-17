@@ -1,28 +1,47 @@
 {
   "name": "ngoantho.github.io",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "My personal portfolio.",
-  "repository": "https://github.com/ngoantho/ngoantho.github.io",
-  "author": "Anthony Ngo",
-  "private": true,
+  "author": "Anthony Ngo <ngo.anthony.me@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngoantho/ngoantho.github.io"
+  },
   "alias": {
     "react": "preact/compat",
     "react-dom": "preact/compat"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
-    "node-sass": "^4.14.1",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-nuke-dist": "^1.0.1"
-  },
-  "dependencies": {
-    "preact": "^10.4.4"
   },
   "scripts": {
     "dev": "parcel ./src/index.html",
     "build:optim": "parcel build ./src/index.html --experimental-scope-hoisting",
     "build": "parcel build ./src/index.html"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-preact": "^1.1.1",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "node-sass": "^4.14.1",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-nuke-dist": "^1.0.1",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "preact": "^10.4.4"
   },
   "peerDependencies": {
     "@babel/core": "^7.10.2"
