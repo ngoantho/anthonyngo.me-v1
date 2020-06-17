@@ -23,7 +23,7 @@ jobs:
     - name: Test
       run: npm run test --if-present
     - name: Build
-      run: npm run build --if-present
+      run: npm run build:optim --if-present
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
