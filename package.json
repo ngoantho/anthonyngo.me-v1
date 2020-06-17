@@ -15,7 +15,8 @@
   "scripts": {
     "dev": "parcel ./src/index.html",
     "build:optim": "parcel build ./src/index.html --experimental-scope-hoisting",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src/index.html",
+    "format": "prettier --write \"**/*.{js,jsx,css,md}\""
   },
   "husky": {
     "hooks": {
