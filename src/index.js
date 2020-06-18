@@ -1,3 +1,5 @@
-import { h, render } from "preact";
+/* eslint-disable no-unused-vars -- ignore h, Fragment */
+import { h, Fragment, render } from "preact";
 
-render(<h1>Hello world!!!!!</h1>, document.body);
+const App = () => <></>;
+render(<App />, document.body);
