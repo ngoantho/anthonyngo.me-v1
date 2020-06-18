@@ -1,6 +1,7 @@
 {
   "extends": [
     "preact",
+    "eslint:recommended",
     "prettier"
   ],
   "parserOptions": {

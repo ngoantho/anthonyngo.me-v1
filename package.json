@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "build:optim": "parcel build ./src/index.html --experimental-scope-hoisting",
+    "build:optim": "parcel build ./src/index.html --experimental-scope-hoisting --no-source-maps --no-autoinstall",
     "build": "parcel build ./src/index.html",
     "format": "prettier --write \"**/*.{js,jsx,css,md}\""
   },
@@ -28,6 +28,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
     "babel-eslint": "^10.1.0",
@@ -43,7 +44,5 @@
   "dependencies": {
     "preact": "^10.4.4"
   },
-  "peerDependencies": {
-    "@babel/core": "^7.10.2"
-  }
+  "peerDependencies": {}
 }
