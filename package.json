@@ -53,7 +53,5 @@
     "preact": "^10.4.4",
     "react-html-parser": "^2.0.2"
   },
-  "peerDependencies": {
-    "@babel/core": "^7.0.0-0"
-  }
+  "peerDependencies": {}
 }
