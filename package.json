@@ -37,17 +37,22 @@
     "eslint": "^7.2.0",
     "eslint-config-preact": "^1.1.1",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-compat": "latest",
+    "eslint-plugin-jest": "latest",
+    "eslint-plugin-react": "latest",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "parcel-bundler": "^1.12.4",
+    "posthtml": "^0.13.0",
     "prettier": "^2.0.5"
   },
   "dependencies": {
     "postcss-modules": "^2.0.0",
     "postcss-preset-env": "^6.7.0",
-    "preact": "^10.4.4"
+    "preact": "^10.4.4",
+    "react-html-parser": "^2.0.2"
   },
   "peerDependencies": {
-    "@babel/core": "^7.10.2"
+    "@babel/core": "^7.0.0-0"
   }
 }

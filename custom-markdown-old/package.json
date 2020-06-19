@@ -1,0 +1,22 @@
+{
+  "name": "parcel-plugin-custom-markdown",
+  "version": "1.0.0",
+  "description": "Parcel plugin to generate HTML and metadata dictionary from Markdown files",
+  "main": "index.js",
+  "author": "Anthony Ngo <ngo.anthony.me@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngoantho/ngoantho.github.io.git"
+  },
+  "dependencies": {
+    "markdown-it": "^11.0.0",
+    "markdown-it-meta": "^0.0.1"
+  },
+  "devDependencies": {
+    "parcel-assert-bundle-tree": "^1.0.0",
+    "parcel-bundler": "^1.12.4",
+    "serialize-to-js": "^3.1.1"
+  }
+}
