@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/node,yarn,macos
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,yarn,macos
+# Created by https://www.toptal.com/developers/gitignore/api/node,yarn,macos,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,yarn,macos,visualstudiocode
 
 ### macOS ###
 # General
@@ -139,6 +139,18 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
 ### yarn ###
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 
@@ -151,9 +163,7 @@ dist
 # .yarn/cache and .pnp.* may be safely ignored, but you'll need to run yarn install
 # to regenerate them between each branch switch.
 # Uncomment the following lines if you're not using Zero-Installs:
-#.yarn/cache
-#.pnp.*
+# .yarn/cache
+# .pnp.*
 
-# End of https://www.toptal.com/developers/gitignore/api/node,yarn,macos
-
-.vscode
+# End of https://www.toptal.com/developers/gitignore/api/node,yarn,macos,visualstudiocode
