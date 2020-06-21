@@ -13,6 +13,14 @@
   ],
   "plugins": [
     [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src"
+        }
+      }
+    ],
+    [
       "@babel/plugin-transform-react-jsx",
       {
         "pragma": "h",
