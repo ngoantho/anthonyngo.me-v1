@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm instsll
+      run: npm install
     - name: Build
       run: npm run build:optim
     - name: Deploy
