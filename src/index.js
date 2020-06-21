@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars -- ignore h, Fragment */
-import { h, Fragment, render } from "preact";
+import { h, render } from "preact";
+import Landing from "@/components/sections/landing";
 
-const App = () => <></>;
-render(<App />, document.body);
+render(<Landing />, document.body);
