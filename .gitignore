@@ -1,6 +1,37 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Created by https://www.toptal.com/developers/gitignore/api/node,yarn,macos,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=node,yarn,macos,visualstudiocode
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+/.eslintcache
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Created by https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,visualstudiocode
 
 ### macOS ###
 # General
@@ -30,6 +61,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+<<<<<<< HEAD
 ### Node ###
 # Logs
 logs
@@ -139,6 +171,8 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+=======
+>>>>>>> develop-next
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -151,6 +185,7 @@ dist
 # Ignore all local history of files
 .history
 
+<<<<<<< HEAD
 ### yarn ###
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 
@@ -167,3 +202,6 @@ dist
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,yarn,macos,visualstudiocode
+=======
+# End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode
+>>>>>>> develop-next

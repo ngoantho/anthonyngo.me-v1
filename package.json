@@ -1,62 +1,47 @@
 {
   "name": "ngoantho.github.io",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/ngoantho/ngoantho.github.io"
   },
   "author": "Anthony Ngo <ngo.anthony.me@gmail.com>",
   "license": "MIT",
-  "alias": {
-    "react": "preact/compat",
-    "react-dom": "preact/compat"
-  },
-  "browserslist": "defaults",
-  "scripts": {
-    "dev": "parcel ./src/index.html",
-    "build:optim": "parcel build ./src/index.html --experimental-scope-hoisting --no-source-maps --no-autoinstall",
-    "build": "parcel build ./src/index.html",
-    "format": "prettier --write \"**/*.{js,jsx,css,md}\""
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.js": "eslint --cache --cache-location=\"./eslintcache/\" --fix",
     "*.{js,css,md}": "prettier --write"
   },
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
-    "@babel/preset-react": "^7.10.1",
-    "babel-plugin-module-resolver": "^4.0.0",
-    "eslint": "^7.3.0",
-    "eslint-config-preact": "^1.1.1",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-import-resolver-babel-module": "^5.1.2",
-    "eslint-plugin-compat": "^3.7.0",
-    "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jest": "^23.13.2",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.4",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-custom-markdown": "file:./parcel-plugin-custom-markdown",
-    "prettier": "^2.0.5"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.28",
-    "normalize.css": "^8.0.1",
-    "postcss-modules": "^2.0.0",
-    "postcss-normalize": "^9.0.0",
-    "postcss-preset-env": "^6.7.0",
-    "preact": "^10.4.4",
-    "react-html-parser": "^2.0.2"
+    "@mdx-js/loader": "^1.6.6",
+    "@next/mdx": "^9.4.4",
+    "imagemin-optipng": "^8.0.0",
+    "next": "9.4.4",
+    "next-compose-plugins": "^2.2.0",
+    "next-optimized-images": "^2.6.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "sass": "^1.26.9"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.21.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "responsive-loader": "^1.2.0",
+    "sharp": "^0.25.4"
   }
 }
