@@ -13,7 +13,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --cache-location='./eslintcache/' --fix",
+    "*.js": "eslint --cache --cache-location=\"./eslintcache/\" --fix",
     "*.{js,css,md}": "prettier --write"
   },
   "scripts": {
