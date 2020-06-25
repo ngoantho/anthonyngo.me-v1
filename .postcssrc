@@ -1,7 +1,0 @@
-{
-  "modules": true,
-  "plugins": {
-    "postcss-preset-env": {},
-    "postcss-normalize": {}
-  }
-}
