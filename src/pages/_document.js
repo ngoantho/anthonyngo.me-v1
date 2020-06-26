@@ -5,11 +5,12 @@ const { language, description, keywords, url } = site;
 class AppDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
-    const icon192 = require("@/images/favicon192.png");
-    const icon96 = require("@/images/favicon96.png");
-    const icon72 = require("@/images/favicon72.png");
-    const thumbnail = require("@/images/favicon.png");
-    return { ...initialProps, thumbnail, icon72, icon96, icon192 };
+    const icon192 = require("public/icons/favicon192.png");
+    const icon96 = require("public/icons/favicon96.png");
+    const icon72 = require("public/icons/favicon72.png");
+    const thumbnail = require("public/icons/favicon.png");
+    const favicon = require("public/icons/favicon.ico");
+    return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 };
   }
 
   render() {
@@ -73,8 +74,9 @@ class AppDocument extends Document {
             sizes="96x96"
             href={this.props.icon96}
           />
-          <link rel="mask-icon" href="/favicon.ico" color="#5bbad5" />
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="mask-icon" href={this.props.favicon} color="#5bbad5" />
+          <link rel="shortcut icon" href={this.props.favicon} />
+          <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>
           <Main />
