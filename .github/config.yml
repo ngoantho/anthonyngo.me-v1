@@ -1,0 +1,3 @@
+todo:
+  keyword: ['@todo', 'todo', 'TODO']
+  bodyKeyword: ['@body', 'body', 'BODY']
