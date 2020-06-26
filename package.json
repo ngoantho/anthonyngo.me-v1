@@ -19,11 +19,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "next start"
+    "start": "next build && next start"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@mdx-js/loader": "^1.6.6",
     "@next/mdx": "^9.4.4",
+    "emotion-theming": "^10.0.27",
     "imagemin-optipng": "^8.0.0",
     "next": "9.4.4",
     "next-compose-plugins": "^2.2.0",
@@ -40,8 +43,6 @@
     "eslint-plugin-import": "^2.21.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5",
-    "responsive-loader": "^1.2.0",
-    "sharp": "^0.25.4"
+    "prettier": "^2.0.5"
   }
 }
