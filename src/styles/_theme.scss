@@ -1,0 +1,32 @@
+// colors
+$primary: #F9F7F7;
+$secondary: #DBE2EF;
+$tertiary: #3F72AF;
+$quaternary: #112D4E;
+
+// fonts
+$lato: "Lato", monospace;
+$raleway: "Raleway", sans-serif;
+
+// weights
+$thin: 100;
+$light: 300;
+$regular: 400;
+$bold: 700;
+$black: 900;
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+  tertiary: $tertiary;
+  quaternary: $quaternary;
+  
+  lato: $lato;
+  raleway: $raleway;
+  
+  thin: $thin;
+  light: $light;
+  regular: $regular;
+  bold: $bold;
+  black: $black;
+}

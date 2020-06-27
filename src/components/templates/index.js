@@ -1,10 +1,2 @@
-/**
- * @todo Populate the remaining templates
- * @body - [ ] About
- *       - [ ] Experience
- *       - [ ] Education?
- *       - [ ] Contact me?
- *       - [ ] Footer
- */
-
+// TODO add more templates
 export { default as Landing } from "./Landing";

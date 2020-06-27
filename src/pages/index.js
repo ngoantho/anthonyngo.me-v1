@@ -2,10 +2,7 @@
 import Head from "next/head";
 import Landing from "@/components/templates/Landing";
 
-/**
- * @todo Landing Page
- * @body Grab metadata from dynamic imports of templates, push metadata to global React context, populate Header list
- */
+// TODO Landing page
 const Home = () => {
   return (
     <div className="container">

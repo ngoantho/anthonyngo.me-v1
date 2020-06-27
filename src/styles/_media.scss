@@ -1,0 +1,19 @@
+$giant: 1440;
+$bigDesktop: 1200;
+$desktop: 1000;
+$tablet: 768;
+$tablet2: 600;
+$phone: 376;
+$phone2: 480;
+$tiny: 330;
+
+:export {
+  giant: $giant;
+  bigDesktop: $bigDesktop;
+  desktop: $desktop;
+  tablet: $tablet;
+  tablet2: $tablet2;
+  phone: $phone;
+  phone2: $phone2;
+  tiny: $tiny;
+}

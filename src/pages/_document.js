@@ -75,7 +75,6 @@ class AppDocument extends Document {
             sizes="96x96"
             href={this.props.icon96}
           />
-          <link rel="mask-icon" href={this.props.favicon} color="#5bbad5" />
           <link rel="shortcut icon" href={this.props.favicon} />
           <link rel="manifest" href="/manifest.json" />
         </Head>
