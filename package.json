@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "next build && next start"
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",

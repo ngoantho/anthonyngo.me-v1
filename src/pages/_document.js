@@ -4,12 +4,13 @@ const { language, description, keywords, url } = site;
 
 class AppDocument extends Document {
   static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
     const icon192 = require("public/icons/favicon192.png");
     const icon96 = require("public/icons/favicon96.png");
     const icon72 = require("public/icons/favicon72.png");
     const thumbnail = require("public/icons/favicon.png");
     const favicon = require("public/icons/favicon.ico");
+
+    const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 };
   }
 
@@ -21,7 +22,7 @@ class AppDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
           <meta
             name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
           />
 
           <meta name="application-name" content={name} />
