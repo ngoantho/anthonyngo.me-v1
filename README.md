@@ -7,7 +7,7 @@
     <img alt="License: MIT" src="https://img.shields.io/github/license/ngoantho/portfolio" />
   </a>
   
-  [![Netlify Status](https://api.netlify.com/api/v1/badges/5b53bef7-3b77-4226-b2d1-e2d4c7eace9e/deploy-status)](https://app.netlify.com/sites/ngoantho/deploys)
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/5b53bef7-3b77-4226-b2d1-e2d4c7eace9e/deploy-status)](https://ngoantho.netlify.app)
 </p>
 
 > Source code of my personal portfolio built with Next.js & MDX
