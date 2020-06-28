@@ -1,16 +1,18 @@
-import App from "next/app";
-import Head from "next/head";
-import { ThemeProvider } from "emotion-theming";
+import App from "next/app"
+import Head from "next/head"
+import { ThemeProvider } from "emotion-theming"
 
-import theme from "@/styles/_theme.scss";
-import "@/styles/main.scss";
-import { site } from "@/config";
-const favicon = require("public/icons/favicon.ico");
-const { title } = site;
+import "@/styles/main.scss"
+import theme from "@/styles/_theme.scss"
+import { site } from "@/config"
+const favicon = (async () => {
+  return (await import("public/icons/favicon.ico")).default
+})()
+const { title } = site
 
 class MyApp extends App {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps } = this.props
 
     return (
       <>
@@ -24,8 +26,8 @@ class MyApp extends App {
           <Component {...pageProps} />
         </ThemeProvider>
       </>
-    );
+    )
   }
 }
 
-export default MyApp;
+export default MyApp

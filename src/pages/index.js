@@ -1,22 +1,28 @@
 /* eslint-disable no-unused-vars */
-import Head from "next/head";
-import Landing from "@/components/templates/Landing";
+import Head from "next/head"
+import { Landing } from "@/components/templates"
 
 // TODO Landing page
-const Home = () => {
+const Home = ({ metadata }) => {
   return (
     <div className="container">
       <main>
         <Landing />
       </main>
     </div>
-  );
-};
-
-export async function getStaticProps() {
-  return {
-    props: {},
-  };
+  )
 }
 
-export default Home;
+export async function getStaticProps() {
+  const { metadata: Landing } = await import(
+    "@/components/templates/Landing.mdx"
+  )
+
+  return {
+    props: {
+      metadata: [Landing],
+    },
+  }
+}
+
+export default Home
