@@ -2,13 +2,13 @@ import Document, { Html, Head, Main, NextScript } from "next/document"
 import { site, contactMe, name } from "@/config"
 const { language, description, keywords, url } = site
 
-class AppDocument extends Document {
+export default class AppDocument extends Document {
   static async getInitialProps(ctx) {
-    const { default: icon192 } = await import("public/icons/favicon192.png")
-    const { default: icon96 } = await import("public/icons/favicon96.png")
-    const { default: icon72 } = await import("public/icons/favicon72.png")
-    const { default: thumbnail } = await import("public/icons/favicon.png")
-    const { default: favicon } = await import("public/icons/favicon.ico")
+    const { default: icon192 } = await import("public/favicon192.png")
+    const { default: icon96 } = await import("public/favicon96.png")
+    const { default: icon72 } = await import("public/favicon72.png")
+    const { default: thumbnail } = await import("public/favicon.png")
+    const { default: favicon } = await import("public/favicon.ico")
 
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 }
@@ -86,5 +86,3 @@ class AppDocument extends Document {
     )
   }
 }
-
-export default AppDocument

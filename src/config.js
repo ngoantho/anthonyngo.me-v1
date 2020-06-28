@@ -4,7 +4,7 @@ export const site = {
     "Anthony Ngo is an aspiring software engineer based in Seattle, WA learning to develop exceptional websites, applications, and anything in between.",
   keywords:
     "Anthony Ngo, Anthony, Ngo, ngoantho, internship, web developer, javascript, SeattleU",
-  url: "anthony.ngo.me",
+  url: "anthonyngo.me",
   language: "en-US",
 }
 export const contactMe = {
@@ -27,5 +27,5 @@ export const contactMe = {
   },
 }
 export const name = "Anthony Ngo"
-export const email = "ngo.anthony.me@gmail.com"
+export const email = "anthonyngo.info@gmail.com"
 export const location = "Seattle, WA"
