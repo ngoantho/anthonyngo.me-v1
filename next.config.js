@@ -2,7 +2,7 @@
 const withPlugins = require("next-compose-plugins")
 const optimizedImages = require("next-optimized-images")
 const nextOffline = require("next-offline")
-const { PHASE_PRODUCTION_BUILD } = require("next/constants")
+const { PHASE_PRODUCTION_BUILD, PHASE_EXPORT } = require("next/constants")
 const bundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 })
@@ -21,9 +21,12 @@ module.exports = withPlugins(
         [PHASE_PRODUCTION_BUILD]: {
           inlineImageLimit: 16384,
         },
+        [PHASE_EXPORT]: {
+          inlineImageLimit: 16384,
+        },
       },
     ],
-    [bundleAnalyzer, {}, [PHASE_PRODUCTION_BUILD]],
+    [bundleAnalyzer, {}, [PHASE_PRODUCTION_BUILD, PHASE_EXPORT]],
     [
       nextOffline,
       {
@@ -42,7 +45,7 @@ module.exports = withPlugins(
           ],
         },
       },
-      [PHASE_PRODUCTION_BUILD],
+      [PHASE_PRODUCTION_BUILD, PHASE_EXPORT],
     ],
   ],
   {
