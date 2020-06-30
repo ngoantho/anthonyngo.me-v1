@@ -1,17 +1,17 @@
-import Document, { Html, Head, Main, NextScript } from "next/document"
-import { site, contactMe, name } from "@/config"
-const { language, description, keywords, url } = site
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import { site, contactMe, name } from "@/config";
+const { language, description, keywords, url } = site;
 
 export default class AppDocument extends Document {
   static async getInitialProps(ctx) {
-    const { default: icon192 } = await import("public/favicon192.png")
-    const { default: icon96 } = await import("public/favicon96.png")
-    const { default: icon72 } = await import("public/favicon72.png")
-    const { default: thumbnail } = await import("public/favicon.png")
-    const { default: favicon } = await import("public/favicon.ico")
+    const { default: icon192 } = await import("public/favicon192.png");
+    const { default: icon96 } = await import("public/favicon96.png");
+    const { default: icon72 } = await import("public/favicon72.png");
+    const { default: thumbnail } = await import("public/favicon.png");
+    const { default: favicon } = await import("public/favicon.ico");
 
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 }
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 };
   }
 
   render() {
@@ -83,6 +83,6 @@ export default class AppDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

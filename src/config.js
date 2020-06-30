@@ -6,7 +6,7 @@ export const site = {
     "Anthony Ngo, Anthony, Ngo, ngoantho, internship, web developer, javascript, SeattleU",
   url: "anthonyngo.me",
   language: "en-US",
-}
+};
 export const contactMe = {
   LinkedIn: {
     icon: "linkedin",
@@ -25,7 +25,7 @@ export const contactMe = {
     url: "https://twitter.com/@vadlus",
     handle: "@vadlus",
   },
-}
-export const name = "Anthony Ngo"
-export const email = "anthonyngo.info@gmail.com"
-export const location = "Seattle, WA"
+};
+export const name = "Anthony Ngo";
+export const email = "anthonyngo.info@gmail.com";
+export const location = "Seattle, WA";

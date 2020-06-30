@@ -3,7 +3,5 @@
     "next/babel",
     "@emotion/babel-preset-css-prop"
   ],
-  "plugins": [
-    "react-html-attrs"
-  ]
+  "plugins": []
 }

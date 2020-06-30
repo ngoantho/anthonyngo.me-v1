@@ -1,18 +1,18 @@
 /* eslint-disable no-undef */
-const withPlugins = require("next-compose-plugins")
-const optimizedImages = require("next-optimized-images")
-const nextOffline = require("next-offline")
+const withPlugins = require("next-compose-plugins");
+const optimizedImages = require("next-optimized-images");
+const nextOffline = require("next-offline");
 const {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
   PHASE_EXPORT,
-} = require("next/constants")
+} = require("next/constants");
 const bundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
-})
+});
 const mdx = require("@next/mdx")({
   extension: /\.mdx?$/,
-})
+});
 
 module.exports = withPlugins(
   [
@@ -51,21 +51,22 @@ module.exports = withPlugins(
   ],
   {
     pageExtensions: ["js", "jsx", "mdx"],
-    webpack(config) {
+    webpack(config, { dev }) {
       config.resolve.alias = {
         ...config.resolve.alias,
         react: "preact/compat",
         "react-dom": "preact/compat",
         "react-render-to-string": "preact-render-to-string",
         "react-ssr-prepass": "preact-ssr-prepass",
-      }
-      return config
+      };
+      if (dev) config.devtool = "eval-cheap-source-map";
+      return config;
     },
     exportPathMap() {
       return {
         "/": { page: "/" },
         "/index.html": { page: "/" },
-      }
+      };
     },
   }
-)
+);

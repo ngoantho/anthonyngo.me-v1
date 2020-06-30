@@ -1,71 +1,66 @@
 /* eslint-disable react/self-closing-comp */
-import styles from "./Header.module.scss"
-import { useState } from "react"
-import { withTheme } from "emotion-theming"
-import { css } from "@emotion/core"
-import { cx } from "@/utils"
+import styles from "./Header.module.scss";
+import { useState } from "react";
+import { withTheme } from "emotion-theming";
+import { css } from "@emotion/core";
+import { cx } from "@/utils";
 
 const Header = ({ metadata, theme }) => {
-  const [isMenuOpen, setMenuOpen] = useState(false)
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const menuItems = metadata.map(({ id, name }, i) => {
     return (
-      <li key={i} class={styles["nav-item"]}>
+      <li key={i} className={styles["nav-item"]}>
         <a
           href={`#${id}`}
-          class={styles["nav-item__link"]}
+          className={styles["nav-item__link"]}
           css={css`
-            color: ${theme.quaternary};
+            color: ${theme.colors.quaternary};
             &:hover {
-              color: ${theme.tertiary};
+              color: ${theme.colors.tertiary};
             }
-          `}
-        >
+          `}>
           {name}
         </a>
       </li>
-    )
-  })
+    );
+  });
 
   return (
     <>
       <nav
-        class={cx(styles.nav, styles["vertical-nav"])}
+        className={cx(styles.nav, styles["vertical-nav"])}
         css={css`
-          background: ${theme.secondary};
-          width: ${isMenuOpen ? "auto" : 0};
-        `}
-      >
+          background: ${theme.colors.secondary};
+          width: ${isMenuOpen ? `${theme.vertNavEaseIn}` : 0};
+        `}>
         <a
-          class={cx(styles["drawer-button"], styles.close)}
+          className={cx(styles["drawer-button"], styles.close)}
           href="#"
-          onClick={() => setMenuOpen(false)}
-        >
+          onClick={() => setMenuOpen(false)}>
           ✕
         </a>
-        <ul class={cx(styles["nav-list"], styles["type-vertical"])}>
+        <ul className={cx(styles["nav-list"], styles["type-vertical"])}>
           {menuItems}
         </ul>
       </nav>
       <header
-        class={cx(styles.nav, styles["main-header"])}
+        className={cx(styles.nav, styles["main-header"])}
         css={css`
-          background: ${theme.primary};
-        `}
-      >
+          background: ${theme.colors.primary};
+        `}>
         <a
-          class={cx(styles["drawer-button"], styles.open)}
+          className={cx(styles["drawer-button"], styles.open)}
           href="#"
-          onClick={() => setMenuOpen(true)}
-        >
+          onClick={() => setMenuOpen(true)}>
           ≡
         </a>
-        <ul class={cx(styles["nav-list"], styles["type-horizontal"])}>
+        <ul className={cx(styles["nav-list"], styles["type-horizontal"])}>
           {menuItems}
         </ul>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default withTheme(Header)
+export default withTheme(Header);

@@ -1,47 +1,50 @@
-/* eslint-disable no-cond-assign */
-function toVal(mix) {
-  let key
-  let val
-  let str = ""
+function toVal(thing) {
+  let key;
+  let val;
+  let str = "";
 
-  if (typeof mix === "string" || typeof mix === "number") {
-    str += mix
-  } else if (typeof mix === "object") {
-    if (Array.isArray(mix)) {
-      for (key = 0; key < mix.length; key++) {
-        if (mix[key]) {
-          if ((val = toVal(mix[key]))) {
-            str && (str += " ")
-            str += val
+  switch (typeof thing) {
+    case "string":
+      str += thing;
+      break;
+    case "number":
+      str += thing;
+      break;
+    case "object":
+      if (Array.isArray(thing)) {
+        for (key = 0; key < thing.length; key++) {
+          if ((val = toVal(thing[key]))) {
+            str && (str += " ");
+            str += val;
           }
         }
       }
-    } else {
-      for (key in mix) {
-        if (mix[key]) {
-          str && (str += " ")
-          str += key
+      break;
+    default:
+      for (key in thing) {
+        if (thing[key]) {
+          str && (str += " ");
+          str += key;
         }
       }
-    }
+      break;
   }
-
-  return str
+  return str;
 }
 
 export default function () {
-  let i = 0
-  let tmp
-  let x
-  let str = ""
+  let i = 0;
+  let tmp;
+  let x;
+  let str = "";
   while (i < arguments.length) {
     if ((tmp = arguments[i++])) {
       if ((x = toVal(tmp))) {
-        str && (str += " ")
-        str += x
+        str && (str += " ");
+        str += x;
       }
     }
   }
 
-  return str
+  return str;
 }

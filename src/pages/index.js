@@ -1,6 +1,7 @@
-import { css } from "@emotion/core"
-import { container } from "@styles/Container.module.css"
-import Header from "@components/Header"
+import { css } from "@emotion/core";
+import { container } from "@styles/Container.module.css";
+import Header from "@components/Header";
+import Landing from "@components/Landing";
 
 const Home = ({ metadata }) => {
   return (
@@ -9,41 +10,23 @@ const Home = ({ metadata }) => {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-      `}
-    >
+      `}>
       <Header metadata={metadata} />
-      <main
-        className={container}
-        css={css`
-          height: 1000px;
-        `}
-       />
+      <main className={container}>
+        <Landing />
+      </main>
     </main>
-  )
-}
+  );
+};
 
 export async function getStaticProps() {
+  const { metadata: Landing } = await import("@components/Landing");
+
   return {
     props: {
-      metadata: [
-        {
-          id: "landing1",
-          name: "Landing1",
-          visible: true,
-        },
-        {
-          id: "landing2",
-          name: "Landing2",
-          visible: true,
-        },
-        {
-          id: "landing3",
-          name: "Landing3",
-          visible: true,
-        },
-      ],
+      metadata: [Landing],
     },
-  }
+  };
 }
 
-export default Home
+export default Home;
