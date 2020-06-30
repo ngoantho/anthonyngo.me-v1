@@ -2,7 +2,6 @@
 const withPlugins = require("next-compose-plugins")
 const optimizedImages = require("next-optimized-images")
 const nextOffline = require("next-offline")
-const sass = require("@zeit/next-sass")
 const {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
@@ -18,7 +17,6 @@ const mdx = require("@next/mdx")({
 module.exports = withPlugins(
   [
     [mdx, { pageExtensions: ["js", "jsx", "mdx"] }],
-    [sass, { cssModules: true }],
     [bundleAnalyzer, {}, [PHASE_PRODUCTION_BUILD, PHASE_EXPORT]],
     [
       optimizedImages,

@@ -1,8 +1,8 @@
 import Head from "next/head"
-import "@styles/main.scss"
-import theme from "@/styles/_theme.scss"
+import theme from "@/theme"
+import { ThemeProvider } from "emotion-theming"
 import { site } from "@/config"
-import { ThemeProvider } from "@/utils/theme"
+import "@styles/global.css"
 
 const favicon = (async () => {
   return (await import("public/favicon.ico")).default
@@ -18,7 +18,7 @@ const App = ({ Component, pageProps }) => {
         <meta name="msapplication-TileColor" content={theme.primary} />
         <link rel="mask-icon" href={favicon} color={theme.primary} />
       </Head>
-      <ThemeProvider value={theme}>
+      <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
     </>

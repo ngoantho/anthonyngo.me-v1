@@ -15,6 +15,17 @@
       "modules": true
     }
   },
+  "rules": {
+    "react/self-closing-comp": "warn",
+    "react/no-unknown-property": [
+      "off",
+      {
+        "ignore": [
+          "class"
+        ]
+      }
+    ]
+  },
   "settings": {
     "import/resolver": {
       "alias": {
