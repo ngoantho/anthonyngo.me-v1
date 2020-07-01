@@ -1,10 +1,21 @@
 const withPlugins = require("next-compose-plugins");
+const nextCss = require("@zeit/next-css");
 const mdx = require("@next/mdx")({
   extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [
+      require("remark-attr"),
+      require("remark-align", {
+        left: "align-left",
+        center: "align-center",
+        right: "align-right",
+      }),
+    ],
+  },
 });
 
 module.exports = withPlugins(
-  [[mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
+  [nextCss, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
   {
     pageExtensions: ["js", "jsx", "mdx"],
     webpack(config, { dev }) {
