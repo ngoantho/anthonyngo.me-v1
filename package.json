@@ -1,0 +1,43 @@
+{
+  "name": "ngoantho.github.io",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngoantho/portfolio.git"
+  },
+  "author": "Anthony Ngo <ngo.anthony.me@gmail.com>",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --cache-location=.eslintcache/ --fix",
+    "*.{js,json,md,mdx}": "prettier --write"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start",
+    "lint": "lint-staged"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^1.6.6",
+    "@next/mdx": "^9.4.4",
+    "linaria": "^1.3.3",
+    "next": "9.4.4",
+    "next-compose-plugins": "^2.2.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-alloy": "^3.7.3",
+    "eslint-plugin-react": "^7.20.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  }
+}

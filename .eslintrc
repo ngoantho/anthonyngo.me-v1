@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "alloy",
+    "alloy/react"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "rules": {
+    "react/self-closing-comp": "warn",
+    "react/jsx-first-prop-new-line": "warn",
+    "react/jsx-max-props-per-line": "warn"
+  }
+}
