@@ -1,4 +1,3 @@
-import { withTheme } from "theming";
 import { Layout } from "@/components";
 import { Main } from "@/styles";
 import dynamic from "next/dynamic";
@@ -8,11 +7,11 @@ const LandingSection = dynamic(() =>
   import("../components/sections/landing.js")
 );
 
-const Index = ({ theme, metadata }) => {
+const Index = ({ metadata }) => {
   return (
-    <Layout theme={theme}>
+    <Layout>
       {/* header */}
-      <Main theme={theme}>
+      <Main>
         <LandingSection
           metadata={metadata.filter((mdx) => mdx.bind === "landing")}
         />
@@ -31,4 +30,4 @@ export function getStaticProps() {
   };
 }
 
-export default withTheme(Index);
+export default Index

@@ -38,7 +38,7 @@
     "react-dom": "16.13.1",
     "remark-align": "^1.2.13",
     "remark-attr": "^0.11.1",
-    "theming": "^3.2.0",
+    "styled-components": "^5.1.1",
     "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {

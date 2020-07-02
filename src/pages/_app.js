@@ -2,8 +2,7 @@
 import { MDXProvider } from "@mdx-js/react";
 import invert from "invert-color";
 import useDarkMode from "use-dark-mode";
-
-import { ThemeProvider } from "theming";
+import { ThemeProvider } from "styled-components";
 import theme from "../theme";
 
 const App = ({ Component, pageProps }) => {
