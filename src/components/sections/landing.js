@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 const Landing = () => {
-  return <></>;
+  return <h1>Wow!</h1>;
 };
 
 export default Landing;

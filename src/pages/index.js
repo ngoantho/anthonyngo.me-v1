@@ -1,28 +1,31 @@
 import { withTheme } from "theming";
 import { Layout } from "@/components";
 import { Main } from "@/styles";
-
+import dynamic from "next/dynamic";
 import { metadata } from "../components/sections/*.mdx";
-import glob from "glob-promise";
-import { join } from "path";
 
-const Index = ({ theme, slugs, metadata }) => {
-  console.log(slugs);
-  console.log(metadata);
+const LandingSection = dynamic(() =>
+  import("../components/sections/landing.js")
+);
 
+const Index = ({ theme, metadata }) => {
   return (
     <Layout theme={theme}>
-      <Main />
+      {/* header */}
+      <Main theme={theme}>
+        <LandingSection
+          metadata={metadata.filter((mdx) => mdx.bind === "landing")}
+        />
+        {/* sections */}
+      </Main>
+      {/* footer */}
     </Layout>
   );
 };
 
-export async function getStaticProps() {
-  const slugs = await glob(join(process.cwd(), "src/components/sections/*"));
-
+export function getStaticProps() {
   return {
     props: {
-      slugs,
       metadata,
     },
   };

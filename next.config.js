@@ -18,7 +18,7 @@ module.exports = withPlugins(
   [nextCss, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
   {
     pageExtensions: ["js", "jsx", "mdx"],
-    webpack(config, { dev }) {
+    webpack(config, { dev, isServer }) {
       config.module.rules.push({
         test: /\.js$/,
         use: [
