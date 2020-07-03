@@ -10,3 +10,5 @@ export function hash(string) {
   }
   return hash;
 }
+
+export { flatten } from "./flatten";

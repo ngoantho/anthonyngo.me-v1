@@ -1,24 +1,47 @@
 /* eslint-disable guard-for-in */
 import { MDXProvider } from "@mdx-js/react";
-import invert from "invert-color";
+import { variant } from "../theme";
+import { css } from "linaria";
+import { flatten } from "../utils";
 import useDarkMode from "use-dark-mode";
-import { ThemeProvider } from "styled-components";
-import theme from "../theme";
+import "normalize.css";
+
+const MiscGlobalStyles = ({ children }) => {
+  return (
+    <>
+      <div
+        className={css`
+          :global() {
+            html {
+              scroll-behavior: smooth;
+            }
+            body {
+              &.light-mode {
+                background: ${variant.light.primary};
+                ${flatten(variant.light)}
+              }
+              &.dark-mode {
+                background: ${variant.dark.primary};
+                ${flatten(variant.dark)}
+              }
+            }
+          }
+        `}
+      />
+      {children}
+    </>
+  );
+};
 
 const App = ({ Component, pageProps }) => {
-  const { value } = useDarkMode(false, { storageKey: null, onChange: null });
-  if (!value) {
-    theme.colors = Object.values(theme.colors).map((color) => {
-      return invert(color);
-    });
-  }
+  useDarkMode(false, { storageKey: null, onChange: null });
 
   return (
-    <ThemeProvider theme={theme}>
-      <MDXProvider components={{}}>
+    <MDXProvider components={{}}>
+      <MiscGlobalStyles>
         <Component {...pageProps} />
-      </MDXProvider>
-    </ThemeProvider>
+      </MiscGlobalStyles>
+    </MDXProvider>
   );
 };
 

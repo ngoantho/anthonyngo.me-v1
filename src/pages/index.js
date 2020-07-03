@@ -1,7 +1,6 @@
 import { Layout } from "@/components";
 import { Main } from "@/styles";
 import dynamic from "next/dynamic";
-import { metadata } from "../components/sections/*.mdx";
 
 const LandingSection = dynamic(() =>
   import("../components/sections/landing.js")
@@ -12,9 +11,7 @@ const Index = ({ metadata }) => {
     <Layout>
       {/* header */}
       <Main>
-        <LandingSection
-          metadata={metadata.filter((mdx) => mdx.bind === "landing")}
-        />
+        <LandingSection />
         {/* sections */}
       </Main>
       {/* footer */}
@@ -24,10 +21,8 @@ const Index = ({ metadata }) => {
 
 export function getStaticProps() {
   return {
-    props: {
-      metadata,
-    },
+    props: {},
   };
 }
 
-export default Index
+export default Index;

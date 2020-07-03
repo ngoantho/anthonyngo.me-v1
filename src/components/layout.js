@@ -1,15 +1,7 @@
-import { withTheme } from "styled-components";
-import { styled } from "linaria/react"
-
-const GlobalNext = styled.div``
+/* eslint-disable react/jsx-no-useless-fragment */
 
 const Layout = ({ children }) => {
-  return (
-    <>
-      <GlobalNext />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
-export default withTheme(Layout)
+export default Layout;

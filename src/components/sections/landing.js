@@ -1,6 +1,14 @@
-/* eslint-disable react/jsx-no-useless-fragment */
+import { css } from "linaria";
+
 const Landing = () => {
-  return <h1>Wow!</h1>;
+  return (
+    <h1
+      className={css`
+        color: var(--colors-tertiary);
+      `}>
+      Wow!
+    </h1>
+  );
 };
 
 export default Landing;
