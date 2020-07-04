@@ -1,4 +1,4 @@
-import { css } from "@emotion/core";
+// import { css } from "linaria";
 
 const sizes = {
   giant: 1440,
@@ -11,16 +11,14 @@ const sizes = {
   tiny: 330,
 };
 
-const media = () => {
-  let result = {};
-  Object.keys(sizes).forEach((size) => {
-    const normEm = sizes[size] / 16;
-    result[size] = (...args) => css`
-      @media (max-width: ${normEm}em) {
-        ${css(...args)}
-      }
-    `;
-  });
-  return result;
-};
+const media = Object.keys(sizes).reduce((accumulator, label) => {
+  const remSize = sizes[label] / 16;
+  accumulator[label] = (...args) => `
+    @media(max-width: ${remSize}rem) {
+      ${args}
+    }
+`
+  return accumulator;
+}, {})
+
 export default media;

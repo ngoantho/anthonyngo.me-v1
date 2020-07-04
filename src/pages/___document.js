@@ -1,3 +1,4 @@
+/*
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { site, contactMe, name } from "@/config";
 const { language, description, keywords, url } = site;
@@ -86,3 +87,4 @@ export default class AppDocument extends Document {
     );
   }
 }
+*/

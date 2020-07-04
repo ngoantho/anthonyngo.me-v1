@@ -13,3 +13,4 @@ export function hash(string) {
 
 export { flatten } from "./flatten";
 export { cx } from "./cx";
+export { default as media } from "./media";
