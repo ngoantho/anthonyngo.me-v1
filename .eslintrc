@@ -1,6 +1,5 @@
 {
   "extends": [
-    "plugin:import/errors",
     "eslint:recommended",
     "alloy",
     "alloy/react"
@@ -17,38 +16,7 @@
   },
   "rules": {
     "react/self-closing-comp": "warn",
-    "react/no-unknown-property": [
-      "off",
-      {
-        "ignore": [
-          "class"
-        ]
-      }
-    ]
-  },
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [
-          [
-            "@",
-            "./src/"
-          ],
-          [
-            "@styles",
-            "./src/styles/"
-          ],
-          [
-            "@components",
-            "./src/components/"
-          ]
-        ],
-        "extensions": [
-          ".js",
-          ".css",
-          ".mdx"
-        ]
-      }
-    }
+    "react/jsx-first-prop-new-line": "warn",
+    "react/jsx-max-props-per-line": "warn"
   }
 }

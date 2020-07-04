@@ -1,65 +1,36 @@
-/* eslint-disable no-undef */
 const withPlugins = require("next-compose-plugins");
-const optimizedImages = require("next-optimized-images");
-const nextOffline = require("next-offline");
-const {
-  PHASE_DEVELOPMENT_SERVER,
-  PHASE_PRODUCTION_BUILD,
-  PHASE_EXPORT,
-} = require("next/constants");
-const bundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
+const nextCss = require("@zeit/next-css");
 const mdx = require("@next/mdx")({
   extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [
+      require("remark-attr"),
+      require("remark-align", {
+        left: "align-left",
+        center: "align-center",
+        right: "align-right",
+      }),
+    ],
+  },
 });
 
 module.exports = withPlugins(
-  [
-    [mdx, { pageExtensions: ["js", "jsx", "mdx"] }],
-    [bundleAnalyzer, {}, [PHASE_PRODUCTION_BUILD, PHASE_EXPORT]],
-    [
-      optimizedImages,
-      {
-        handleImages: ["png", "svg", "webp", "ico"],
-        inlineImageLimit: 16384,
-        [PHASE_DEVELOPMENT_SERVER]: {
-          inlineImageLimit: -1,
-        },
-      },
-    ],
-    [
-      nextOffline,
-      {
-        workboxOpts: {
-          runtimeCaching: [
-            {
-              urlPattern: /^https?.*/,
-              handler: "NetworkFirst",
-              options: {
-                cacheName: "offlineCache",
-                expiration: {
-                  maxEntries: 200,
-                },
-              },
-            },
-          ],
-        },
-      },
-      [PHASE_PRODUCTION_BUILD, PHASE_EXPORT],
-    ],
-  ],
+  [nextCss, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
   {
     pageExtensions: ["js", "jsx", "mdx"],
     webpack(config, { dev }) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        react: "preact/compat",
-        "react-dom": "preact/compat",
-        "react-render-to-string": "preact-render-to-string",
-        "react-ssr-prepass": "preact-ssr-prepass",
-      };
-      if (dev) config.devtool = "eval-cheap-source-map";
+      config.module.rules.push({
+        test: /\.js$/,
+        use: [
+          {
+            loader: "linaria/loader",
+            options: {
+              sourceMap: process.env.NODE_ENV !== "production",
+              displayName: true
+            },
+          },
+        ],
+      });
       return config;
     },
     exportPathMap() {

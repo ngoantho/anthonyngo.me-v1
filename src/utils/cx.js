@@ -1,50 +1,15 @@
-function toVal(thing) {
-  let key;
-  let val;
-  let str = "";
-
-  switch (typeof thing) {
-    case "string":
-      str += thing;
-      break;
-    case "number":
-      str += thing;
-      break;
-    case "object":
-      if (Array.isArray(thing)) {
-        for (key = 0; key < thing.length; key++) {
-          if ((val = toVal(thing[key]))) {
-            str && (str += " ");
-            str += val;
-          }
-        }
-      }
-      break;
-    default:
-      for (key in thing) {
-        if (thing[key]) {
-          str && (str += " ");
-          str += key;
-        }
-      }
-      break;
-  }
-  return str;
-}
-
-export default function () {
-  let i = 0;
-  let tmp;
-  let x;
-  let str = "";
-  while (i < arguments.length) {
-    if ((tmp = arguments[i++])) {
-      if ((x = toVal(tmp))) {
-        str && (str += " ");
-        str += x;
+export const cx = (...args) => {
+  const result = new Set();
+  for (const item of args) {
+    const type = typeof item;
+    if (type === "string" && item.length > 0) {
+      result.add(item);
+    } else if (type === "object" && item !== null) {
+      for (const [key, value] of Object.entries(item)) {
+        if (value) result.add(key);
       }
     }
   }
 
-  return str;
-}
+  return [...result].join(" ");
+};

@@ -1,7 +1,9 @@
 {
   "presets": [
     "next/babel",
-    "@emotion/babel-preset-css-prop"
+    "linaria/babel"
   ],
-  "plugins": []
+  "plugins": [
+    "import-glob-array"
+  ]
 }

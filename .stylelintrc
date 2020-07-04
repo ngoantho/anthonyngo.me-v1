@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "linaria/stylelint-config"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "declaration-empty-line-before": null,
+    "no-missing-end-of-source-newline": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "/global/"
+        ]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "grid-kiss"
+        ]
+      }
+    ]
+  }
+}

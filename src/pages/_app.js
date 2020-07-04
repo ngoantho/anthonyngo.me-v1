@@ -1,27 +1,45 @@
-import Head from "next/head";
-import { ThemeProvider } from "emotion-theming";
-import { site } from "@/config";
-import theme from "@styles/settings";
-import "@styles/global.css";
+import { MDXProvider } from "@mdx-js/react";
+import { variant } from "../theme";
+import { css } from "linaria";
+import { flatten, cx } from "../utils";
+import { GlobalStyle } from "../styles";
+import useDarkMode from "use-dark-mode";
 
-const favicon = (async () => {
-  return (await import("public/favicon.ico")).default;
-})();
-const { title } = site;
+// credit: https://levelup.gitconnected.com/adding-dark-mode-to-your-react-app-with-emotion-css-in-js-fc5c0f926838
+const BackgroundStyles = ({ children }) => (
+  <>
+    <data
+      className={cx(
+        css`
+          :global {
+            body.light-mode {
+              background-color: ${variant.alternate.primary};
+              color: ${variant.alternate.quaternary};
+              ${flatten(variant.alternate)};
+            }
+            body.dark-mode {
+              background-color: ${variant.normal.primary};
+              color: ${variant.normal.quaternary};
+              ${flatten(variant.normal)};
+            }
+          }
+        `,
+        GlobalStyle
+      )}
+    />
+    {children}
+  </>
+);
 
 const App = ({ Component, pageProps }) => {
+  useDarkMode(false, { storageKey: null, onChange: null });
+
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="theme-color" content={theme.colors.tertiary} />
-        <meta name="msapplication-TileColor" content={theme.colors.primary} />
-        <link rel="mask-icon" href={favicon} color={theme.colors.primary} />
-      </Head>
-      <ThemeProvider theme={theme}>
+    <MDXProvider components={{}}>
+      <BackgroundStyles>
         <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+      </BackgroundStyles>
+    </MDXProvider>
   );
 };
 
