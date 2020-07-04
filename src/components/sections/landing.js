@@ -4,7 +4,7 @@ const Landing = () => {
   return (
     <h1
       className={css`
-        color: var(--colors-tertiary);
+        font-family: "mono", monospace;
       `}>
       Wow!
     </h1>

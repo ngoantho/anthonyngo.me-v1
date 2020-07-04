@@ -3,5 +3,7 @@
     "next/babel",
     "linaria/babel"
   ],
-  "plugins": []
+  "plugins": [
+    "import-glob-array"
+  ]
 }

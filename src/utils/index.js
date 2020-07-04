@@ -12,3 +12,4 @@ export function hash(string) {
 }
 
 export { flatten } from "./flatten";
+export { cx } from "./cx";

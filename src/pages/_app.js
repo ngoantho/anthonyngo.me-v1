@@ -1,46 +1,44 @@
-/* eslint-disable guard-for-in */
 import { MDXProvider } from "@mdx-js/react";
 import { variant } from "../theme";
 import { css } from "linaria";
-import { flatten } from "../utils";
+import { flatten, cx } from "../utils";
+import { GlobalStyle } from "../styles";
 import useDarkMode from "use-dark-mode";
-import "normalize.css";
 
-const MiscGlobalStyles = ({ children }) => {
-  return (
-    <>
-      <div
-        className={css`
-          :global() {
-            html {
-              scroll-behavior: smooth;
+// credit: https://levelup.gitconnected.com/adding-dark-mode-to-your-react-app-with-emotion-css-in-js-fc5c0f926838
+const BackgroundStyles = ({ children }) => (
+  <>
+    <data
+      className={cx(
+        css`
+          :global {
+            body.light-mode {
+              background-color: ${variant.alternate.primary};
+              color: ${variant.alternate.quaternary};
+              ${flatten(variant.alternate)};
             }
-            body {
-              &.light-mode {
-                background: ${variant.light.primary};
-                ${flatten(variant.light)}
-              }
-              &.dark-mode {
-                background: ${variant.dark.primary};
-                ${flatten(variant.dark)}
-              }
+            body.dark-mode {
+              background-color: ${variant.normal.primary};
+              color: ${variant.normal.quaternary};
+              ${flatten(variant.normal)};
             }
           }
-        `}
-      />
-      {children}
-    </>
-  );
-};
+        `,
+        GlobalStyle
+      )}
+    />
+    {children}
+  </>
+);
 
 const App = ({ Component, pageProps }) => {
   useDarkMode(false, { storageKey: null, onChange: null });
 
   return (
     <MDXProvider components={{}}>
-      <MiscGlobalStyles>
+      <BackgroundStyles>
         <Component {...pageProps} />
-      </MiscGlobalStyles>
+      </BackgroundStyles>
     </MDXProvider>
   );
 };

@@ -26,12 +26,11 @@ module.exports = withPlugins(
             loader: "linaria/loader",
             options: {
               sourceMap: process.env.NODE_ENV !== "production",
+              displayName: true
             },
           },
         ],
       });
-
-      if (dev) config.devtool = "eval-cheap-source-map";
       return config;
     },
     exportPathMap() {

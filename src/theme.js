@@ -1,4 +1,4 @@
-import invert from "invert-color";
+import { invert } from "polished";
 
 export const weights = {
   thin: 100,
@@ -26,21 +26,30 @@ export const spacing = {
   extralarge: "2.5em",
 };
 
+// https://colorhunt.co/palette/2763
 const colors = {
   primary: "#222831",
-  secondary: "#393E46",
-  tertiary: "#00ADB5",
-  quaternary: "#EEEEEE",
+  secondary: "#393e46",
+  tertiary: "#00adb5",
+  quaternary: "#eeeeee",
+};
+const inverted = Object.keys(colors).reduce(
+  (accumulator, name) =>
+    Object.assign(accumulator, {
+      [name]: invert(colors[name]),
+    }),
+  {}
+);
+
+export const variant = {
+  normal: colors, // dark
+  alternate: inverted, // light
 };
 
-const variant = {
-  dark: colors,
-  light: {
-    primary: invert(colors.primary),
-    secondary: invert(colors.secondary),
-    tertiary: invert(colors.tertiary),
-    quaternary: invert(colors.quaternary),
-  },
-};
-
-export { variant };
+export default Object.keys(colors).reduce(
+  (accumulator, name) =>
+    Object.assign(accumulator, {
+      [name]: `var(--colors-${name})`,
+    }),
+  {}
+);
