@@ -22,4 +22,3 @@ export const flatten = (theme) =>
 
 export { cx } from "./cx";
 export { useTheme, withTheme } from "./themeutils";
-export { default as media } from "./media";

@@ -1,5 +1,6 @@
 const withPlugins = require("next-compose-plugins");
 const nextCss = require("@zeit/next-css");
+const nextFonts = require("next-fonts");
 const mdx = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
@@ -15,7 +16,7 @@ const mdx = require("@next/mdx")({
 });
 
 module.exports = withPlugins(
-  [nextCss, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
+  [nextCss, nextFonts, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
   {
     pageExtensions: ["js", "jsx", "mdx"],
     webpack(config) {

@@ -10,6 +10,7 @@ export default class AppDocument extends Document {
       <Html>
         <Head />
         <body>
+          <script src="noflash.js" />
           <Main />
           <NextScript />
         </body>

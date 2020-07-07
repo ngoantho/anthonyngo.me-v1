@@ -3,7 +3,9 @@
     "baseUrl": "./src/",
     "paths": {
       "@/*": ["./*"],
-      "/*": ["../public/*"]
+      "/*": ["../public/*"],
+      "@fonts/*": ["./assets/fonts/*"],
+      "@images/*": ["./assets/fonts/*"]
     }
   },
   "exclude": ["node_modules"]

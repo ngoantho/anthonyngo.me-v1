@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import { invert } from "polished";
 
 export const weights = {
@@ -46,10 +47,5 @@ export const variant = {
   alternate: inverted, // light
 };
 
-export default Object.keys(colors).reduce(
-  (accumulator, name) =>
-    Object.assign(accumulator, {
-      [name]: `var(--colors-${name})`,
-    }),
-  {}
-);
+const ThemeContext = createContext(variant.normal);
+export default ThemeContext;

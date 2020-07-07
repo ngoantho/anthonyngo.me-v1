@@ -1,6 +1,6 @@
 import { Header, Layout } from "@/components";
 
-import Landing from "./landing";
+import Landing from "./sections/landing";
 
 const Index = ({ headerData, frontMatter }) => {
   return (
@@ -12,28 +12,19 @@ const Index = ({ headerData, frontMatter }) => {
 };
 
 export async function getStaticProps() {
-  const { landing } = await Landing.getMetadata();
+  const landing = await Landing.getMetadata();
+  const collected = {
+    landing,
+  };
 
   return {
     props: {
       frontMatter: {
-        landing,
+        ...collected,
       },
-      // headerData: [landing].filter((section) => section.visible),
-      headerData: [
-        {
-          href: "landing",
-          show: "Landing",
-        },
-        {
-          href: "landing",
-          show: "Landing",
-        },
-        {
-          href: "landing",
-          show: "Landing",
-        },
-      ],
+      headerData: [collected.landing.metadata].filter(
+        (section) => section.visible
+      ),
     },
   };
 }

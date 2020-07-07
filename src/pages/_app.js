@@ -1,18 +1,11 @@
 import { GlobalStyles } from "../styles";
 import { MDXProvider } from "@mdx-js/react";
+import ThemeContext from "@/theme";
 import { css } from "linaria";
 import { cx } from "../utils";
 import useDarkMode from "use-dark-mode";
+import { useState } from "react";
 import { variant } from "../theme";
-
-const flatten = (theme) =>
-  Object.keys(theme).reduce(
-    (accumulator, name) =>
-      Object.assign(accumulator, {
-        [`--colors-${name}`]: theme[name],
-      }),
-    {}
-  );
 
 // credit: https://levelup.gitconnected.com/adding-dark-mode-to-your-react-app-with-emotion-css-in-js-fc5c0f926838
 const BackgroundStyles = ({ children }) => (
@@ -25,12 +18,10 @@ const BackgroundStyles = ({ children }) => (
             body.light-mode {
               background-color: ${variant.alternate.primary};
               color: ${variant.alternate.quaternary};
-              ${flatten(variant.alternate)}
             }
             body.dark-mode {
               background-color: ${variant.normal.primary};
               color: ${variant.normal.quaternary};
-              ${flatten(variant.normal)}
             }
           }
           display: none;
@@ -42,14 +33,26 @@ const BackgroundStyles = ({ children }) => (
 );
 
 const App = ({ Component, pageProps }) => {
-  useDarkMode(false, { storageKey: null, onChange: null });
+  const [currVariant, setCurrVariant] = useState(variant.normal);
+  useDarkMode(false, {
+    storageKey: null,
+    onChange: null,
+  });
+  useDarkMode(false, {
+    storageKey: null,
+    onChange: (darkMode) => {
+      setCurrVariant(!darkMode ? variant.alternate : variant.normal);
+    },
+  });
 
   return (
-    <MDXProvider components={{}}>
-      <BackgroundStyles>
-        <Component {...pageProps} />
-      </BackgroundStyles>
-    </MDXProvider>
+    <ThemeContext.Provider value={currVariant}>
+      <MDXProvider components={{}}>
+        <BackgroundStyles>
+          <Component {...pageProps} />
+        </BackgroundStyles>
+      </MDXProvider>
+    </ThemeContext.Provider>
   );
 };
 

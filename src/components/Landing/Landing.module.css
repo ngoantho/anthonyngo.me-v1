@@ -1,6 +1,0 @@
-.landing {
-  composes: section from "~src/styles/Section.module.css";
-  composes: flex-center from "~src/styles/mixins.module.css";
-  flex-direction: column;
-  align-items: flex-start;
-}
