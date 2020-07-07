@@ -11,6 +11,15 @@ export function hash(string) {
   return hash;
 }
 
-export { flatten } from "./flatten";
+export const flatten = (theme) =>
+  Object.keys(theme).reduce(
+    (accumulator, name) =>
+      Object.assign(accumulator, {
+        [`--colors-${name}`]: theme[name],
+      }),
+    {}
+  );
+
 export { cx } from "./cx";
+export { useTheme, withTheme } from "./themeutils";
 export { default as media } from "./media";

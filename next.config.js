@@ -18,7 +18,7 @@ module.exports = withPlugins(
   [nextCss, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
   {
     pageExtensions: ["js", "jsx", "mdx"],
-    webpack(config, { dev }) {
+    webpack(config) {
       config.module.rules.push({
         test: /\.js$/,
         use: [
@@ -26,7 +26,7 @@ module.exports = withPlugins(
             loader: "linaria/loader",
             options: {
               sourceMap: process.env.NODE_ENV !== "production",
-              displayName: true
+              displayName: true,
             },
           },
         ],

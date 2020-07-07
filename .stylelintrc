@@ -14,14 +14,6 @@
           "/global/"
         ]
       }
-    ],
-    "property-no-unknown": [
-      true,
-      {
-        "ignoreProperties": [
-          "grid-kiss"
-        ]
-      }
     ]
   }
 }
