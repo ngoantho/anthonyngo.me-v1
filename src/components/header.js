@@ -1,14 +1,20 @@
 import { darken, lighten } from "polished";
 import { hash, withTheme } from "@/utils";
+import { useEffect, useState } from "react";
 
+import { mixins } from "../styles";
 import { styled } from "linaria/react";
-import { useState } from "react";
 
 const StyledHeader = styled.header`
   width: 100%;
   box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.1);
   background-color: ${(props) =>
     props.theme.secondary && darken(0.1, props.theme.secondary)};
+  transition: min-height 0.26s ease;
+
+  &[fill="fill"] {
+    min-height: 100vh;
+  }
 `;
 
 const StyledNav = styled.ul`
@@ -16,12 +22,8 @@ const StyledNav = styled.ul`
   justify-content: flex-end;
   align-items: center;
   list-style: none;
-
   margin-left: auto;
   margin-right: auto;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  padding-inline-start: 0px;
 
   @media (max-width: 44rem) {
     & > li:not([for="hamburger"]) {
@@ -47,7 +49,7 @@ const StyledNavLink = styled.a`
 
 const StyledHamburger = styled(StyledNavLink)`
   font-size: 1.75rem;
-  padding: 2vh 2vw;
+  padding: 2vh 4vw;
   display: none;
 
   @media (max-width: 44rem) {
@@ -64,10 +66,6 @@ const MobileNav = styled.ul`
     flex-direction: column;
     list-style: none;
     align-items: center;
-
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    padding-inline-start: 0px;
     visibility: hidden;
     height: 0px;
 
@@ -88,6 +86,10 @@ const MobileNav = styled.ul`
 
 const Header = ({ data, theme, config }) => {
   const [navMenuOpen, setNavMenuOpen] = useState(false);
+  useEffect(() => {
+    // clear #mobileNav hash from url
+    if (navMenuOpen) history.replaceState({}, document.title, ".");
+  }, [navMenuOpen]);
 
   const listItems = data.map((section, i) => {
     return (
@@ -103,8 +105,8 @@ const Header = ({ data, theme, config }) => {
   });
 
   return (
-    <StyledHeader theme={theme.colors}>
-      <StyledNav>
+    <StyledHeader theme={theme.colors} fill={navMenuOpen ? "fill" : null}>
+      <StyledNav className={mixins.clearUAMargins}>
         {listItems}
         <li htmlFor="hamburger">
           <StyledHamburger
@@ -115,11 +117,11 @@ const Header = ({ data, theme, config }) => {
           </StyledHamburger>
         </li>
       </StyledNav>
-      <MobileNav id="mobileNav">{listItems}</MobileNav>
+      <MobileNav id="mobileNav" className={mixins.clearUAMargins}>
+        {listItems}
+      </MobileNav>
     </StyledHeader>
   );
 };
 
-export default withTheme(Header, {
-  wow: true,
-});
+export default withTheme(Header, {});

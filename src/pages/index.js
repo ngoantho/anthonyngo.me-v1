@@ -12,7 +12,7 @@ const Index = ({ headerData, frontMatter }) => {
 };
 
 export async function getStaticProps() {
-  const landing = await Landing.getMetadata();
+  const landing = await Landing.getServerData();
   const collected = {
     landing,
   };

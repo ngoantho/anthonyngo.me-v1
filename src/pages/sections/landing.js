@@ -1,9 +1,10 @@
 import MDXContent from "./landing.mdx";
-// import { useTheme } from "@/utils";
+import { styled } from "linaria/react";
+import { useTheme } from "@/utils";
 
 const Landing = ({ frontMatter }) => {
-  // const theme = useTheme();
-  console.log(frontMatter);
+  const theme = useTheme();
+  console.log(frontMatter)
 
   return (
     <section>
@@ -12,7 +13,7 @@ const Landing = ({ frontMatter }) => {
   );
 };
 
-Landing.getMetadata = async () => {
+Landing.getServerData = async () => {
   const { metadata } = await import("./landing.mdx");
   return {
     metadata,

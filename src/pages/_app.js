@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
+
 import { GlobalStyles } from "../styles";
 import { MDXProvider } from "@mdx-js/react";
 import ThemeContext from "@/theme";
 import { css } from "linaria";
 import { cx } from "../utils";
 import useDarkMode from "use-dark-mode";
-import { useState } from "react";
 import { variant } from "../theme";
 
 // credit: https://levelup.gitconnected.com/adding-dark-mode-to-your-react-app-with-emotion-css-in-js-fc5c0f926838
@@ -34,16 +35,13 @@ const BackgroundStyles = ({ children }) => (
 
 const App = ({ Component, pageProps }) => {
   const [currVariant, setCurrVariant] = useState(variant.normal);
-  useDarkMode(false, {
-    storageKey: null,
+  const { value: isDarkMode } = useDarkMode(false, {
+    storageKey: "darkMode",
     onChange: null,
   });
-  useDarkMode(false, {
-    storageKey: null,
-    onChange: (darkMode) => {
-      setCurrVariant(!darkMode ? variant.alternate : variant.normal);
-    },
-  });
+  useEffect(() => {
+    setCurrVariant(!isDarkMode ? variant.alternate : variant.normal);
+  }, [isDarkMode]);
 
   return (
     <ThemeContext.Provider value={currVariant}>
