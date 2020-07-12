@@ -12,4 +12,3 @@ export function hash(string) {
 }
 
 export { cx } from "./cx";
-export { useTheme, withTheme } from "./themeutils";

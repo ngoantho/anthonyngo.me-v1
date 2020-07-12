@@ -1,2 +1,2 @@
-export { default as Layout } from "./layout";
-export { default as Header } from "./header";
+import * as Sections from "./sections";
+export { Sections };

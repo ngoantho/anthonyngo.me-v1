@@ -1,46 +1,27 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
+/* import { site, contactMe, name } from "@/config";
+const { language, description, keywords, url } = site; */
+
 export default class AppDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
-  }
 
-  render() {
-    return (
-      <Html>
-        <Head />
-        <body>
-          <script src="noflash.js" />
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
-}
-
-/*
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { site, contactMe, name } from "@/config";
-const { language, description, keywords, url } = site;
-
-export default class AppDocument extends Document {
-  static async getInitialProps(ctx) {
-    const { default: icon192 } = await import("public/favicon192.png");
+    /* const { default: icon192 } = await import("public/favicon192.png");
     const { default: icon96 } = await import("public/favicon96.png");
     const { default: icon72 } = await import("public/favicon72.png");
     const { default: thumbnail } = await import("public/favicon.png");
     const { default: favicon } = await import("public/favicon.ico");
 
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 };
+    return { ...initialProps, favicon, thumbnail, icon72, icon96, icon192 }; */
   }
 
   render() {
     return (
-      <Html lang={language}>
+      <Html>
         <Head>
-          <meta charSet="utf-8" />
+          {/* <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
           <meta
             name="viewport"
@@ -98,7 +79,7 @@ export default class AppDocument extends Document {
             href={this.props.icon96}
           />
           <link rel="shortcut icon" href={this.props.favicon} />
-          <link rel="manifest" href="/manifest.json" />
+          <link rel="manifest" href="/manifest.json" /> */}
         </Head>
         <body>
           <Main />
@@ -108,4 +89,3 @@ export default class AppDocument extends Document {
     );
   }
 }
-*/

@@ -1,2 +1,2 @@
-export { default as GlobalStyles } from "./globalstyle";
-export { default as mixins } from "./mixins";
+export { default as ThemeSysOverrides } from "./themesysoverride";
+export { default as Fonts } from "./fonts";

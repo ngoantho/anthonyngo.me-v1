@@ -1,12 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/",
-    "paths": {
-      "@/*": ["./*"],
-      "/*": ["../public/*"],
-      "@fonts/*": ["./assets/fonts/*"],
-      "@images/*": ["./assets/fonts/*"]
-    }
+    "baseUrl": "./src/"
   },
   "exclude": ["node_modules"]
 }

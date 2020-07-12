@@ -1,7 +1,10 @@
+const path = require("path");
+const { merge } = require("webpack-merge");
+const CssnanoPlugin = require("cssnano-webpack-plugin");
+
 const withPlugins = require("next-compose-plugins");
-const nextCss = require("@zeit/next-css");
-const nextFonts = require("next-fonts");
-const mdx = require("@next/mdx")({
+const withCSS = require("@zeit/next-css");
+const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [
@@ -16,23 +19,45 @@ const mdx = require("@next/mdx")({
 });
 
 module.exports = withPlugins(
-  [nextCss, nextFonts, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
+  [
+    withCSS,
+    [
+      withMDX,
+      {
+        pageExtensions: ["js", "jsx", "mdx"],
+      },
+    ],
+  ],
   {
     pageExtensions: ["js", "jsx", "mdx"],
-    webpack(config) {
-      config.module.rules.push({
-        test: /\.js$/,
-        use: [
-          {
-            loader: "linaria/loader",
-            options: {
-              sourceMap: process.env.NODE_ENV !== "production",
-              displayName: true,
+    webpack(config, options) {
+      return merge(config, {
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              use: [
+                {
+                  loader: "linaria/loader",
+                  options: {
+                    sourceMap: process.env.NODE_ENV !== "production",
+                    displayName: process.env.NODE_ENV !== "production",
+                  },
+                },
+              ],
             },
+          ],
+        },
+        resolve: {
+          alias: {
+            src: path.resolve(__dirname, "src/"),
           },
-        ],
+          modules: [path.resolve(__dirname, "src")],
+        },
+        optimization: {
+          minimizer: [new CssnanoPlugin()],
+        },
       });
-      return config;
     },
     exportPathMap() {
       return {

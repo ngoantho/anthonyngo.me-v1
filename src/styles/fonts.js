@@ -1,5 +1,4 @@
 import { css } from "linaria";
-
 export default css`
   :global() {
     @font-face {
@@ -16,7 +15,5 @@ export default css`
         local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"),
         local("Roboto-Light"), local("DroidSans"), local("Tahoma");
     }
-
-    @import url("https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap");
   }
 `;

@@ -1,30 +1,36 @@
-import { Header, Layout } from "@/components";
+import { Landing } from "components/sections";
+import PropTypes from "prop-types";
+const { arrayOf, shape, string, bool } = PropTypes;
 
-import Landing from "./sections/landing";
+function Index({ metadata, frontMatter }) {
+  const { landing } = frontMatter;
 
-const Index = ({ headerData, frontMatter }) => {
-  return (
-    <Layout>
-      <Header data={headerData} />
-      <Landing frontMatter={frontMatter.landing} />
-    </Layout>
-  );
+  return <Landing frontMatter={landing} />;
+}
+
+Index.propTypes = {
+  headerData: arrayOf(
+    shape({
+      href: string.isRequired,
+      display: string.isRequired,
+      visible: bool,
+    })
+  ),
 };
 
 export async function getStaticProps() {
-  const landing = await Landing.getServerData();
-  const collected = {
-    landing,
-  };
+  const { landing } = await import("assets/index");
+  const landingParsed = (({ frontMatter, ...metadata }) => ({
+    frontMatter,
+    metadata,
+  }))(await landing);
 
   return {
     props: {
+      metadata: [landingParsed.metadata],
       frontMatter: {
-        ...collected,
+        landing: landingParsed.frontMatter,
       },
-      headerData: [collected.landing.metadata].filter(
-        (section) => section.visible
-      ),
     },
   };
 }

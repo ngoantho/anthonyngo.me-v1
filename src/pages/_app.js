@@ -1,57 +1,17 @@
-import { useEffect, useState } from "react";
+import "styles/themesys.css";
 
-import { GlobalStyles } from "../styles";
-import { MDXProvider } from "@mdx-js/react";
-import ThemeContext from "@/theme";
-import { css } from "linaria";
-import { cx } from "../utils";
-import useDarkMode from "use-dark-mode";
-import { variant } from "../theme";
+import { Fonts, ThemeSysOverrides } from "styles";
 
-// credit: https://levelup.gitconnected.com/adding-dark-mode-to-your-react-app-with-emotion-css-in-js-fc5c0f926838
-const BackgroundStyles = ({ children }) => (
-  <>
-    <data
-      className={cx(
-        GlobalStyles,
-        css`
-          :global() {
-            body.light-mode {
-              background-color: ${variant.alternate.primary};
-              color: ${variant.alternate.quaternary};
-            }
-            body.dark-mode {
-              background-color: ${variant.normal.primary};
-              color: ${variant.normal.quaternary};
-            }
-          }
-          display: none;
-        `
-      )}
-    />
-    {children}
-  </>
-);
+import { ThemeProvider } from "theming";
+// import { css } from "linaria";
+import { cx } from "utils";
+import theme from "theme";
 
-const App = ({ Component, pageProps }) => {
-  const [currVariant, setCurrVariant] = useState(variant.normal);
-  const { value: isDarkMode } = useDarkMode(false, {
-    storageKey: "darkMode",
-    onChange: null,
-  });
-  useEffect(() => {
-    setCurrVariant(!isDarkMode ? variant.alternate : variant.normal);
-  }, [isDarkMode]);
-
+export default function App({ Component, pageProps }) {
   return (
-    <ThemeContext.Provider value={currVariant}>
-      <MDXProvider components={{}}>
-        <BackgroundStyles>
-          <Component {...pageProps} />
-        </BackgroundStyles>
-      </MDXProvider>
-    </ThemeContext.Provider>
+    <ThemeProvider theme={theme}>
+      <data className={cx(ThemeSysOverrides, Fonts)} />
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
-};
-
-export default App;
+}
