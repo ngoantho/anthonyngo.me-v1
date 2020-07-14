@@ -1,5 +1,8 @@
 {
-  "extends": ["eslint:recommended", "alloy", "alloy/react"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 8,
@@ -10,5 +13,14 @@
       "modules": true
     }
   },
-  "rules": {}
+  "extends": [
+    "eslint:recommended",
+    "alloy",
+    "alloy/react"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

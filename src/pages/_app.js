@@ -1,17 +1,21 @@
-import "styles/themesys.css";
+import "milligram/dist/milligram.css";
 
-import { Fonts, ThemeSysOverrides } from "styles";
+import { CacheProvider } from "@emotion/core";
+import { GlobalStyles } from "styles";
+import { ThemeProvider } from "emotion-theming";
+import { cache } from "emotion";
+import { Layout } from "components";
+import theme from "src/config";
 
-import { ThemeProvider } from "theming";
-// import { css } from "linaria";
-import { cx } from "utils";
-import theme from "theme";
-
-export default function App({ Component, pageProps }) {
+export default function ({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <data className={cx(ThemeSysOverrides, Fonts)} />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          {GlobalStyles}
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </CacheProvider>
   );
 }

@@ -1,2 +1,2 @@
-import * as Sections from "./sections";
-export { Sections };
+export { default as Layout } from "./layout";
+export { default as Navbar } from "./navbar";

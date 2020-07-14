@@ -17,9 +17,8 @@
 
 # misc
 .DS_Store
-/.eslintcache
+.eslintcache
 /.stylelintcache
-/.linaria-cache
 
 # debug
 npm-debug.log*
