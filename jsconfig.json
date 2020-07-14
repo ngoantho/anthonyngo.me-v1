@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "./src/",
-    "paths": {
-      "@/*": ["./*"],
-      "/*": ["../public/*"],
-      "@fonts/*": ["./assets/fonts/*"],
-      "@images/*": ["./assets/fonts/*"]
-    }
+    "target": "es2018",
+    "module": "es2015"
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

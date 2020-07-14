@@ -1,44 +1,24 @@
-const withPlugins = require("next-compose-plugins");
-const nextCss = require("@zeit/next-css");
-const nextFonts = require("next-fonts");
-const mdx = require("@next/mdx")({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [
-      require("remark-attr"),
-      require("remark-align", {
-        left: "align-left",
-        center: "align-center",
-        right: "align-right",
-      }),
-    ],
-  },
-});
+const { merge } = require("webpack-merge");
+const path = require("path");
 
-module.exports = withPlugins(
-  [nextCss, nextFonts, [mdx, { pageExtensions: ["js", "jsx", "mdx"] }]],
-  {
-    pageExtensions: ["js", "jsx", "mdx"],
-    webpack(config) {
-      config.module.rules.push({
-        test: /\.js$/,
-        use: [
-          {
-            loader: "linaria/loader",
-            options: {
-              sourceMap: process.env.NODE_ENV !== "production",
-              displayName: true,
-            },
-          },
-        ],
-      });
-      return config;
-    },
-    exportPathMap() {
-      return {
-        "/": { page: "/" },
-        "/index.html": { page: "/" },
-      };
-    },
-  }
-);
+module.exports = {
+  webpack(config, options) {
+    return merge(config, {
+      resolve: {
+        alias: {
+          src: path.resolve(__dirname, "src/"),
+        },
+        modules: [path.resolve(__dirname, "src")],
+      },
+    });
+  },
+  experimental: {
+    modern: true,
+  },
+  exportPathMap() {
+    return {
+      "/": { page: "/" },
+      "/index.html": { page: "/" },
+    };
+  },
+};

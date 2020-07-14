@@ -1,57 +1,21 @@
-import { useEffect, useState } from "react";
+import "milligram/dist/milligram.css";
 
-import { GlobalStyles } from "../styles";
-import { MDXProvider } from "@mdx-js/react";
-import ThemeContext from "@/theme";
-import { css } from "linaria";
-import { cx } from "../utils";
-import useDarkMode from "use-dark-mode";
-import { variant } from "../theme";
+import { CacheProvider } from "@emotion/core";
+import { GlobalStyles } from "styles";
+import { ThemeProvider } from "emotion-theming";
+import { cache } from "emotion";
+import { Layout } from "components";
+import theme from "src/config";
 
-// credit: https://levelup.gitconnected.com/adding-dark-mode-to-your-react-app-with-emotion-css-in-js-fc5c0f926838
-const BackgroundStyles = ({ children }) => (
-  <>
-    <data
-      className={cx(
-        GlobalStyles,
-        css`
-          :global() {
-            body.light-mode {
-              background-color: ${variant.alternate.primary};
-              color: ${variant.alternate.quaternary};
-            }
-            body.dark-mode {
-              background-color: ${variant.normal.primary};
-              color: ${variant.normal.quaternary};
-            }
-          }
-          display: none;
-        `
-      )}
-    />
-    {children}
-  </>
-);
-
-const App = ({ Component, pageProps }) => {
-  const [currVariant, setCurrVariant] = useState(variant.normal);
-  const { value: isDarkMode } = useDarkMode(false, {
-    storageKey: "darkMode",
-    onChange: null,
-  });
-  useEffect(() => {
-    setCurrVariant(!isDarkMode ? variant.alternate : variant.normal);
-  }, [isDarkMode]);
-
+export default function ({ Component, pageProps }) {
   return (
-    <ThemeContext.Provider value={currVariant}>
-      <MDXProvider components={{}}>
-        <BackgroundStyles>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          {GlobalStyles}
           <Component {...pageProps} />
-        </BackgroundStyles>
-      </MDXProvider>
-    </ThemeContext.Provider>
+        </Layout>
+      </ThemeProvider>
+    </CacheProvider>
   );
-};
-
-export default App;
+}

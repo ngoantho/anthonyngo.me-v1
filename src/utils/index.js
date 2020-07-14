@@ -11,5 +11,6 @@ export function hash(string) {
   return hash;
 }
 
+export { withConfig, useConfig } from "./configutils";
+export { on, off, emit } from "./events";
 export { cx } from "./cx";
-export { useTheme, withTheme } from "./themeutils";

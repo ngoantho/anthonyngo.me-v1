@@ -6,27 +6,18 @@
   <a href="https://github.com/ngoantho/ngoanthohub.io/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/ngoantho/portfolio" />
   </a>
+  <a href="" target="_blank">
+    <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/5b53bef7-3b77-4226-b2d1-e2d4c7eace9e/deploy-status"/>
+  </a>
   
-  [![Netlify Status](https://api.netlify.com/api/v1/badges/5b53bef7-3b77-4226-b2d1-e2d4c7eace9e/deploy-status)](https://ngoantho.netlify.app)
-</p>
-
-> Source code of my personal portfolio built with Next.js & MDX
-
-### ✨ [Demo](ngoantho.netlify.app)
-
-## Install
-
-```sh
-npm install
-```
-
-## Usage
-
-```sh
-npm run start
-```
-
-## Author
+  > Source code of my personal portfolio built with Next.js
+  
+  ### ✨ [ngoantho.netlify.app](ngoantho.netlify.app)
+  
+  ## Features
+  - 
+  
+  ## Author
 
 👤 **Anthony Ngo <ngo.anthony.me@gmail.com>**
 
@@ -46,7 +37,4 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [Anthony Ngo <ngo.anthony.me@gmail.com>](https://github.com/ngoantho).<br />
 This project is [MIT](https://github.com/ngoantho/ngoanthohub.io/blob/master/LICENSE) licensed.
-
----
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+</p>
