@@ -1,7 +1,7 @@
 export const navLinks = [
   ["Projects", "#projects"],
-  ["About", "#about"],
-  ["Experience", "#experience"],
+  // ["About", "#about"],
+  // ["Experience", "#experience"],
   ["Contact", "#contact"],
 ];
 

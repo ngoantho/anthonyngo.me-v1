@@ -15,7 +15,7 @@ export default (
 
         width: 100%;
         overflow-x: hidden;
-        overflow-y: auto;
+        overflow-y: visible;
         -webkit-overflow-scrolling: touch;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
