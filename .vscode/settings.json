@@ -1,7 +1,6 @@
 {
   "prettier.eslintIntegration": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnPaste": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -14,6 +13,11 @@
   "eslint.validate": [
     "javascript",
     "javascriptreact",
+  ],
+  "css.fileExtensions": [
+    "css",
+    "scss",
+    "javascriptreact"
   ],
   "eslint.packageManager": "pnpm",
   "emmet.includeLanguages": {

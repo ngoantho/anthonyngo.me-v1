@@ -1,3 +1,10 @@
+import { Landing } from "components/sections";
+import { Layout } from "components";
+
 export default function () {
-  return <h1>Wow!</h1>;
+  return (
+    <Layout>
+      <Landing id="landing" />
+    </Layout>
+  );
 }
