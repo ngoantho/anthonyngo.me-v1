@@ -2,7 +2,7 @@ export const navLinks = [
   ["Projects", "#projects"],
   // ["About", "#about"],
   // ["Experience", "#experience"],
-  ["Contact", "#contact"],
+  ["Contact", "mailto:ngo.anthony.me@gmail.com"],
 ];
 
 export const weights = {
@@ -32,7 +32,10 @@ export const spacing = {
 };
 
 export const colors = {
-  headerBg: "#222222",
+  tan: "#f0ece3",
+  grey: "#dfd3c3",
+  gold: "#c7b198",
+  dusk: "#596e79",
 };
 
 export default {

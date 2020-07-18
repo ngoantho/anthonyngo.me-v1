@@ -1,10 +1,16 @@
 /* @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { cx, withConfig } from "utils";
+import { fadeIn, fadeInDown, fadeInUp } from "styles/anims";
 
 import picture from "assets/me.png";
+import { withTheme } from "emotion-theming";
 
-const Landing = ({ config: { showRightPicture, ...config }, ...props }) => (
+const Landing = ({
+  config: { showRightPicture, ...config },
+  theme: { weights },
+  ...props
+}) => (
   <section {...props} css={styles(config)}>
     <div className="row">
       <div
@@ -12,14 +18,21 @@ const Landing = ({ config: { showRightPicture, ...config }, ...props }) => (
         className={cx("column", {
           "column-50": showRightPicture,
         })}>
-        <h5 name="super-title">Hi, my name is</h5>
-        <h1 name="title">Anthony Ngo</h1>
-        <h2 name="sub-title">I build things in my free time</h2>
+        {/* eslint-disable react/no-unescaped-entities */}
+        <h5 name="super-title">Hi, I'm</h5>
+        <h1
+          name="title"
+          style={{
+            fontWeight: weights.bold - 100,
+          }}>
+          Anthony Ngo
+        </h1>
+        <h2 name="sub-title">aspiring software engineer</h2>
         <p name="blurb">
-          {
-            "I'm a computer science student based in Seattle, WA. Currently studying at "
-          }
-          <a href="http://www.seattleu.edu">Seattle University</a>.
+          Hi, I'm Anthony! I'm a current computer science student studying at{" "}
+          <a href="//seattleu.edu">Seattle University</a>, who is passionate
+          about making open source software, creating technology to help others,
+          and building a better future.
         </p>
         <a
           href="#projects"
@@ -27,9 +40,11 @@ const Landing = ({ config: { showRightPicture, ...config }, ...props }) => (
           css={css`
             margin-right: 1rem;
           `}>
-          find out more about my work
+          featured projects
         </a>
-        <a href="#contact" className="button button-clear">
+        <a
+          href="mailto:ngo.anthony.me@gmail.com"
+          className="button button-clear">
           hire me
         </a>
       </div>
@@ -46,9 +61,14 @@ const styles = (context) => css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
+  ${context.fullPage ? "min-height: 100vh" : ""}
 
   & > .row {
+    flex-direction: column-reverse;
+    @media (min-width: ${context.mobileCutoff}) {
+      flex-direction: row;
+    }
+
     & > [name="inner-left"] {
       @media (max-width: ${context.mobileCutoff}) {
         max-width: 100% !important;
@@ -57,12 +77,14 @@ const styles = (context) => css`
       [name="super-title"] {
         letter-spacing: ${context.superTitleSpacing};
         margin-bottom: 0;
-        font-family: "mono";
+        font-family: "mono", monospace;
         font-size: smaller;
+        visibility: hidden;
       }
       [name="title"] {
-        font-weight: ${context.titleWeight};
         margin-bottom: 0;
+        ${fadeInUp}
+
         @media (min-width: 80rem) {
           font-size: 8rem;
         }
@@ -77,6 +99,9 @@ const styles = (context) => css`
         }
       }
       [name="sub-title"] {
+        ${fadeInUp}
+        animation-delay: 0.25s;
+
         @media (min-width: 80rem) {
           font-size: 6rem;
         }
@@ -90,6 +115,19 @@ const styles = (context) => css`
           font-size: 3rem;
         }
       }
+      [name="blurb"] {
+        ${fadeInUp}
+        animation-delay: 0.5s;
+
+        @media (min-width: ${context.mobileCutoff}) {
+          font-size: larger;
+        }
+      }
+
+      .button {
+        ${fadeInUp}
+        animation-delay: 0.75s;
+      }
     }
 
     & > [name="inner-right"] {
@@ -98,16 +136,21 @@ const styles = (context) => css`
       }
 
       display: grid;
+      ${fadeIn}
+
       img {
         margin: auto;
+        border-radius: 40%;
       }
     }
   }
 `;
 
-export default withConfig(Landing, {
-  mobileCutoff: "40rem",
-  titleWeight: "600",
-  superTitleSpacing: "0rem",
-  showRightPicture: false,
-});
+export default withTheme(
+  withConfig(Landing, {
+    mobileCutoff: "40rem",
+    superTitleSpacing: "0rem",
+    showRightPicture: true,
+    fullPage: true,
+  })
+);

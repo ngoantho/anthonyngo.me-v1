@@ -7,7 +7,7 @@ export default css`
     @supports (scroll-behavior: smooth) {
       scroll-behavior: smooth;
     }
-    @media all and (prefers-reduced-motion: reduce) {
+    @media screen and (prefers-reduced-motion: reduce) {
       scroll-behavior: auto;
     }
     box-sizing: border-box;
@@ -27,7 +27,10 @@ export default css`
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4,
+  h5,
+  h6 {
     text-rendering: optimizeLegibility;
   }
 `;
