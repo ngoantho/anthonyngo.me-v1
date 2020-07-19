@@ -18,17 +18,19 @@ const FeaturedProjects = dynamic(() =>
 
 function Index({ featuredPosts, morePosts }) {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Anthony Ngo</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Landing id="landing" />
-      <Landing />
-      <Fade direction="top" triggerOnce="true">
-        <FeaturedProjects id="projects" posts={featuredPosts} />
-      </Fade>
-    </Layout>
+      <Layout>
+        <Landing id="landing" />
+        <Landing />
+        <Fade direction="top" triggerOnce="true">
+          <FeaturedProjects id="projects" posts={featuredPosts} />
+        </Fade>
+      </Layout>
+    </>
   );
 }
 
