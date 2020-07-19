@@ -2,6 +2,7 @@ const { merge } = require("webpack-merge");
 const path = require("path");
 const withPlugins = require("next-compose-plugins");
 const optimizedImages = require("next-optimized-images");
+const withPWA = require("next-pwa");
 
 module.exports = withPlugins(
   [
@@ -10,6 +11,12 @@ module.exports = withPlugins(
       {
         handleImages: ["jpeg", "png", "svg", "webp", "gif", "ico"],
         optimizeImages: process.env.NODE_ENV === "production",
+      },
+    ],
+    [
+      withPWA,
+      {
+        disable: process.env.NODE_ENV === "development",
       },
     ],
   ],
