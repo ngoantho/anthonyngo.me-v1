@@ -25,7 +25,6 @@ function Index({ featuredPosts, morePosts }) {
       </Head>
       <Layout>
         <Landing id="landing" />
-        <Landing />
         <Fade direction="top" triggerOnce="true">
           <FeaturedProjects id="projects" posts={featuredPosts} />
         </Fade>
