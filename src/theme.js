@@ -39,6 +39,7 @@ export const colors = {
 };
 
 export default {
+  navLinks,
   colors,
   weights,
   sizes,

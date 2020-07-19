@@ -1,22 +1,16 @@
 /* eslint-disable no-unused-vars */
-/* @jsx jsx */
-import { css, jsx } from "@emotion/core";
-
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
+import { Landing } from "components/sections";
 import { Layout } from "components";
 import PropTypes from "prop-types";
-import Reveal from "react-reveal/reveal";
 import dynamic from "next/dynamic";
-import fs from "fs";
-import path from "path";
+import { join } from "path";
+import { promises } from "fs";
 import schema from "assets/schema";
 
-// import { useState } from "react";
-
 const { arrayOf, shape, string } = PropTypes;
-const Landing = dynamic(() =>
-  import("components/sections").then((mod) => mod.Landing)
-);
+const { readdir, readFile } = promises;
+
 const FeaturedProjects = dynamic(() =>
   import("components/sections").then((mod) => mod.FeaturedProjects)
 );
@@ -24,16 +18,8 @@ const FeaturedProjects = dynamic(() =>
 function Index({ featuredPosts, morePosts }) {
   return (
     <Layout>
-      {/*
-        <Reveal>
-          <Landing id="landing" />
-        </Reveal>
-        <Fade bottom>
-          <FeaturedProjects id="projects" posts={featuredPosts} />
-        </Fade>
-      */}
       <Landing />
-      <Fade bottom>
+      <Fade direction="top" triggerOnce="true">
         <FeaturedProjects id="projects" posts={featuredPosts} />
       </Fade>
     </Layout>
@@ -58,29 +44,33 @@ Index.propTypes = {
 export default Index;
 
 export async function getStaticProps() {
-  const featuredDirectory = path.join(process.cwd(), "src/assets/featured");
-  const featuredFilenames = fs.readdirSync(featuredDirectory);
-  const featuredPosts = featuredFilenames.map((filename) => {
-    const filePath = path.join(featuredDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, "utf8");
+  let featuredPosts = [];
+  const featuredDirectory = join(process.cwd(), "src/assets/featured");
+  for (const filename of await readdir(featuredDirectory)) {
+    const filePath = join(featuredDirectory, filename);
+    const fileContents = await readFile(filePath, "utf8");
+    featuredPosts = [
+      ...featuredPosts,
+      {
+        filename,
+        content: JSON.parse(fileContents),
+      },
+    ];
+  }
 
-    return {
-      filename,
-      content: JSON.parse(fileContents),
-    };
-  });
-
-  const moreDirectory = path.join(process.cwd(), "src/assets/other");
-  const moreFilenames = fs.readdirSync(moreDirectory);
-  const morePosts = moreFilenames.map((filename) => {
-    const filePath = path.join(moreDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, "utf8");
-
-    return {
-      filename,
-      content: JSON.parse(fileContents),
-    };
-  });
+  let morePosts = [];
+  const moreDirectory = join(process.cwd(), "src/assets/other");
+  for (const filename of await readdir(moreDirectory)) {
+    const filePath = join(moreDirectory, filename);
+    const fileContents = await readFile(filePath, "utf8");
+    morePosts = [
+      ...morePosts,
+      {
+        filename,
+        content: JSON.parse(fileContents),
+      },
+    ];
+  }
 
   return {
     props: {

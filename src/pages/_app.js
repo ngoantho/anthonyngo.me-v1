@@ -4,7 +4,7 @@ import { CacheProvider } from "@emotion/core";
 import { GlobalStyles } from "styles";
 import { ThemeProvider } from "emotion-theming";
 import { cache } from "emotion";
-import theme from "src/config";
+import theme from "theme";
 import { useEffect } from "react";
 
 export default function ({ Component, pageProps }) {

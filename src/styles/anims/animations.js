@@ -22,6 +22,28 @@ export const fadeInDown = keyframes`
     visibility: visible;
   }
 `;
+export const fadeInLeft = keyframes`
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+export const fadeInRight = keyframes`
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+    visibility: visible;
+  }
+`;
 export const fadeIn = keyframes`
   from {
     opacity: 0;

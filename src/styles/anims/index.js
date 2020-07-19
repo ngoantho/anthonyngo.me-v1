@@ -1,6 +1,8 @@
 import {
   fadeIn as fadeInAnim,
   fadeInDown as fadeInDownAnim,
+  fadeInLeft as fadeInLeftAnim,
+  fadeInRight as fadeInRightAnim,
   fadeInUp as fadeInUpAnim,
 } from "./animations";
 
@@ -14,6 +16,18 @@ export const fadeInUp = css`
 
 export const fadeInDown = css`
   animation: ${fadeInDownAnim} 0.75s;
+  animation-fill-mode: forwards;
+  visibility: hidden;
+`;
+
+export const fadeInLeft = css`
+  animation: ${fadeInLeftAnim} 0.75s;
+  animation-fill-mode: forwards;
+  visibility: hidden;
+`;
+
+export const fadeInRight = css`
+  animation: ${fadeInRightAnim} 0.75s;
   animation-fill-mode: forwards;
   visibility: hidden;
 `;
