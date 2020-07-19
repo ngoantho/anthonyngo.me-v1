@@ -7,7 +7,7 @@ export default css`
     @supports (scroll-behavior: smooth) {
       scroll-behavior: smooth;
     }
-    @media all and (prefers-reduced-motion: reduce) {
+    @media screen and (prefers-reduced-motion: reduce) {
       scroll-behavior: auto;
     }
     box-sizing: border-box;

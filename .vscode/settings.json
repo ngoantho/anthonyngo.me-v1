@@ -19,7 +19,7 @@
     "scss",
     "javascriptreact"
   ],
-  "eslint.packageManager": "pnpm",
+  "eslint.packageManager": "npm",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
   },

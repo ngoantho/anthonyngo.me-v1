@@ -1,68 +1,51 @@
 /* @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import { cx, withConfig } from "utils";
+import { fadeInLeft, fadeInRight, fadeInUp } from "styles/anims";
 
 import picture from "assets/me.png";
+import useMedia from "use-media";
+import { withTheme } from "emotion-theming";
 
-const Landing = ({ config: { showRightPicture, ...config }, ...props }) => (
-  <section {...props} css={styles(config)}>
-    <div className="row">
-      <div
-        name="inner-left"
-        className={cx("column", {
-          "column-50": showRightPicture,
-        })}>
-        <h5 name="super-title">Hi, my name is</h5>
-        <h1 name="title">Anthony Ngo</h1>
-        <h2 name="sub-title">I build things in my free time</h2>
-        <p name="blurb">
-          {
-            "I'm a computer science student based in Seattle, WA. Currently studying at "
-          }
-          <a href="http://www.seattleu.edu">Seattle University</a>.
-        </p>
-        <a
-          href="#projects"
-          className="button button-outline"
-          css={css`
-            margin-right: 1rem;
-          `}>
-          find out more about my work
-        </a>
-        <a href="#contact" className="button button-clear">
-          hire me
-        </a>
-      </div>
-      {showRightPicture ? (
-        <div className="column column-50" name="inner-right">
-          <img src={picture} />
-        </div>
-      ) : null}
-    </div>
-  </section>
-);
-
-const styles = (context) => css`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100vh;
-
-  & > .row {
-    & > [name="inner-left"] {
-      @media (max-width: ${context.mobileCutoff}) {
-        max-width: 100% !important;
+const useStyles = ({ config, weights }) => ({
+  $: css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    ${config.fullPage &&
+    css`
+      min-height: 100vh;
+    `}
+  `,
+  container: {
+    $: css`
+      flex-direction: column-reverse;
+      @media (min-width: 40rem) {
+        flex-direction: row;
       }
+    `,
+    content: {
+      $: css`
+        @media (max-width: 40rem) {
+          max-width: 100% !important;
+        }
 
-      [name="super-title"] {
-        letter-spacing: ${context.superTitleSpacing};
+        & > .button {
+          ${fadeInUp}
+          animation-delay: 0.75s;
+        }
+      `,
+      superTitle: css`
         margin-bottom: 0;
-        font-family: "mono";
+        font-family: "mono", monospace;
         font-size: smaller;
-      }
-      [name="title"] {
-        font-weight: ${context.titleWeight};
+        visibility: hidden;
+      `,
+      title: css`
         margin-bottom: 0;
+        font-weight: ${weights.bold - 100};
+        ${fadeInUp}
+
         @media (min-width: 80rem) {
           font-size: 8rem;
         }
@@ -75,8 +58,11 @@ const styles = (context) => css`
         @media (max-width: 40rem) {
           font-size: 5rem;
         }
-      }
-      [name="sub-title"] {
+      `,
+      subTitle: css`
+        ${fadeInUp}
+        animation-delay: 0.25s;
+
         @media (min-width: 80rem) {
           font-size: 6rem;
         }
@@ -89,25 +75,90 @@ const styles = (context) => css`
         @media (max-width: 40rem) {
           font-size: 3rem;
         }
-      }
-    }
+      `,
+      blurb: css`
+        ${fadeInUp}
+        animation-delay: 0.5s;
 
-    & > [name="inner-right"] {
-      @media (max-width: ${context.mobileCutoff}) {
-        max-width: 100% !important;
-      }
+        @media (min-width: 40rem) {
+          font-size: larger;
+        }
+      `,
+    },
+    pic: (isMobile) => css`
+      display: grid !important;
+      ${isMobile ? fadeInLeft : fadeInRight}
 
-      display: grid;
       img {
         margin: auto;
+        border-radius: 40%;
       }
-    }
-  }
-`;
-
-export default withConfig(Landing, {
-  mobileCutoff: "40rem",
-  titleWeight: "600",
-  superTitleSpacing: "0rem",
-  showRightPicture: false,
+    `,
+  },
 });
+
+const Landing = ({
+  config: { showHeadshot, ...config },
+  theme: { weights },
+  ...props
+}) => {
+  const styles = useStyles({
+    config,
+    weights,
+  });
+  const {
+    container: { content },
+  } = styles;
+  const isMobile = useMedia("(max-width: 40rem)");
+
+  return (
+    <section {...props} css={styles.$}>
+      <div className="row" css={styles.container.$}>
+        <div
+          className={cx("column", {
+            "column-50": showHeadshot,
+          })}
+          css={content.$}>
+          {/* eslint-disable react/no-unescaped-entities */}
+          <h5 css={content.superTitle}>Hi, I'm</h5>
+          <h1 css={content.title}>Anthony Ngo</h1>
+          <h2 css={content.subTitle}>aspiring software engineer</h2>
+          <p css={content.blurb}>
+            Hi, I'm Anthony! I'm a current computer science student studying at{" "}
+            <a href="//seattleu.edu">Seattle University</a>, who is passionate
+            about making open source software, creating technology to help
+            others, and building a better future.
+          </p>
+          <a
+            href="#projects"
+            className="button button-outline"
+            css={css`
+              margin-right: 1rem;
+            `}>
+            featured projects
+          </a>
+          <a
+            href="mailto:ngo.anthony.me@gmail.com"
+            className="button button-clear">
+            hire me
+          </a>
+        </div>
+        {showHeadshot ? (
+          <div
+            className="column column-50"
+            css={styles.container.pic(isMobile)}>
+            <img src={picture} />
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+};
+
+export default withTheme(
+  withConfig(Landing, {
+    superTitleSpacing: "0rem",
+    showHeadshot: true,
+    fullPage: true,
+  })
+);

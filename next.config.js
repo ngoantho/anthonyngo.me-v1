@@ -14,7 +14,7 @@ module.exports = withPlugins(
     ],
   ],
   {
-    webpack(config, { dev }) {
+    webpack(config, { dev, isServer }) {
       return merge(config, {
         resolve: {
           alias: {
@@ -26,6 +26,11 @@ module.exports = withPlugins(
 
         ...(dev && {
           devtool: "eval-cheap-source-map",
+        }),
+        ...(!isServer && {
+          node: {
+            fs: "empty",
+          },
         }),
       });
     },
