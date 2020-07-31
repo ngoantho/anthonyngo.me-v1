@@ -1,31 +1,33 @@
+export const name = "Anthony Ngo";
+export const email = "ngo.anthony.me@gmail.com";
+export const location = "Seattle, WA";
+
 export const site = {
   title: "Anthony Ngo | Pursueing Internships",
   description:
-    "Anthony Ngo is an aspiring software engineer based in Seattle, WA learning to develop exceptional websites, applications, and anything in between.",
+    "Anthony Ngo is a current computer science student studying at Seattle University, who is passionate about making open source software, creating technology to help others, and building a better future.",
   keywords:
-    "Anthony Ngo, Anthony, Ngo, ngoantho, internship, web developer, javascript, SeattleU",
+    "Anthony Ngo, Anthony, Ngo, ngoantho, internship, software engineer, javascript, SeattleU",
   url: "anthonyngo.me",
   language: "en-US",
 };
+
 export const contactMe = {
   LinkedIn: {
-    icon: "linkedin",
+    icon: "icons/linkedin.png",
     url: "https://www.linkedin.com/in/anthongo/",
   },
   GitHub: {
-    icon: "github",
+    icon: "icons/github-mark.png",
     url: "https://github.com/ngoantho",
   },
   Instagram: {
-    icon: "instagram",
+    icon: "icons/instagram.png",
     url: "https://www.instagram.com/ant.ngo_1/",
   },
   Twitter: {
-    icon: "twitter",
+    icon: "icons/twitter.png",
     url: "https://twitter.com/@vadlus",
     handle: "@vadlus",
   },
 };
-export const name = "Anthony Ngo";
-export const email = "anthonyngo.info@gmail.com";
-export const location = "Seattle, WA";

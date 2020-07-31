@@ -10,7 +10,6 @@ export default css`
     @media screen and (prefers-reduced-motion: reduce) {
       scroll-behavior: auto;
     }
-    box-sizing: border-box;
     width: 100%;
   }
 
@@ -23,11 +22,5 @@ export default css`
   *::before,
   *::after {
     box-sizing: inherit;
-  }
-
-  h1,
-  h2,
-  h3 {
-    text-rendering: optimizeLegibility;
   }
 `;

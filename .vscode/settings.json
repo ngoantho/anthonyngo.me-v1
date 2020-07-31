@@ -1,5 +1,4 @@
 {
-  "prettier.eslintIntegration": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -19,7 +18,7 @@
     "scss",
     "javascriptreact"
   ],
-  "eslint.packageManager": "npm",
+  "eslint.packageManager": "pnpm",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
   },

@@ -8,7 +8,7 @@ export default (
     styles={css`
       ${Fonts}
       ${Defaults}
-      
+
       body {
         width: 100%;
         overflow-x: hidden;
@@ -16,6 +16,12 @@ export default (
         -webkit-overflow-scrolling: touch;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3 {
+        text-rendering: optimizeLegibility;
       }
     `}
   />

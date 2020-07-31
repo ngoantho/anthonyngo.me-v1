@@ -1,22 +1,15 @@
-/* eslint-disable no-unused-vars */
-import { Fade } from "react-awesome-reveal";
+import { Layout, Sections } from "components";
+import { getProjectsFrom, processMkd } from "../lib/api";
+
 import Head from "next/head";
-import { Landing } from "components/sections";
-import { Layout } from "components";
 import PropTypes from "prop-types";
-import dynamic from "next/dynamic";
 import { join } from "path";
-import { promises } from "fs";
 import schema from "assets/schema";
 
+const { Landing, FeaturedProjects, AllProjects } = Sections;
 const { arrayOf, shape, string } = PropTypes;
-const { readdir, readFile } = promises;
 
-const FeaturedProjects = dynamic(() =>
-  import("components/sections").then((mod) => mod.FeaturedProjects)
-);
-
-function Index({ featuredPosts, morePosts }) {
+function Index({ featuredProjects, allProjects, miscData }) {
   return (
     <>
       <Head>
@@ -24,26 +17,25 @@ function Index({ featuredPosts, morePosts }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Layout>
-        <Landing id="landing" />
-        <Fade direction="top" triggerOnce="true">
-          <FeaturedProjects id="projects" posts={featuredPosts} />
-        </Fade>
+        <Landing data={miscData.landing} />
+        <FeaturedProjects id="featured_projects" projects={featuredProjects} />
+        <AllProjects id="all_projects" projects={allProjects} />
       </Layout>
     </>
   );
 }
 
 Index.propTypes = {
-  featuredPosts: arrayOf(
+  featuredProjects: arrayOf(
     shape({
-      filename: string,
-      content: schema,
+      html: string,
+      frontMatter: schema,
     })
   ),
-  morePosts: arrayOf(
+  allProjects: arrayOf(
     shape({
-      filename: string,
-      content: schema,
+      html: string,
+      frontMatter: schema,
     })
   ),
 };
@@ -51,38 +43,18 @@ Index.propTypes = {
 export default Index;
 
 export async function getStaticProps() {
-  let featuredPosts = [];
-  const featuredDirectory = join(process.cwd(), "src/assets/featured");
-  for (const filename of await readdir(featuredDirectory)) {
-    const filePath = join(featuredDirectory, filename);
-    const fileContents = await readFile(filePath, "utf8");
-    featuredPosts = [
-      ...featuredPosts,
-      {
-        filename,
-        content: JSON.parse(fileContents),
-      },
-    ];
-  }
-
-  let morePosts = [];
-  const moreDirectory = join(process.cwd(), "src/assets/other");
-  for (const filename of await readdir(moreDirectory)) {
-    const filePath = join(moreDirectory, filename);
-    const fileContents = await readFile(filePath, "utf8");
-    morePosts = [
-      ...morePosts,
-      {
-        filename,
-        content: JSON.parse(fileContents),
-      },
-    ];
-  }
+  const featuredProjectsDir = join(process.cwd(), "src/assets/featured");
+  const allProjectsDir = join(process.cwd(), "src/assets/projects");
+  let featuredProjects = await getProjectsFrom(featuredProjectsDir);
+  let allProjects = await getProjectsFrom(allProjectsDir);
 
   return {
     props: {
-      featuredPosts,
-      morePosts,
+      featuredProjects,
+      allProjects,
+      miscData: {
+        landing: await processMkd("src/assets/landing.md"),
+      },
     },
   };
 }

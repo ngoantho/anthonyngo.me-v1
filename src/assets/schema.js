@@ -6,7 +6,7 @@ export default shape({
   title: string.isRequired,
   github: string,
   external: string,
+  preview: string,
   tags: arrayOf(string).isRequired,
-  show: bool.isRequired,
-  content: string.isRequired,
+  visibleInProjects: bool.isRequired,
 });

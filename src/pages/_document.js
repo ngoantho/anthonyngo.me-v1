@@ -7,20 +7,11 @@ const { language, description, keywords, url } = site;
 
 export default class AppDocument extends Document {
   static async getInitialProps(ctx) {
-    const { default: icon192 } = await import("public/icons/favicon192.png");
-    const { default: icon96 } = await import("public/icons/favicon96.png");
-    const { default: icon72 } = await import("public/icons/favicon72.png");
-    const { default: icon48 } = await import("public/icons/favicon48.png");
-
     const initialProps = await Document.getInitialProps(ctx);
     const styles = extractCritical(initialProps.html);
 
     return {
       ...initialProps,
-      icon48,
-      icon72,
-      icon96,
-      icon192,
       styles: (
         <>
           {initialProps.styles}
@@ -47,11 +38,6 @@ export default class AppDocument extends Document {
             content="default"
           />
           <meta name="apple-mobile-web-app-title" content={name} />
-          <link
-            rel="apple-touch-icon"
-            sizes="192x192"
-            href={this.props.icon192}
-          />
           <meta name="description" content={description} />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
@@ -62,14 +48,12 @@ export default class AppDocument extends Document {
           <meta name="twitter:title" content={name} />
           <meta name="twitter:description" content={description} />
           <meta name="twitter:creator" content={contactMe.Twitter.handle} />
-          <meta name="twitter:image" content={this.props.icon192} />
 
           <meta property="og:type" content="website" />
           <meta property="og:title" content={name} />
           <meta property="og:description" content={description} />
           <meta property="og:site_name" content={name} />
           <meta property="og:url" content={url} />
-          <meta property="og:image" content={this.props.icon48} />
 
           <meta name="author" content={name} />
           <meta name="keywords" content={keywords} />
@@ -77,23 +61,9 @@ export default class AppDocument extends Document {
           <meta name="creator" content={name} />
           <meta name="rating" content="General" />
           <meta name="coverage" content="Worldwide" />
-
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="72x72"
-            href={this.props.icon72}
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="96x96"
-            href={this.props.icon96}
-          />
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>
+          <div id="modal" />
           <Main />
           <NextScript />
         </body>
