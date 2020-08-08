@@ -1,51 +1,30 @@
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { Navbar, SocialBar } from "components";
+import { glob as css, styled } from "goober";
 
-import GlobalStylesWithTheme from "./globalStylesWithTheme";
-import { fluidRange } from "polished";
-import { useEffect } from "react";
+import { Footer } from "components/sections";
 
-function Layout({ children }) {
-  useEffect(() => {
-    if (CSS.supports("scroll-behavior: smooth")) return;
-    if (window.matchMedia("all and (prefers-reduced-motion: reduce)").matches)
-      return;
-    require("smooth-scroll")('a[href*="#"]');
-  }, []);
+const StyledMainWrapper = styled("main")`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
+css`
+  #__next {
+    position: relative;
+  }
+`;
+
+function Layout({ children, footerData }) {
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      `}>
-      <GlobalStylesWithTheme />
-      <main
-        className="container"
-        css={css`
-          ${fluidRange(
-            {
-              prop: "paddingLeft",
-              fromSize: "2rem",
-              toSize: "4rem",
-            },
-            "40rem",
-            "80rem"
-          )}
-          ${fluidRange(
-            {
-              prop: "paddingRight",
-              fromSize: "2rem",
-              toSize: "4rem",
-            },
-            "40rem",
-            "80rem"
-          )}
-        `}>
+    <>
+      <Navbar />
+      <StyledMainWrapper className="container">
         {children}
-      </main>
-    </div>
+        <Footer data={footerData} />
+        <SocialBar />
+      </StyledMainWrapper>
+    </>
   );
 }
 

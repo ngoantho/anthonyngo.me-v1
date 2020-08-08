@@ -1,113 +1,85 @@
-/** @jsx jsx */
-import { css, jsx } from "@emotion/core";
-import { fluidRange, invert, lighten } from "polished";
+import { colors, config } from "theme";
+import { css, styled } from "goober";
+import { invert, lighten } from "polished";
 
-// import { cnx } from "util";
-import { withTheme } from "emotion-theming";
+const { email } = config;
 
-const useStyles = ({
-  weights,
-  sizes,
-  colors,
-  config: { shiftDown = "20", supColor = lighten(0.35, colors.dusk) },
-  subColor = lighten(0.7, "#000000"),
-}) => ({
-  $: css`
+const S = {};
+S.layout = {
+  MainWrapper: styled("section")`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
   `,
-  container: {
-    $: css`
-      padding-top: ${shiftDown - 5}vh;
-      padding-bottom: ${shiftDown}vh;
+  CenterRow: styled("div")`
+    @media (min-width: 40rem) {
+      flex-direction: column !important;
+    }
+  `,
+  Core: styled("div")``,
+};
+S.with = {
+  SupTitle: styled("h3")`
+    margin-bottom: 0;
+    font-family: "mono", monospace;
+    font-size: smaller;
+    color: ${lighten(0.35, colors.quaternary)};
+    @media (min-width: 40rem) {
+      font-size: initial;
+    }
+  `,
+  Title: styled("h1")`
+    margin-bottom: 0;
+    text-shadow: ${invert(colors.quaternary)} 0px 2px 2px;
+    font-weight: 500;
+  `,
+  SubTitle: styled("h2")`
+    color: ${lighten(0.7, "#000000")};
+  `,
+  Blurb: styled("div")`
+    p {
       @media (min-width: 40rem) {
-        flex-direction: column;
+        font-size: larger;
       }
-    `,
-    styled: css`
-      & > #sup {
-        margin-bottom: 0;
-        font-family: "mono", monospace;
-        font-size: smaller;
-        color: ${supColor};
-        @media (min-width: 40rem) {
-          font-size: initial;
-        }
+      a {
+        text-decoration: underline;
       }
+    }
+  `,
+};
 
-      & > #title {
-        margin-bottom: 0;
-        text-shadow: ${invert(colors.dusk)} 0px 2px 2px;
-        font-weight: ${weights.regular + 200};
-        @media (min-width: 80rem) {
-          font-size: ${sizes["xxl"]};
-        }
-        ${fluidRange(
-          {
-            prop: "fontSize",
-            fromSize: sizes[0],
-            toSize: sizes["l"],
-          },
-          "40rem",
-          "80rem"
-        )}
-      }
-
-      & > #sub {
-        color: ${subColor};
-        @media (min-width: 80rem) {
-          font-size: ${sizes["xl"]};
-        }
-        ${fluidRange(
-          {
-            prop: "fontSize",
-            fromSize: sizes[1],
-            toSize: sizes[0],
-          },
-          "40rem",
-          "80rem"
-        )}
-      }
-
-      & > p {
-        & > a {
-          text-decoration: underline;
-        }
-
-        @media (min-width: 40rem) {
-          font-size: larger;
-        }
-      }
-    `,
-  },
-});
-
-const Landing = ({ theme: { weights, colors, sizes }, data, ...props }) => {
-  const styles = useStyles({ weights, colors, sizes, config: {} });
+const Landing = ({ data, ...props }) => {
+  const { frontMatter, html } = data;
 
   return (
-    <section {...props} css={styles.$}>
-      <div className="row" css={styles.container.$}>
-        <div
-          className="column"
-          css={styles.container.styled}
-          dangerouslySetInnerHTML={{
-            __html: data.html,
-          }}
-        />
+    <S.layout.MainWrapper {...props}>
+      <S.layout.CenterRow className="row">
+        <S.layout.Core className="column">
+          <S.with.SupTitle>{frontMatter.supTitle}</S.with.SupTitle>
+          <S.with.Title>{frontMatter.title}</S.with.Title>
+          <S.with.SubTitle>{frontMatter.subTitle}</S.with.SubTitle>
+          <S.with.Blurb dangerouslySetInnerHTML={{ __html: html }} />
+        </S.layout.Core>
         <aside className="row">
-          <div className="column">
-            <a
-              href="mailto:ngo.anthony.me@gmail.com"
-              className="button button-outline">
+          <div
+            className={[
+              "column",
+              css`
+                @media (min-width: 40rem) {
+                  padding-left: 2rem !important;
+                }
+              `,
+            ].join(" ")}>
+            <a href={`mailto:${email}`} className="button button-outline">
               get in touch
             </a>
           </div>
         </aside>
-      </div>
-    </section>
+      </S.layout.CenterRow>
+    </S.layout.MainWrapper>
   );
 };
 
-export default withTheme(Landing);
+export default Landing;

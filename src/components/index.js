@@ -1,6 +1,9 @@
+export { default as Navbar } from "./navbar";
+export { default as MobileMenu } from "./mobmenu";
+export { default as Layout } from "./layout";
+export { default as Project } from "./project";
+export { default as Side } from "./side";
+export { default as SocialBar } from "./socialbar";
+
 import * as Sections from "./sections/index";
 export { Sections };
-export { default as Layout } from "./layout";
-export { default as ProjectProxy } from "./projectblock";
-export { default as GlobalStylesWithTheme } from "./globalStylesWithTheme";
-export { default as ClientOnlyPortal } from "./ClientOnlyPortal";

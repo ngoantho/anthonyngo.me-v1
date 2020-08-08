@@ -1,11 +1,5 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
   },
@@ -18,8 +12,6 @@
     "scss",
     "javascriptreact"
   ],
-  "eslint.packageManager": "pnpm",
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-  },
+  "auto-rename-tag.activationOnLanguage": ["javascript", "javascriptreact"],
+  "eslint.packageManager": "pnpm"
 }

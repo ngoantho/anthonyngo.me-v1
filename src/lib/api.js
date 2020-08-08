@@ -1,20 +1,8 @@
-import { join } from "path";
-import markdownToHtml from "./mdToHtml";
-import matter from "gray-matter";
+import { getProjectByFile, parse } from "./parse";
+
 import { promises } from "fs";
-const { readdir, readFile } = promises;
 
-async function getProjectBySlug(slug, dir) {
-  const filePath = join(dir, slug);
-  const fileContents = await readFile(filePath, "utf8");
-  const { data, content } = matter(fileContents);
-  const htmlContent = await markdownToHtml(content);
-
-  return {
-    frontMatter: { ...data },
-    html: htmlContent,
-  };
-}
+const { readdir } = promises;
 
 function getDateFromString(string) {
   let parts = string.split("-");
@@ -25,7 +13,7 @@ export async function getProjectsFrom(dir) {
   let slugs = await readdir(dir);
   let projects = await Promise.all(
     slugs
-      .map((slug) => getProjectBySlug(slug, dir))
+      .map((slug) => parse(slug, dir))
       .sort(async (projectA, projectB) => {
         const {
           frontMatter: { date: a },
@@ -43,4 +31,4 @@ export async function getProjectsFrom(dir) {
   return projects;
 }
 
-export * from "./parse";
+export { getProjectByFile };

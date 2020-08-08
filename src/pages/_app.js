@@ -1,27 +1,36 @@
 import "milligram/dist/milligram.css";
+import "styles/accent.css";
 
-import { CacheProvider } from "@emotion/core";
-import { GlobalStyles } from "styles";
-import { ThemeProvider } from "emotion-theming";
-import { cache } from "emotion";
-import theme from "theme";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
-export default function ({ Component, pageProps }) {
-  function cb() {
+import { GlobalLayout } from "styles";
+import { prefix } from "goober-autoprefixer";
+import { setup } from "goober";
+
+// goober's needs to know how to render the `styled` nodes.
+// So to let it know, we run the `setup` function with the
+// `createElement` function and prefixer function.
+setup(React.createElement, prefix);
+
+((client, cb) => client && cb())(typeof window !== "undefined", () => {
+  if (CSS.supports("scroll-behavior: smooth")) return;
+  if (window.matchMedia("screen and (prefers-reduced-motion: reduce)").matches)
+    return;
+  require("smooth-scroll")('a[href*="#"]');
+});
+
+export default function App({ Component, pageProps }) {
+  function cbHashChange() {
     history.replaceState(null, null, " ");
   }
   useEffect(() => {
-    window.addEventListener("hashchange", cb, false);
-    return () => window.removeEventListener("hashchange", cb, false);
+    window.addEventListener("hashchange", cbHashChange, false);
+    return () => window.removeEventListener("hashchange", cbHashChange, false);
   }, []);
 
   return (
-    <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        {GlobalStyles}
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </CacheProvider>
+    <GlobalLayout>
+      <Component {...pageProps} />
+    </GlobalLayout>
   );
 }

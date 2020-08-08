@@ -11,7 +11,7 @@ export function hash(string) {
   return hash;
 }
 
-export const cnx = (...args) => {
+export const cx = (...args) => {
   const result = new Set();
   for (const item of args) {
     const type = typeof item;
@@ -26,5 +26,3 @@ export const cnx = (...args) => {
 
   return [...result].join(" ");
 };
-
-export { withConfig, useConfig } from "./configutils";

@@ -31,3 +31,6 @@ export const contactMe = {
     handle: "@vadlus",
   },
 };
+
+export const navLinks = [];
+export const navHeight = 100;

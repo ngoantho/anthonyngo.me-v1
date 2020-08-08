@@ -1,12 +1,12 @@
 import { Layout, Sections } from "components";
-import { getProjectsFrom, processMkd } from "../lib/api";
+import { getProjectByFile, getProjectsFrom } from "../lib/api";
 
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { join } from "path";
 import schema from "assets/schema";
 
-const { Landing, FeaturedProjects, AllProjects } = Sections;
+const { Landing, Projects } = Sections;
 const { arrayOf, shape, string } = PropTypes;
 
 function Index({ featuredProjects, allProjects, miscData }) {
@@ -16,10 +16,9 @@ function Index({ featuredProjects, allProjects, miscData }) {
         <title>Anthony Ngo</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout>
+      <Layout footerData={miscData.footer}>
         <Landing data={miscData.landing} />
-        <FeaturedProjects id="featured_projects" projects={featuredProjects} />
-        <AllProjects id="all_projects" projects={allProjects} />
+        <Projects data={{ featuredProjects, allProjects }} />
       </Layout>
     </>
   );
@@ -53,7 +52,8 @@ export async function getStaticProps() {
       featuredProjects,
       allProjects,
       miscData: {
-        landing: await processMkd("src/assets/landing.md"),
+        landing: await getProjectByFile("src/assets/sections/landing.md"),
+        footer: await getProjectByFile("src/assets/sections/footer.md"),
       },
     },
   };

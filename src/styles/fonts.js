@@ -1,5 +1,6 @@
-import { css } from "@emotion/core";
-export default css`
+import { glob as css } from "goober";
+
+css`
   @font-face {
     font-family: "mono";
     font-display: auto;

@@ -4,14 +4,18 @@ import matter from "gray-matter";
 import { promises } from "fs";
 const { readFile } = promises;
 
-export async function processMkd(file) {
-  const filePath = join(process.cwd(), file);
+export async function parse(file, dir = "") {
+  const filePath = join(dir, file);
   const fileContents = await readFile(filePath, "utf8");
   const { data, content } = matter(fileContents);
   const htmlContent = await markdownToHtml(content);
 
   return {
     html: htmlContent,
-    ...data,
+    frontMatter: { ...data },
   };
+}
+
+export async function getProjectByFile(filePath) {
+  return await parse(`${filePath}`);
 }
