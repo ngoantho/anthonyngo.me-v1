@@ -39,7 +39,6 @@ S.layout = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* height: 100%; */
     grid-row: 1;
     grid-column: 1;
 
@@ -149,7 +148,8 @@ export default function Project({
               {frontMatter.github ? (
                 <a
                   href={`//github.com/ngoantho/${frontMatter.github}`}
-                  target="_blank">
+                  target="_blank"
+                  rel="nofollow noopener noreferrer">
                   <S.with.Icon
                     src={require("public/icons/github-mark-light.png")}
                     alt={frontMatter.github}
@@ -159,7 +159,10 @@ export default function Project({
             </li>
             <li>
               {frontMatter.external ? (
-                <a href={`//${frontMatter.external}`} target="_blank">
+                <a
+                  href={`//${frontMatter.external}`}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer">
                   <S.with.Icon
                     src={require("public/icons/external.png")}
                     alt={frontMatter.external}

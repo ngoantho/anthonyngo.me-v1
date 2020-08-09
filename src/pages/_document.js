@@ -7,18 +7,10 @@ const { language, description, keywords, url } = site;
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
-    const { default: icon192 } = await import(
-      "public/favicons/favicon192.png?url"
-    );
-    const { default: icon96 } = await import(
-      "public/favicons/favicon96.png?url"
-    );
-    const { default: icon72 } = await import(
-      "public/favicons/favicon72.png?url"
-    );
-    const { default: icon48 } = await import(
-      "public/favicons/favicon48.png?url"
-    );
+    const { default: icon192 } = await import("public/favicons/favicon192.png");
+    const { default: icon96 } = await import("public/favicons/favicon96.png");
+    const { default: icon72 } = await import("public/favicons/favicon72.png");
+    const { default: icon48 } = await import("public/favicons/favicon48.png");
 
     const page = renderPage();
 

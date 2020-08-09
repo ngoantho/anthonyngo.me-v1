@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Layout } from "components";
 import Link from "next/link";
 import { colors } from "theme";
@@ -5,12 +6,12 @@ import { getProjectByFile } from "../lib/api";
 import { styled } from "goober";
 
 const S = {
-  MainContainer: styled("main")`
+  MainContainer: styled("section")`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 5rem);
+    margin: auto 0 auto;
   `,
   Title: styled("h1")`
     font-family: "mono", monospace;
@@ -42,6 +43,9 @@ const S = {
 export default function Custom404({ footerData }) {
   return (
     <Layout footerData={footerData}>
+      <Head>
+        <title>404 | Anthony Ngo</title>
+      </Head>
       <S.MainContainer>
         <S.Title>404</S.Title>
         <S.Subtitle>Page Not Found</S.Subtitle>

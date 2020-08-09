@@ -17,12 +17,11 @@ S.layout = {
     font-size: ${sizes.s};
     line-height: 1;
     @media (max-width: 40rem) {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
   `,
   Social: styled("div")`
     color: ${colors.primary};
-    margin: 0 auto 1rem;
     @media (min-width: 72.5rem) {
       display: none !important;
     }
@@ -57,7 +56,10 @@ const Footer = ({ data }) => {
           "column-40": notMobile && !isDesktop,
           "column-offset-10": notMobile && !isDesktop,
         })}>
-        <S.with.FinaleGithubLink href={frontMatter.github} target="_blank">
+        <S.with.FinaleGithubLink
+          href={frontMatter.github}
+          target="_blank"
+          rel="nofollow noopener noreferrer">
           {frontMatter.blurb}
         </S.with.FinaleGithubLink>
       </S.layout.Finale>
@@ -68,7 +70,10 @@ const Footer = ({ data }) => {
         <S.with.SocialList>
           {formattedMedia.map(([type, { icon, url }], i) => (
             <li key={i}>
-              <S.with.SocialLink href={url} target="_blank">
+              <S.with.SocialLink
+                href={url}
+                target="_blank"
+                rel="nofollow noopener noreferrer">
                 <img
                   src={require(`public/${icon}`)}
                   alt={type}

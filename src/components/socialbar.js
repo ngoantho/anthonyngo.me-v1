@@ -39,7 +39,10 @@ const SocialBar = () => {
       <S.List>
         {formattedMedia.map(([type, { icon, url }], i) => (
           <li key={i}>
-            <S.Link href={url} target="_blank">
+            <S.Link
+              href={url}
+              target="_blank"
+              rel="nofollow noopener noreferrer">
               <img src={require(`public/${icon}`)} alt={type} title={type} />
             </S.Link>
           </li>

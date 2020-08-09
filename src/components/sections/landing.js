@@ -21,7 +21,7 @@ S.layout = {
   Core: styled("div")``,
 };
 S.with = {
-  SupTitle: styled("h3")`
+  SupTitle: styled("h4")`
     margin-bottom: 0;
     font-family: "mono", monospace;
     font-size: smaller;

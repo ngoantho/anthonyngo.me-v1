@@ -1,5 +1,6 @@
 import { css, styled } from "goober";
 
+import Link from "next/link";
 import Project from "../project";
 import useMedia from "use-media";
 import { useState } from "react";
@@ -9,14 +10,16 @@ S.layout = {
   MainWrapper: styled("section")`
     display: flex;
     flex-direction: column;
-    margin-bottom: 10vh;
+    margin-bottom: 20vh;
   `,
-  OverlineComp: styled("ul")`
+  OverhangComp: styled("ul")`
     display: flex;
     align-items: center;
+    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
+    flex-direction: column;
   `,
   Masonry: styled("div")`
     align-content: center;
@@ -54,36 +57,14 @@ S.layout = {
     }
   `,
 };
-S.with = {
-  OverlineWrapper: styled("li")`
-    /*
-    counter-increment: item 1;
-    &::before {
-      content: "0" counter(item) ". ";
-      text-align: right;
-      font-size: 75%;
-    }
-    */
-  `,
-  OverlineLine: styled("li")`
-    @media (min-width: 40rem) {
-      border: 1px solid darkslategrey;
-      height: 0.2rem;
-      width: 25%;
-      margin: 0 0 2rem 2rem;
-    }
-  `,
-};
+S.with = {};
 
-const Projects = ({
-  data,
-  masonryInitial = 6,
-  showMoreButton = true,
-  ...props
-}) => {
+const Projects = ({ data, masonryInitial = 6, ...props }) => {
   const [moreShown, setMoreShown] = useState(false);
   const isDesktop = useMedia("(min-width: 80rem)");
   const isTablet = useMedia("(min-width: 40rem) and (max-width: 80rem)");
+
+  if (isDesktop && !moreShown) setMoreShown(true);
 
   const { featuredProjects, allProjects } = data;
   const visibleFeaturedProjects = featuredProjects
@@ -96,18 +77,25 @@ const Projects = ({
 
   return (
     <S.layout.MainWrapper {...props}>
-      <S.layout.OverlineComp>
-        <S.with.OverlineWrapper>
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
-          <h2
-            className={css`
-              display: inline-block;
-            `}>
+      <S.layout.OverhangComp>
+        <li
+          className={css`
+            margin-bottom: 0;
+          `}>
+          <h2>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             Some things I've built
           </h2>
-        </S.with.OverlineWrapper>
-        <S.with.OverlineLine />
-      </S.layout.OverlineComp>
+        </li>
+        <li
+          className={css`
+            margin: -1rem 0 3rem;
+          `}>
+          <Link href="/archive">
+            <a href="/archive">view the archive</a>
+          </Link>
+        </li>
+      </S.layout.OverhangComp>
       <S.layout.Masonry
         className="row"
         total={visibleFeaturedProjects.length + visibleAllProjects.length}>
@@ -135,14 +123,17 @@ const Projects = ({
       <div
         className={css`
           display: grid;
-          margin-top: 5rem;
+          margin-top: 4rem;
         `}>
         <button
           className={[
             "button-outline",
             css`
+              width: 50%;
               margin: auto;
-              display: ${showMoreButton ? "initial" : "none"};
+              @media (min-width: 80rem) {
+                display: none;
+              }
             `,
           ].join(" ")}
           onClick={() => setMoreShown(!moreShown)}>

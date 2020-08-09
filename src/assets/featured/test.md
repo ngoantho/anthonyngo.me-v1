@@ -1,9 +1,9 @@
 ---
-date: 0
+date: 2020-07-17
 title: "Featured Project 1"
 github: "portfolio"
 external: "anthonyngo.me"
-visibleInProjects: true
+visibleInProjects: false
 tags:
   - 
 ---

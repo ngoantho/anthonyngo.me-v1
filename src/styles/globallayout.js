@@ -6,7 +6,6 @@ import { glob as css } from "goober";
 css`
   html {
     /* https://caniuse.com/#feat=css-scroll-behavior */
-    /* fixme: implement JS polyfill via scrollIntoView */
     @supports (scroll-behavior: smooth) {
       scroll-behavior: smooth;
     }
