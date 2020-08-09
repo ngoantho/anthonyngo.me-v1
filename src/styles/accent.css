@@ -8,40 +8,6 @@ body {
   color: var(--glob-color);
 }
 
-.navigation .title,
-.navigation-title {
-  color: var(--glob-color);
-}
-
-.navigation {
-  background: #34373c;
-  border-bottom: 0.1rem solid #1b1c1d;
-}
-
-.header {
-  background-color: #141518;
-}
-
-pre {
-  background: #141518;
-}
-
-.prettyprint {
-  color: var(--glob-color);
-}
-
-.prettyprint.lang-md * {
-  color: var(--glob-color) !important;
-}
-
-code {
-  background: #141518;
-}
-
-.prettyprint .atv {
-  color: rgba(73, 158, 223, 1);
-}
-
 a {
   color: var(--colors-accent);
 }

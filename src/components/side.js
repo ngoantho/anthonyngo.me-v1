@@ -9,7 +9,7 @@ const S = {
     width: ${(props) => `${props.fit}rem`};
     color: ${colors.primary};
     display: none;
-    @media (min-width: 72.5rem) {
+    @media (min-width: 80rem) {
       display: block;
     }
   `,

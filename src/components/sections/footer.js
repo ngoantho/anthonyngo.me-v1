@@ -22,7 +22,7 @@ S.layout = {
   `,
   Social: styled("div")`
     color: ${colors.primary};
-    @media (min-width: 72.5rem) {
+    @media (min-width: 80rem) {
       display: none !important;
     }
   `,
@@ -46,7 +46,7 @@ S.with = {
 const Footer = ({ data }) => {
   const formattedMedia = Object.entries(contactMe);
   const notMobile = useMedia("(min-width: 40rem)");
-  const isDesktop = useMedia("(min-width: 72.5rem)");
+  const isDesktop = useMedia("(min-width: 80rem)");
 
   return (
     <S.layout.Container className="row">

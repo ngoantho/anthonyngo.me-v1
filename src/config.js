@@ -34,3 +34,8 @@ export const contactMe = {
 
 export const navLinks = [];
 export const navHeight = 100;
+export const navScrollHeight = 70;
+
+export const hamburgerClamp = 4;
+export const hamHeight = 0.2;
+export const hamVisibleCutoff = "60rem";

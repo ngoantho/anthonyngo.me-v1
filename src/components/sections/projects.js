@@ -1,17 +1,17 @@
 import { css, styled } from "goober";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Project from "../project";
 import { colors } from "theme";
 import useMedia from "use-media";
-import { useState } from "react";
 
 const S = {};
 S.layout = {
   MainWrapper: styled("section")`
     display: flex;
     flex-direction: column;
-    margin-bottom: 20vh;
+    margin-bottom: 10vh;
   `,
   OverhangComp: styled("ul")`
     display: flex;
@@ -69,12 +69,14 @@ S.layout = {
 };
 S.with = {};
 
-const Projects = ({ data, masonryInitial = 6, ...props }) => {
+const Projects = ({ data, masonryInitial = 2, ...props }) => {
   const [moreShown, setMoreShown] = useState(false);
   const isDesktop = useMedia("(min-width: 80rem)");
   const isTablet = useMedia("(min-width: 40rem) and (max-width: 80rem)");
 
-  if (isDesktop && !moreShown) setMoreShown(true);
+  useEffect(() => {
+    if (isDesktop && !moreShown) setMoreShown(true);
+  }, [isDesktop]);
 
   const { featuredProjects, allProjects } = data;
   const visibleFeaturedProjects = featuredProjects

@@ -18,10 +18,14 @@ css`
     padding: 0;
     margin: 0;
     overflow-x: hidden;
-    overflow-y: visible;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+
+    &.noscroll {
+      overflow: hidden;
+    }
   }
 
   h1,

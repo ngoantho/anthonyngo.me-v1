@@ -10,8 +10,8 @@ S.layout = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 20vh;
-    margin-bottom: 20vh;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
   `,
   CenterRow: styled("div")`
     @media (min-width: 40rem) {
