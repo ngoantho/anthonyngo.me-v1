@@ -2,6 +2,7 @@ import { css, styled } from "goober";
 
 import Link from "next/link";
 import Project from "../project";
+import { colors } from "theme";
 import useMedia from "use-media";
 import { useState } from "react";
 
@@ -16,10 +17,19 @@ S.layout = {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
-    flex-direction: column;
+
+    @media (min-width: 40rem) {
+      flex-direction: row;
+      justify-content: flex-start;
+
+      li.archive-link {
+        margin: 0 0 2rem 2rem;
+      }
+    }
   `,
   Masonry: styled("div")`
     align-content: center;
@@ -87,12 +97,15 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
             Some things I've built
           </h2>
         </li>
-        <li
-          className={css`
-            margin: -1rem 0 3rem;
-          `}>
+        <li className="archive-link">
           <Link href="/archive">
-            <a href="/archive">view the archive</a>
+            <a
+              href="/archive"
+              className={css`
+                color: ${colors.tertiary};
+              `}>
+              view the archive
+            </a>
           </Link>
         </li>
       </S.layout.OverhangComp>

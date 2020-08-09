@@ -3,7 +3,8 @@ import "styles/accent.css";
 
 import React, { useEffect } from "react";
 
-import { GlobalLayout } from "styles";
+import { GlobalStyles } from "styles";
+import { Layout } from "components";
 import { prefix } from "goober-autoprefixer";
 import { setup } from "goober";
 
@@ -29,8 +30,10 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <GlobalLayout>
-      <Component {...pageProps} />
-    </GlobalLayout>
+    <GlobalStyles>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </GlobalStyles>
   );
 }

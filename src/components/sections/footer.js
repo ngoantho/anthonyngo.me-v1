@@ -44,7 +44,6 @@ S.with = {
 };
 
 const Footer = ({ data }) => {
-  const { frontMatter } = data;
   const formattedMedia = Object.entries(contactMe);
   const notMobile = useMedia("(min-width: 40rem)");
   const isDesktop = useMedia("(min-width: 72.5rem)");
@@ -57,10 +56,10 @@ const Footer = ({ data }) => {
           "column-offset-10": notMobile && !isDesktop,
         })}>
         <S.with.FinaleGithubLink
-          href={frontMatter.github}
+          href={data.github}
           target="_blank"
           rel="nofollow noopener noreferrer">
-          {frontMatter.blurb}
+          {data.blurb}
         </S.with.FinaleGithubLink>
       </S.layout.Finale>
       <S.layout.Social

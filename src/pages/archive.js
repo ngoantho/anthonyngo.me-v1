@@ -1,9 +1,8 @@
 import { colors, config } from "theme";
 import { css, styled } from "goober";
-import { getProjectByFile, getProjectsFrom } from "../lib/api";
 
 import Head from "next/head";
-import { Layout } from "components";
+import { getProjectsFrom } from "../lib/api";
 import { join } from "path";
 import { lighten } from "polished";
 
@@ -15,7 +14,7 @@ const S = {
   MainContainer: styled("section")`
     display: flex;
     flex-direction: column;
-    margin: auto 0 auto;
+    margin: auto 0;
   `,
   BigTitle: styled("h1")`
     font-weight: 500;
@@ -72,7 +71,7 @@ const S = {
       border-style: hidden;
       &.year {
         font-family: "mono", monospace;
-        color: var(--colors-accent);
+        color: ${colors.secondary};
       }
       &.title {
         font-weight: 700;
@@ -110,9 +109,9 @@ const S = {
   `,
 };
 
-export default function Archive({ projects, footerData }) {
+export default function Archive({ projects }) {
   return (
-    <Layout footerData={footerData}>
+    <>
       <Head>
         <title>Archive | Anthony Ngo</title>
         <link rel="canonical" href={`${url}/archive`} />
@@ -204,7 +203,7 @@ export default function Archive({ projects, footerData }) {
           </S.Table>
         </S.TableContainer>
       </S.MainContainer>
-    </Layout>
+    </>
   );
 }
 
@@ -214,7 +213,6 @@ export async function getStaticProps() {
   return {
     props: {
       projects: await getProjectsFrom(projectsDir),
-      footerData: await getProjectByFile("src/assets/sections/footer.md"),
     },
   };
 }

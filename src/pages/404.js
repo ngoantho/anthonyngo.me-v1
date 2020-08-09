@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { Layout } from "components";
 import Link from "next/link";
 import { colors } from "theme";
-import { getProjectByFile } from "../lib/api";
 import { styled } from "goober";
 
 const S = {
@@ -40,9 +38,9 @@ const S = {
   `,
 };
 
-export default function Custom404({ footerData }) {
+export default function Custom404() {
   return (
-    <Layout footerData={footerData}>
+    <>
       <Head>
         <title>404 | Anthony Ngo</title>
       </Head>
@@ -55,14 +53,6 @@ export default function Custom404({ footerData }) {
           </S.HomeButton>
         </Link>
       </S.MainContainer>
-    </Layout>
+    </>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      footerData: await getProjectByFile("src/assets/sections/footer.md"),
-    },
-  };
 }

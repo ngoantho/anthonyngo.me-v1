@@ -1,8 +1,8 @@
-import { Layout, Sections } from "components";
 import { getProjectByFile, getProjectsFrom } from "../lib/api";
 
 import Head from "next/head";
 import PropTypes from "prop-types";
+import { Sections } from "components";
 import { join } from "path";
 import schema from "assets/schema";
 
@@ -16,10 +16,8 @@ function Index({ featuredProjects, allProjects, miscData }) {
         <title>Anthony Ngo</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout footerData={miscData.footer}>
-        <Landing data={miscData.landing} />
-        <Projects data={{ featuredProjects, allProjects }} />
-      </Layout>
+      <Landing data={miscData.landing} />
+      <Projects data={{ featuredProjects, allProjects }} />
     </>
   );
 }
@@ -53,7 +51,6 @@ export async function getStaticProps() {
       allProjects,
       miscData: {
         landing: await getProjectByFile("src/assets/sections/landing.md"),
-        footer: await getProjectByFile("src/assets/sections/footer.md"),
       },
     },
   };

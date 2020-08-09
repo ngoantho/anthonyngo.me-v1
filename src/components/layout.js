@@ -15,7 +15,13 @@ css`
   }
 `;
 
-function Layout({ children, footerData }) {
+function Layout({
+  children,
+  footerData = {
+    github: "//github.com/ngoantho/portfolio",
+    blurb: "Designed & Built by Anthony Ngo",
+  },
+}) {
   return (
     <>
       <Navbar />
