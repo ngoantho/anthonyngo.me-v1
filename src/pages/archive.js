@@ -1,20 +1,23 @@
+import { ExtPage, Icon, Link } from "styles";
 import { colors, config } from "theme";
-import { css, styled } from "goober";
 
 import Head from "next/head";
 import { getProjectsFrom } from "../lib/api";
 import { join } from "path";
 import { lighten } from "polished";
+import { styled } from "goober";
 
 const {
   site: { url },
+  commonTransition,
+  commonMargin,
 } = config;
 
 const S = {
-  MainContainer: styled("section")`
-    display: flex;
-    flex-direction: column;
-    margin: auto 0;
+  MainContainer: styled(ExtPage)`
+    header {
+      margin: 0 auto;
+    }
   `,
   BigTitle: styled("h1")`
     font-weight: 500;
@@ -40,9 +43,9 @@ const S = {
     }
   `,
   TableContainer: styled("div")`
-    margin: 7.5rem 1rem;
+    margin: 0 auto;
     @media (min-width: 40rem) {
-      margin: 7.5rem 2rem;
+      padding-left: ${commonMargin * 1.25}rem;
     }
   `,
   Table: styled("table")`
@@ -56,9 +59,10 @@ const S = {
     }
 
     tbody tr {
+      transition: ${commonTransition};
       &:hover,
       &:focus {
-        background-color: ${lighten(0.05, "#2c2f34")};
+        background-color: ${colors.tintLight};
       }
     }
 
@@ -117,10 +121,7 @@ export default function Archive({ projects }) {
         <link rel="canonical" href={`${url}/archive`} />
       </Head>
       <S.MainContainer>
-        <header
-          className={css`
-            margin-left: 2rem;
-          `}>
+        <header>
           <S.BigTitle>Archive</S.BigTitle>
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           <S.BigSubtitle>A list of things I've worked on</S.BigSubtitle>
@@ -147,7 +148,7 @@ export default function Archive({ projects }) {
                   external,
                 } = frontMatter;
                 return (
-                  <tr key={i}>
+                  <tr key={i} tabIndex="0">
                     <td className="year">{`${new Date(
                       date
                     ).getFullYear()}`}</td>
@@ -173,26 +174,26 @@ export default function Archive({ projects }) {
                     <td className="links">
                       <span>
                         {github && (
-                          <a
+                          <Link
                             href={`//github.com/ngoantho/${github}`}
                             target="_blank"
                             rel="nofollow noopener noreferrer">
-                            <img
+                            <Icon
                               src={require("public/icons/github-mark-light.png")}
                               alt={github}
                             />
-                          </a>
+                          </Link>
                         )}
                         {external && (
-                          <a
+                          <Link
                             href={`//${external}`}
                             target="_blank"
                             rel="nofollow noopener noreferrer">
-                            <img
+                            <Icon
                               src={require("public/icons/external.png")}
                               alt={external}
                             />
-                          </a>
+                          </Link>
                         )}
                       </span>
                     </td>

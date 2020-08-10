@@ -1,17 +1,18 @@
+import { Link as BaseLink, Section } from "styles";
+import { colors, config } from "theme";
 import { css, styled } from "goober";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Project from "../project";
-import { colors } from "theme";
 import useMedia from "use-media";
+
+const { commonMargin, commonTransition } = config;
 
 const S = {};
 S.layout = {
-  MainWrapper: styled("section")`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10vh;
+  MainWrapper: styled(Section)`
+    padding-bottom: 20rem;
   `,
   OverhangComp: styled("ul")`
     display: flex;
@@ -25,9 +26,10 @@ S.layout = {
     @media (min-width: 40rem) {
       flex-direction: row;
       justify-content: flex-start;
+      margin-left: ${commonMargin * 1.25}rem;
 
       li.archive-link {
-        margin: 0 0 2rem 2rem;
+        margin: 0 0 ${commonMargin}rem ${commonMargin}rem;
       }
     }
   `,
@@ -37,16 +39,8 @@ S.layout = {
 
     @media (min-width: 80rem) {
       flex-direction: column !important;
-    }
-
-    @media (min-width: 40rem) and (max-width: 80rem) {
-      margin-left: 10% !important;
-    }
-
-    @media (min-width: 40rem) {
-      padding-left: 1rem !important;
-      height: ${(props) => `${props.total * 100}px`};
-
+      padding: 0 50px !important;
+      height: ${(props) => `${Number(props.total) * 50}px`};
       blockquote:nth-child(3n + 1) {
         order: 1;
       }
@@ -55,6 +49,16 @@ S.layout = {
       }
       blockquote:nth-child(3n) {
         order: 3;
+      }
+    }
+
+    @media (min-width: 40rem) and (max-width: 80rem) {
+      padding-left: 20% !important;
+      blockquote:nth-child(2n + 1) {
+        order: 1;
+      }
+      blockquote:nth-child(2n) {
+        order: 2;
       }
     }
 
@@ -69,7 +73,7 @@ S.layout = {
 };
 S.with = {};
 
-const Projects = ({ data, masonryInitial = 2, ...props }) => {
+const Projects = ({ data, masonryInitial = 6, ...props }) => {
   const [moreShown, setMoreShown] = useState(false);
   const isDesktop = useMedia("(min-width: 80rem)");
   const isTablet = useMedia("(min-width: 40rem) and (max-width: 80rem)");
@@ -100,14 +104,13 @@ const Projects = ({ data, masonryInitial = 2, ...props }) => {
           </h2>
         </li>
         <li className="archive-link">
-          <Link href="/archive">
-            <a
-              href="/archive"
+          <Link href="/archive" passHref={true}>
+            <BaseLink
               className={css`
                 color: ${colors.tertiary};
               `}>
               view the archive
-            </a>
+            </BaseLink>
           </Link>
         </li>
       </S.layout.OverhangComp>
@@ -138,7 +141,7 @@ const Projects = ({ data, masonryInitial = 2, ...props }) => {
       <div
         className={css`
           display: grid;
-          margin-top: 4rem;
+          margin-top: ${commonMargin}rem;
         `}>
         <button
           className={[
@@ -146,6 +149,7 @@ const Projects = ({ data, masonryInitial = 2, ...props }) => {
             css`
               width: 50%;
               margin: auto;
+              transition: ${commonTransition};
               @media (min-width: 80rem) {
                 display: none;
               }

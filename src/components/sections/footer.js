@@ -1,34 +1,30 @@
+import { Icon, Link } from "styles";
 import { colors, config, sizes } from "theme";
-import { css, styled } from "goober";
 
-import { cx } from "utils";
-import useMedia from "use-media";
+import { styled } from "goober";
 
-const { contactMe } = config;
+const { contactMe, commonMargin } = config;
 
 const S = {};
 S.layout = {
   Container: styled("footer")`
-    padding: 1.5rem !important;
+    padding-top: ${commonMargin}rem !important;
+    padding-bottom: ${commonMargin}rem !important;
     text-align: center;
+    display: flex;
+    flex-direction: column;
   `,
   Finale: styled("div")`
     font-family: "mono", monospace;
     font-size: ${sizes.s};
     line-height: 1;
     @media (max-width: 40rem) {
-      margin-bottom: 2.5rem;
-    }
-  `,
-  Social: styled("div")`
-    color: ${colors.primary};
-    @media (min-width: 80rem) {
-      display: none !important;
+      margin-bottom: ${commonMargin}rem;
     }
   `,
 };
 S.with = {
-  FinaleGithubLink: styled("a")`
+  FinaleGithubLink: styled(Link)`
     padding: 1rem;
     color: ${colors.primary};
   `,
@@ -36,25 +32,27 @@ S.with = {
     display: flex;
     justify-content: space-evenly;
     list-style: none;
-    margin-bottom: 0;
+    margin-bottom: -25%;
+    @media (min-width: 40rem) {
+      display: none;
+    }
   `,
-  SocialLink: styled("a")`
+  SocialLink: styled(Link)`
     padding: 1rem;
+
+    img {
+      width: 25%;
+      height: auto;
+    }
   `,
 };
 
 const Footer = ({ data }) => {
   const formattedMedia = Object.entries(contactMe);
-  const notMobile = useMedia("(min-width: 40rem)");
-  const isDesktop = useMedia("(min-width: 80rem)");
 
   return (
-    <S.layout.Container className="row">
-      <S.layout.Finale
-        className={cx("column", {
-          "column-40": notMobile && !isDesktop,
-          "column-offset-10": notMobile && !isDesktop,
-        })}>
+    <S.layout.Container className="container">
+      <S.layout.Finale>
         <S.with.FinaleGithubLink
           href={data.github}
           target="_blank"
@@ -62,31 +60,18 @@ const Footer = ({ data }) => {
           {data.blurb}
         </S.with.FinaleGithubLink>
       </S.layout.Finale>
-      <S.layout.Social
-        className={cx("column", {
-          "column-40": notMobile,
-        })}>
-        <S.with.SocialList>
-          {formattedMedia.map(([type, { icon, url }], i) => (
-            <li key={i}>
-              <S.with.SocialLink
-                href={url}
-                target="_blank"
-                rel="nofollow noopener noreferrer">
-                <img
-                  src={require(`public/${icon}`)}
-                  alt={type}
-                  title={type}
-                  className={css`
-                    width: 25%;
-                    height: auto;
-                  `}
-                />
-              </S.with.SocialLink>
-            </li>
-          ))}
-        </S.with.SocialList>
-      </S.layout.Social>
+      <S.with.SocialList>
+        {formattedMedia.map(([type, { icon, url }], i) => (
+          <li key={i}>
+            <S.with.SocialLink
+              href={url}
+              target="_blank"
+              rel="nofollow noopener noreferrer">
+              <Icon src={require(`public/${icon}`)} alt={type} title={type} />
+            </S.with.SocialLink>
+          </li>
+        ))}
+      </S.with.SocialList>
     </S.layout.Container>
   );
 };

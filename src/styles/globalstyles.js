@@ -33,6 +33,18 @@ css`
   h3 {
     text-rendering: optimizeLegibility;
   }
+
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 `;
 
 export default function GlobalStyles({ children }) {

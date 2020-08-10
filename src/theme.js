@@ -1,3 +1,7 @@
+import * as config from "./config";
+
+import { darken, lighten } from "polished";
+
 const h = [
   [1, "4.6rem"], // 1 h1
   [2, "3.6rem"], // 2 h2
@@ -21,7 +25,8 @@ export const colors = {
   secondary: "#dfd3c3",
   tertiary: "#c7b198",
   quaternary: "#596e79",
+  tintLight: lighten(0.05, "#2c2f34"),
+  tintDark: darken(0.05, "#2c2f34"),
 };
 
-import * as config from "./config";
 export { config };

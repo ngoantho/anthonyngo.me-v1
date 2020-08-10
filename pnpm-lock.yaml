@@ -6,6 +6,7 @@ dependencies:
   milligram: 1.4.1
   next: 9.5.1_react-dom@1.0.0+react@1.0.0
   next-optimized-images: 2.6.2
+  nprogress: 0.2.0
   polished: 3.6.5
   preact: 10.4.7
   preact-render-to-string: 5.1.10_preact@10.4.7
@@ -16,7 +17,6 @@ dependencies:
   remark: 12.0.1
   remark-attr: 0.11.1
   remark-html: 12.0.0
-  smooth-scroll: 16.1.3
   use-media: 1.4.0_react@1.0.0
 devDependencies:
   babel-eslint: 10.1.0_eslint@7.6.0
@@ -6489,6 +6489,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
+  /nprogress/0.2.0:
+    dev: false
+    resolution:
+      integrity: sha1-y480xTIT2JVyP8urkH6UIq28r7E=
   /nth-check/1.0.2:
     dependencies:
       boolbase: 1.0.0
@@ -8483,10 +8487,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==
-  /smooth-scroll/16.1.3:
-    dev: false
-    resolution:
-      integrity: sha512-ca9U+neJS/cbdScTBuUTCZvUWNF2EuMCk7oAx3ImdeRK5FPm+xRo9XsVHIkeEVkn7MBRx+ufVEhyveM4ZhaTGA==
   /snapdragon-node/2.1.1:
     dependencies:
       define-property: 1.0.0
@@ -9992,6 +9992,7 @@ specifiers:
   milligram: ^1.4.1
   next: ^9.4.0
   next-optimized-images: ^2.6.2
+  nprogress: ^0.2.0
   polished: ^3.6.5
   preact: ^10.4.4
   preact-render-to-string: ^5.1.9
@@ -10005,7 +10006,6 @@ specifiers:
   remark: ^12.0.1
   remark-attr: ^0.11.1
   remark-html: ^12.0.0
-  smooth-scroll: ^16.1.3
   stylelint: ^13.6.1
   stylelint-config-recommended: ^3.0.0
   use-media: ^1.4.0

@@ -3,15 +3,17 @@ import { glob as css, styled } from "goober";
 import { useEffect, useState } from "react";
 
 import { Footer } from "components/sections";
+import { commonTransition } from "config";
 
 const StyledMainWrapper = styled("main")`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   z-index: 1;
+  transition: ${commonTransition};
 
   &.blur {
-    filter: blur(0.5rem);
+    filter: opacity(0.2);
   }
 `;
 
@@ -38,8 +40,8 @@ function Layout({
       <StyledMainWrapper
         className={["container", menuOpen ? "blur" : ""].join(" ")}>
         {children}
-        <Footer data={footerData} />
         <SocialBar />
+        <Footer data={footerData} />
       </StyledMainWrapper>
     </>
   );
