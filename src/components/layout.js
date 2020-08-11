@@ -18,9 +18,9 @@ const StyledMainWrapper = styled("main")`
   }
 
   &.homePage {
-    padding-top: 100px;
+    padding-top: 10rem;
     footer {
-      padding-top: 100px !important;
+      padding-top: 10rem !important;
     }
   }
 
