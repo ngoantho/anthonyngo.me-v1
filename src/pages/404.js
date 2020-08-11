@@ -49,7 +49,7 @@ export default function Custom404() {
       <S.MainContainer>
         <S.Title>404</S.Title>
         <S.Subtitle>Page Not Found</S.Subtitle>
-        <Link href="/" passHref={true}>
+        <Link href="/" passHref>
           <S.HomeButton className="button button-outline">go back</S.HomeButton>
         </Link>
       </S.MainContainer>

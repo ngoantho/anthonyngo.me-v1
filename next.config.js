@@ -48,6 +48,19 @@ module.exports = withPrefresh(
         path.resolve(__dirname, "src"),
       ];
 
+      config.module.rules = [
+        ...config.module.rules,
+        {
+          test: /\.(ico|txt)$/,
+          use: {
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+            },
+          },
+        },
+      ];
+
       if (!isServer) {
         config.node.fs = "empty";
       }
@@ -60,6 +73,8 @@ module.exports = withPrefresh(
     exportPathMap() {
       return {
         "/index.html": { page: "/" },
+        "/archive.html": { page: "/archive" },
+        "/404.html": { page: "/404" },
       };
     },
   })
