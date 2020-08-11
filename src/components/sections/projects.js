@@ -102,7 +102,7 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
           </h2>
         </li>
         <li className="archive-link">
-          <Link href="/archive" passHref={true}>
+          <Link href="/archive" passHref>
             <BaseLink
               className={css`
                 color: ${colors.tertiary};

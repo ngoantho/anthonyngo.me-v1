@@ -1,10 +1,12 @@
-import { Navbar, SocialBar } from "components";
+import { Loader, Navbar, SocialBar } from "components";
 import { commonTransition, navHeight } from "config";
 import { useEffect, useState } from "react";
 
 import { Footer } from "components/sections";
 import { styled } from "goober";
 import { useRouter } from "next/router";
+
+const BLUR_AMOUNT = 0.2;
 
 const StyledMainWrapper = styled("main")`
   display: flex;
@@ -14,7 +16,7 @@ const StyledMainWrapper = styled("main")`
   transition: ${commonTransition};
 
   &.blur {
-    filter: opacity(0.2);
+    filter: opacity(${BLUR_AMOUNT});
   }
 
   &.homePage {
@@ -36,22 +38,31 @@ function Layout({
     blurb: "Designed & Built by Anthony Ngo",
   },
 }) {
-  const { pathname } = useRouter();
-
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     document.body.classList.toggle("noscroll", menuOpen);
   }, [menuOpen]);
 
-  return (
+  const { pathname } = useRouter();
+  const homePage = pathname === "/";
+  const [isLoading, setIsLoading] = useState(true);
+
+  return isLoading ? (
+    <Loader onFinishLoading={() => setIsLoading(false)} />
+  ) : (
     <>
-      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Navbar
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        blurAmount={BLUR_AMOUNT}
+        homePage={homePage}
+      />
       <StyledMainWrapper
         className={[
           "container",
           menuOpen && "blur",
-          pathname === "/" && "homePage",
-          pathname !== "/" && "extPage",
+          homePage && "homePage",
+          !homePage && "extPage",
         ]
           .filter(Boolean)
           .join(" ")}>

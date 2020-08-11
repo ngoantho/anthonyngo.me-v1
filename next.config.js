@@ -4,7 +4,6 @@ const path = require("path");
 
 module.exports = withPrefresh(
   withOptimizedImages({
-    handleImages: ["jpeg", "png", "svg", "webp", "gif", "ico"],
     webpack(config, { dev, isServer }) {
       // Move Preact into the framework chunk instead of duplicating in routes:
       const splitChunks =
@@ -52,8 +51,13 @@ module.exports = withPrefresh(
       config.module.rules = [
         ...config.module.rules,
         {
-          test: /\.txt/i,
-          use: "raw-loader",
+          test: /\.(ico|txt)$/,
+          use: {
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+            },
+          },
         },
       ];
 
@@ -69,6 +73,8 @@ module.exports = withPrefresh(
     exportPathMap() {
       return {
         "/index.html": { page: "/" },
+        "/archive.html": { page: "/archive" },
+        "/404.html": { page: "/404" },
       };
     },
   })

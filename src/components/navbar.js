@@ -1,12 +1,11 @@
+import { Link as BaseLink, Icon } from "styles";
 import { colors, config } from "theme";
 import { useEffect, useState } from "react";
 
-import { Link as BaseLink } from "styles";
 import Link from "next/link";
 import Menu from "./mobmenu";
 import { lighten } from "polished";
 import { styled } from "goober";
-import { useRouter } from "next/router";
 
 const {
   navHeight,
@@ -32,6 +31,11 @@ S.layout = {
     padding: 0 ${commonMargin}rem;
     position: fixed;
     transition: ${commonTransition};
+    background: var(--glob-bg);
+    box-shadow: ${(props) =>
+      props.scrollDirection === "up"
+        ? "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"
+        : "none"};
     height: ${(props) =>
       props.scrollDirection === "none"
         ? `${navHeight}px`
@@ -40,18 +44,10 @@ S.layout = {
       ${(props) =>
         props.scrollDirection === "down" ? `-${navScrollHeight}px` : "0px"}
     );
-
-    @media (min-width: ${hamVisibleCutoff}) {
-      background: var(--glob-bg);
-      box-shadow: ${(props) =>
-        props.scrollDirection === "up"
-          ? "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"
-          : "none"};
-    }
   `,
   MainNav: styled("nav")`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 3;
@@ -88,6 +84,17 @@ S.with = {
     border-radius: ${borderRadius};
     width: ${(props) => `${hamburgerClamp - props.line / 2}rem`};
   `,
+  Logo: styled("div")`
+    display: grid;
+    height: ${(props) => `${props.size}px`};
+    transition: ${commonTransition};
+    a {
+      margin: auto;
+    }
+    &.blur {
+      filter: opacity(${(props) => props.blurAmount});
+    }
+  `,
   NavLinksList: styled("ul")`
     padding: 0;
     margin-bottom: 0;
@@ -112,30 +119,25 @@ S.with = {
 
 const DELTA = 5;
 
-function Navbar({ menuOpen, setMenuOpen }) {
-  const { pathname } = useRouter();
+function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
   const [scrollDirection, setScrollDirection] = useState("none");
   let prev = 0;
+  let curr = 0;
 
   const handleScroll = (e) => {
-    if (
-      pathname !== "/" ||
-      Math.abs(e.currentTarget.scrollY - prev) <= DELTA ||
-      menuOpen
-    ) {
+    curr = e.currentTarget.scrollY;
+
+    if (Math.abs(curr - prev) <= DELTA || menuOpen) {
       return;
     }
 
-    if (e.currentTarget.scrollY <= DELTA) {
+    if (curr <= DELTA) {
       setScrollDirection("none");
-    } else if (prev > e.currentTarget.scrollY) {
+    } else if (prev > curr) {
       if (scrollDirection !== "up") {
         setScrollDirection("up");
       }
-    } else if (
-      prev < e.currentTarget.scrollY &&
-      e.currentTarget.scrollY > navHeight / 2
-    ) {
+    } else if (prev < curr && curr > navHeight / 2) {
       if (scrollDirection !== "down") {
         setScrollDirection("down");
       }
@@ -153,6 +155,26 @@ function Navbar({ menuOpen, setMenuOpen }) {
   return (
     <S.layout.Container scrollDirection={scrollDirection}>
       <S.layout.MainNav>
+        <S.with.Logo
+          tabIndex="-1"
+          size="48"
+          blurAmount={blurAmount}
+          className={[menuOpen && "blur"].filter(Boolean)}>
+          {homePage ? (
+            <a href="/">
+              <Icon src={require("public/favicons/favicon48.png")} alt="Home" />
+            </a>
+          ) : (
+            <Link href="/" passHref>
+              <BaseLink>
+                <Icon
+                  src={require("public/favicons/favicon48.png")}
+                  alt="Home"
+                />
+              </BaseLink>
+            </Link>
+          )}
+        </S.with.Logo>
         <S.layout.NavLinks>
           <S.with.NavLinksList>
             {navLinks.map(([name, hash], i) => (
@@ -174,7 +196,6 @@ function Navbar({ menuOpen, setMenuOpen }) {
         </S.layout.NavLinks>
         <S.layout.Hamburger
           className="button-outline"
-          tabIndex="1"
           onClick={() => setMenuOpen(!menuOpen)}>
           <S.with.HamburgerLine line="1" />
           <S.with.HamburgerLine line="2" />
