@@ -1,9 +1,9 @@
 import { Navbar, SocialBar } from "components";
 import { commonTransition, navHeight } from "config";
-import { glob as css, styled } from "goober";
 import { useEffect, useState } from "react";
 
 import { Footer } from "components/sections";
+import { styled } from "goober";
 import { useRouter } from "next/router";
 
 const StyledMainWrapper = styled("main")`
@@ -17,13 +17,15 @@ const StyledMainWrapper = styled("main")`
     filter: opacity(0.2);
   }
 
-  &.adjustForNav {
-    padding-top: ${navHeight}px;
+  &.homePage {
+    padding-top: 100px;
+    footer {
+      padding-top: 100px !important;
+    }
   }
-`;
 
-css`
-  #__next {
+  &.extPage {
+    padding-top: ${navHeight}px;
   }
 `;
 
@@ -48,12 +50,13 @@ function Layout({
         className={[
           "container",
           menuOpen && "blur",
-          pathname !== "/" && "adjustForNav",
+          pathname === "/" && "homePage",
+          pathname !== "/" && "extPage",
         ]
           .filter(Boolean)
           .join(" ")}>
         {children}
-        <Footer data={footerData} pathname={pathname} />
+        <Footer data={footerData} />
         <SocialBar />
       </StyledMainWrapper>
     </>

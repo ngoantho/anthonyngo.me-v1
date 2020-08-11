@@ -2,9 +2,8 @@ import { Icon, Link } from "styles";
 import { colors, config, sizes } from "theme";
 
 import { styled } from "goober";
-import { useRouter } from "next/router";
 
-const { contactMe, commonMargin, navHeight } = config;
+const { contactMe, commonMargin } = config;
 
 const S = {};
 S.layout = {
@@ -14,10 +13,6 @@ S.layout = {
     text-align: center;
     display: flex;
     flex-direction: column;
-
-    &.homePage {
-      padding-top: ${navHeight / 2}px !important;
-    }
   `,
   Finale: styled("div")`
     font-family: "mono", monospace;
@@ -54,13 +49,9 @@ S.with = {
 
 const Footer = ({ data }) => {
   const formattedMedia = Object.entries(contactMe);
-  const { pathname } = useRouter();
 
   return (
-    <S.layout.Container
-      className={["container", pathname === "/" && "homePage"]
-        .filter(Boolean)
-        .join(" ")}>
+    <S.layout.Container className="container">
       <S.layout.Finale>
         <S.with.FinaleGithubLink
           href={data.github}
