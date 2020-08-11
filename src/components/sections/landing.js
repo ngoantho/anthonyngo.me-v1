@@ -1,27 +1,25 @@
+import { Link, Section } from "styles";
 import { colors, config } from "theme";
 import { css, styled } from "goober";
 import { invert, lighten } from "polished";
 
-const { email } = config;
+const { email, commonMargin, commonTransition } = config;
 
 const S = {};
 S.layout = {
-  MainWrapper: styled("section")`
-    display: flex;
-    flex-direction: column;
+  MainWrapper: styled(Section)`
     justify-content: center;
-    margin-top: 20vh;
-    margin-bottom: 20vh;
+    @media (min-width: 40rem) {
+      margin-left: ${commonMargin * 1.25}rem;
+    }
   `,
   CenterRow: styled("div")`
-    @media (min-width: 40rem) {
-      flex-direction: column !important;
-    }
+    flex-direction: column !important;
   `,
   Core: styled("div")``,
 };
 S.with = {
-  SupTitle: styled("h3")`
+  SupTitle: styled("h4")`
     margin-bottom: 0;
     font-family: "mono", monospace;
     font-size: smaller;
@@ -32,7 +30,8 @@ S.with = {
   `,
   Title: styled("h1")`
     margin-bottom: 0;
-    text-shadow: ${invert(colors.quaternary)} 0px 2px 2px;
+    text-shadow: ${invert(colors.quaternary)} 0px ${commonMargin}px
+      ${commonMargin}px;
     font-weight: 500;
   `,
   SubTitle: styled("h2")`
@@ -44,6 +43,7 @@ S.with = {
         font-size: larger;
       }
       a {
+        transition: ${commonTransition};
         text-decoration: underline;
       }
     }
@@ -68,13 +68,13 @@ const Landing = ({ data, ...props }) => {
               "column",
               css`
                 @media (min-width: 40rem) {
-                  padding-left: 2rem !important;
+                  padding-left: ${commonMargin}rem !important;
                 }
               `,
             ].join(" ")}>
-            <a href={`mailto:${email}`} className="button button-outline">
+            <Link href={`mailto:${email}`} className="button button-outline">
               get in touch
-            </a>
+            </Link>
           </div>
         </aside>
       </S.layout.CenterRow>

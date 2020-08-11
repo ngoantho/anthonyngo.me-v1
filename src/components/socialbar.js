@@ -1,8 +1,11 @@
+import { Icon, Link } from "styles";
+
 import Side from "./side";
 import { config } from "theme";
 import { styled } from "goober";
 
-const { contactMe } = config;
+const { contactMe, commonMargin } = config;
+
 const S = {
   List: styled("ul")`
     display: flex;
@@ -16,12 +19,12 @@ const S = {
       content: "";
       display: block;
       width: 1px;
-      height: 10rem;
+      height: ${commonMargin * 5}rem;
       margin: 0 auto;
       background-color: darkslategray;
     }
   `,
-  Link: styled("a")`
+  Link: styled(Link)`
     padding: 1rem;
 
     img {
@@ -39,8 +42,11 @@ const SocialBar = () => {
       <S.List>
         {formattedMedia.map(([type, { icon, url }], i) => (
           <li key={i}>
-            <S.Link href={url} target="_blank">
-              <img src={require(`public/${icon}`)} alt={type} title={type} />
+            <S.Link
+              href={url}
+              target="_blank"
+              rel="nofollow noopener noreferrer">
+              <Icon src={require(`public/${icon}`)} alt={type} title={type} />
             </S.Link>
           </li>
         ))}

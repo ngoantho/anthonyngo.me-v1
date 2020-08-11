@@ -1,22 +1,35 @@
+import { Link as BaseLink, Section } from "styles";
+import { colors, config } from "theme";
 import { css, styled } from "goober";
+import { useEffect, useState } from "react";
 
+import Link from "next/link";
 import Project from "../project";
 import useMedia from "use-media";
-import { useState } from "react";
+
+const { commonMargin, commonTransition } = config;
 
 const S = {};
 S.layout = {
-  MainWrapper: styled("section")`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10vh;
-  `,
-  OverlineComp: styled("ul")`
+  MainWrapper: styled(Section)``,
+  OverhangComp: styled("ul")`
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
+
+    @media (min-width: 40rem) {
+      flex-direction: row;
+      justify-content: flex-start;
+      margin-left: ${commonMargin * 1.25}rem;
+
+      li.archive-link {
+        margin: 0 0 ${commonMargin}rem ${commonMargin}rem;
+      }
+    }
   `,
   Masonry: styled("div")`
     align-content: center;
@@ -24,16 +37,8 @@ S.layout = {
 
     @media (min-width: 80rem) {
       flex-direction: column !important;
-    }
-
-    @media (min-width: 40rem) and (max-width: 80rem) {
-      margin-left: 10% !important;
-    }
-
-    @media (min-width: 40rem) {
-      padding-left: 1rem !important;
-      height: ${(props) => `${props.total * 100}px`};
-
+      padding: 0 50px !important;
+      height: ${(props) => `${Number(props.total) * 45}px`};
       blockquote:nth-child(3n + 1) {
         order: 1;
       }
@@ -42,6 +47,16 @@ S.layout = {
       }
       blockquote:nth-child(3n) {
         order: 3;
+      }
+    }
+
+    @media (min-width: 40rem) and (max-width: 80rem) {
+      padding-left: 20% !important;
+      blockquote:nth-child(2n + 1) {
+        order: 1;
+      }
+      blockquote:nth-child(2n) {
+        order: 2;
       }
     }
 
@@ -54,36 +69,16 @@ S.layout = {
     }
   `,
 };
-S.with = {
-  OverlineWrapper: styled("li")`
-    /*
-    counter-increment: item 1;
-    &::before {
-      content: "0" counter(item) ". ";
-      text-align: right;
-      font-size: 75%;
-    }
-    */
-  `,
-  OverlineLine: styled("li")`
-    @media (min-width: 40rem) {
-      border: 1px solid darkslategrey;
-      height: 0.2rem;
-      width: 25%;
-      margin: 0 0 2rem 2rem;
-    }
-  `,
-};
+S.with = {};
 
-const Projects = ({
-  data,
-  masonryInitial = 6,
-  showMoreButton = true,
-  ...props
-}) => {
+const Projects = ({ data, masonryInitial = 6, ...props }) => {
   const [moreShown, setMoreShown] = useState(false);
   const isDesktop = useMedia("(min-width: 80rem)");
   const isTablet = useMedia("(min-width: 40rem) and (max-width: 80rem)");
+
+  useEffect(() => {
+    if (isDesktop && !moreShown) setMoreShown(true);
+  }, [isDesktop]);
 
   const { featuredProjects, allProjects } = data;
   const visibleFeaturedProjects = featuredProjects
@@ -96,18 +91,27 @@ const Projects = ({
 
   return (
     <S.layout.MainWrapper {...props}>
-      <S.layout.OverlineComp>
-        <S.with.OverlineWrapper>
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
-          <h2
-            className={css`
-              display: inline-block;
-            `}>
+      <S.layout.OverhangComp>
+        <li
+          className={css`
+            margin-bottom: 0;
+          `}>
+          <h2>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
             Some things I've built
           </h2>
-        </S.with.OverlineWrapper>
-        <S.with.OverlineLine />
-      </S.layout.OverlineComp>
+        </li>
+        <li className="archive-link">
+          <Link href="/archive" passHref={true}>
+            <BaseLink
+              className={css`
+                color: ${colors.tertiary};
+              `}>
+              view the archive
+            </BaseLink>
+          </Link>
+        </li>
+      </S.layout.OverhangComp>
       <S.layout.Masonry
         className="row"
         total={visibleFeaturedProjects.length + visibleAllProjects.length}>
@@ -135,14 +139,18 @@ const Projects = ({
       <div
         className={css`
           display: grid;
-          margin-top: 5rem;
+          margin-top: ${commonMargin}rem;
         `}>
         <button
           className={[
             "button-outline",
             css`
+              width: 50%;
               margin: auto;
-              display: ${showMoreButton ? "initial" : "none"};
+              transition: ${commonTransition};
+              @media (min-width: 80rem) {
+                display: none;
+              }
             `,
           ].join(" ")}
           onClick={() => setMoreShown(!moreShown)}>

@@ -6,6 +6,7 @@ dependencies:
   milligram: 1.4.1
   next: 9.5.1_react-dom@1.0.0+react@1.0.0
   next-optimized-images: 2.6.2
+  nprogress: 0.2.0
   polished: 3.6.5
   preact: 10.4.7
   preact-render-to-string: 5.1.10_preact@10.4.7
@@ -16,7 +17,6 @@ dependencies:
   remark: 12.0.1
   remark-attr: 0.11.1
   remark-html: 12.0.0
-  smooth-scroll: 16.1.3
   use-media: 1.4.0_react@1.0.0
 devDependencies:
   babel-eslint: 10.1.0_eslint@7.6.0
@@ -24,7 +24,7 @@ devDependencies:
   eslint-config-alloy: 3.7.4
   eslint-plugin-react: 7.20.5_eslint@7.6.0
   husky: 4.2.5
-  imagemin-optipng: 8.0.0
+  imagemin-pngquant: 9.0.0
   lint-staged: 10.2.11
   prettier-eslint: 11.0.0
   prettier-eslint-cli: 5.0.0
@@ -3901,7 +3901,7 @@ packages:
       is-stream: 2.0.0
       merge-stream: 2.0.0
       npm-run-path: 4.0.1
-      onetime: 5.1.1
+      onetime: 5.1.2
       signal-exit: 3.0.3
       strip-final-newline: 2.0.0
     dev: true
@@ -4864,16 +4864,18 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
-  /imagemin-optipng/8.0.0:
+  /imagemin-pngquant/9.0.0:
     dependencies:
-      exec-buffer: 3.2.0
+      execa: 4.0.3
       is-png: 2.0.0
-      optipng-bin: 7.0.0
+      is-stream: 2.0.0
+      ow: 0.17.0
+      pngquant-bin: 6.0.0
     dev: true
     engines:
       node: '>=10'
     resolution:
-      integrity: sha512-CUGfhfwqlPjAC0rm8Fy+R2DJDBGjzy2SkfyT09L8rasnF9jSoHFqJ1xxSZWK6HVPZBMhGPMxCTL70OgTHlLF5A==
+      integrity: sha512-9cqnTEaJwAHWUi+8EMTB3NUouWToCWxtL+QnoYr8bfVwuKilHvRVWKsa9lt+0c3aWaGxCAkHs++j8qINvSqomA==
   /imagemin-webp/5.1.0:
     dependencies:
       cwebp-bin: 5.1.0
@@ -6487,6 +6489,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
+  /nprogress/0.2.0:
+    dev: false
+    resolution:
+      integrity: sha1-y480xTIT2JVyP8urkH6UIq28r7E=
   /nth-check/1.0.2:
     dependencies:
       boolbase: 1.0.0
@@ -6613,6 +6619,14 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-ZpZpjcJeugQfWsfyQlshVoowIIQ1qBGSVll4rfDq6JJVO//fesjoX808hXWfBjY+ROZgpKDI5TRSRBSoJiZ8eg==
+  /onetime/5.1.2:
+    dependencies:
+      mimic-fn: 2.1.0
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   /opencollective-postinstall/2.0.3:
     dev: true
     hasBin: true
@@ -6644,18 +6658,6 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==
-  /optipng-bin/7.0.0:
-    dependencies:
-      bin-build: 3.0.0
-      bin-wrapper: 4.1.0
-      logalot: 2.1.0
-    dev: true
-    engines:
-      node: '>=10'
-    hasBin: true
-    requiresBuild: true
-    resolution:
-      integrity: sha512-mesUAwfedu5p9gRQwlYgD6Svw5IH3VUIWDJj/9cNpP3yFNbbEVqkTMWYhrIEn/cxmbGA3LpZrdoV2Yl8OfmnIA==
   /os-browserify/0.3.0:
     dev: false
     resolution:
@@ -6674,6 +6676,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-u+Z0BseaqFxc/sdm/lc0VV36EnQ=
+  /ow/0.17.0:
+    dependencies:
+      type-fest: 0.11.0
+    dev: true
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-i3keDzDQP5lWIe4oODyDFey1qVrq2hXKTuTH2VpqwpYtzPiKZt2ziRI4NBQmgW40AnV5Euz17OyWweCb+bNEQA==
   /p-cancelable/0.3.0:
     dev: true
     engines:
@@ -7023,6 +7033,19 @@ packages:
     dev: true
     resolution:
       integrity: sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==
+  /pngquant-bin/6.0.0:
+    dependencies:
+      bin-build: 3.0.0
+      bin-wrapper: 4.1.0
+      execa: 4.0.3
+      logalot: 2.1.0
+    dev: true
+    engines:
+      node: '>=10'
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-oXWAS9MQ9iiDAJRdAZ9KO1mC5UwhzKkJsmetiu0iqIjJuW7JsuLhmc4JdRm7uJkIWRzIAou/Vq2VcjfJwz30Ow==
   /pnp-webpack-plugin/1.6.4:
     dependencies:
       ts-pnp: 1.2.0
@@ -8464,10 +8487,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==
-  /smooth-scroll/16.1.3:
-    dev: false
-    resolution:
-      integrity: sha512-ca9U+neJS/cbdScTBuUTCZvUWNF2EuMCk7oAx3ImdeRK5FPm+xRo9XsVHIkeEVkn7MBRx+ufVEhyveM4ZhaTGA==
   /snapdragon-node/2.1.1:
     dependencies:
       define-property: 1.0.0
@@ -9943,6 +9962,7 @@ packages:
     peerDependencies:
       preact: '>=10'
     resolution:
+      registry: 'https://registry.npmjs.org/'
       tarball: 'https://codeload.github.com/preact-compat/react-dom/tar.gz/75804a834f55de5350c175f9646631dabac258ae'
     version: 1.0.0
   github.com/preact-compat/react/acfe2cc2acc677d08fb8edf8ce04796634d8edf8_preact@10.4.7:
@@ -9954,6 +9974,7 @@ packages:
     peerDependencies:
       preact: '>=10'
     resolution:
+      registry: 'https://registry.npmjs.org/'
       tarball: 'https://codeload.github.com/preact-compat/react/tar.gz/acfe2cc2acc677d08fb8edf8ce04796634d8edf8'
     version: 1.0.0
 specifiers:
@@ -9966,11 +9987,12 @@ specifiers:
   goober-autoprefixer: ^1.2.1
   gray-matter: ^4.0.2
   husky: ^4.2.5
-  imagemin-optipng: ^8.0.0
+  imagemin-pngquant: ^9.0.0
   lint-staged: ^10.2.11
   milligram: ^1.4.1
   next: ^9.4.0
   next-optimized-images: ^2.6.2
+  nprogress: ^0.2.0
   polished: ^3.6.5
   preact: ^10.4.4
   preact-render-to-string: ^5.1.9
@@ -9984,7 +10006,6 @@ specifiers:
   remark: ^12.0.1
   remark-attr: ^0.11.1
   remark-html: ^12.0.0
-  smooth-scroll: ^16.1.3
   stylelint: ^13.6.1
   stylelint-config-recommended: ^3.0.0
   use-media: ^1.4.0

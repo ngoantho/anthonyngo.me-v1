@@ -9,7 +9,8 @@ const S = {
     width: ${(props) => `${props.fit}rem`};
     color: ${colors.primary};
     display: none;
-    @media (min-width: 72.5rem) {
+    z-index: 2;
+    @media (min-width: 40rem) {
       display: block;
     }
   `,

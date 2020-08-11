@@ -1,23 +1,28 @@
-import { colors, sizes } from "theme";
+import { Icon as BaseIcon, Link } from "styles";
+import { colors, config, sizes } from "theme";
 
 import { cx } from "utils/index";
 import { lighten } from "polished";
 import { styled } from "goober";
 
-const S = {
-  bodyBg: "#2c2f34",
-  projectBgLightLevel: 0.02,
-  projectSpacing: "1%",
-};
+const { borderRadius, commonTransition } = config;
+
+const S = {};
 S.layout = {
   Base: styled("blockquote")`
-    border-radius: 1rem;
+    border-radius: ${borderRadius};
     border-left: 0px solid #000000;
-    background-color: ${lighten(S.projectBgLightLevel, S.bodyBg)};
+    background-color: ${colors.tintLight};
     min-height: min-content;
     display: grid !important;
+    transition: ${commonTransition};
+    &:hover,
+    &:focus {
+      transform: translateY(-3px);
+      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    }
     @media (min-width: 40rem) {
-      margin-right: ${S.projectSpacing};
+      margin-right: 1%;
     }
   `,
   PreviewComp: styled("picture")`
@@ -39,7 +44,6 @@ S.layout = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* height: 100%; */
     grid-row: 1;
     grid-column: 1;
 
@@ -63,8 +67,8 @@ S.with = {
   HeaderText: styled("h6")`
     color: ${lighten(0.7, "#000000")};
   `,
-  Icon: styled("img")`
-    width: 85%;
+  Icon: styled(BaseIcon)`
+    width: 100%;
     height: auto;
     @media (max-width: 40rem) {
       width: 50%;
@@ -104,7 +108,7 @@ export default function Project({
       tabIndex="0"
       className={cx("column", {
         "column-40": isTablet,
-        "column-33": isDesktop,
+        "column-25": isDesktop,
       })}>
       {frontMatter.preview ? (
         <S.layout.PreviewComp>
@@ -147,24 +151,28 @@ export default function Project({
           <S.with.FooterItem className="column column-25">
             <li>
               {frontMatter.github ? (
-                <a
+                <Link
                   href={`//github.com/ngoantho/${frontMatter.github}`}
-                  target="_blank">
+                  target="_blank"
+                  rel="nofollow noopener noreferrer">
                   <S.with.Icon
                     src={require("public/icons/github-mark-light.png")}
                     alt={frontMatter.github}
                   />
-                </a>
+                </Link>
               ) : null}
             </li>
             <li>
               {frontMatter.external ? (
-                <a href={`//${frontMatter.external}`} target="_blank">
+                <Link
+                  href={`//${frontMatter.external}`}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer">
                   <S.with.Icon
                     src={require("public/icons/external.png")}
                     alt={frontMatter.external}
                   />
-                </a>
+                </Link>
               ) : null}
             </li>
           </S.with.FooterItem>

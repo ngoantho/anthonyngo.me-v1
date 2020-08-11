@@ -1,16 +1,16 @@
-import { Layout } from "components";
+import { colors, config } from "theme";
+
+import { ExtPage } from "styles";
+import Head from "next/head";
 import Link from "next/link";
-import { colors } from "theme";
-import { getProjectByFile } from "../lib/api";
 import { styled } from "goober";
 
+const { commonMargin, commonTransition } = config;
+
 const S = {
-  MainContainer: styled("main")`
-    display: flex;
-    flex-direction: column;
+  MainContainer: styled(ExtPage)`
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 5rem);
   `,
   Title: styled("h1")`
     font-family: "mono", monospace;
@@ -35,30 +35,24 @@ const S = {
     }
   `,
   HomeButton: styled("a")`
-    margin-top: 4rem;
+    margin-top: ${commonMargin}rem;
+    transition: ${commonTransition};
   `,
 };
 
-export default function Custom404({ footerData }) {
+export default function Custom404() {
   return (
-    <Layout footerData={footerData}>
+    <>
+      <Head>
+        <title>404 | Anthony Ngo</title>
+      </Head>
       <S.MainContainer>
         <S.Title>404</S.Title>
         <S.Subtitle>Page Not Found</S.Subtitle>
-        <Link href="/">
-          <S.HomeButton className="button button-outline" href="/">
-            go back
-          </S.HomeButton>
+        <Link href="/" passHref={true}>
+          <S.HomeButton className="button button-outline">go back</S.HomeButton>
         </Link>
       </S.MainContainer>
-    </Layout>
+    </>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      footerData: await getProjectByFile("src/assets/sections/footer.md"),
-    },
-  };
 }

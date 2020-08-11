@@ -1,36 +1,60 @@
 import "milligram/dist/milligram.css";
 import "styles/accent.css";
+import "styles/nprogress.css";
 
 import React, { useEffect } from "react";
 
-import { GlobalLayout } from "styles";
+import { GlobalStyles } from "styles";
+import { Layout } from "components";
+import NProgress from "nprogress";
 import { prefix } from "goober-autoprefixer";
 import { setup } from "goober";
+import { useRouter } from "next/router";
 
 // goober's needs to know how to render the `styled` nodes.
 // So to let it know, we run the `setup` function with the
 // `createElement` function and prefixer function.
 setup(React.createElement, prefix);
 
-((client, cb) => client && cb())(typeof window !== "undefined", () => {
-  if (CSS.supports("scroll-behavior: smooth")) return;
-  if (window.matchMedia("screen and (prefers-reduced-motion: reduce)").matches)
-    return;
-  require("smooth-scroll")('a[href*="#"]');
-});
-
 export default function App({ Component, pageProps }) {
-  function cbHashChange() {
-    history.replaceState(null, null, " ");
-  }
+  const { events } = useRouter();
+
+  const handleRouteStart = () => NProgress.start();
+  const handleRouteChange = (url) => {
+    NProgress.done();
+
+    if (CSS.supports("scroll-behavior: smooth")) return;
+    if (
+      window.matchMedia("screen and (prefers-reduced-motion: reduce)").matches
+    )
+      return;
+
+    if (url.includes("#")) {
+      const id = url.substring(2);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView();
+          el.focus();
+        }
+      }, 0);
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener("hashchange", cbHashChange, false);
-    return () => window.removeEventListener("hashchange", cbHashChange, false);
+    events.on("routeChangeStart", handleRouteStart);
+    events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      events.off("routeChangeStart", handleRouteStart);
+      events.off("routeChangeComplete", handleRouteChange);
+    };
   }, []);
 
   return (
-    <GlobalLayout>
-      <Component {...pageProps} />
-    </GlobalLayout>
+    <GlobalStyles>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </GlobalStyles>
   );
 }
