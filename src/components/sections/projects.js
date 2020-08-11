@@ -11,9 +11,7 @@ const { commonMargin, commonTransition } = config;
 
 const S = {};
 S.layout = {
-  MainWrapper: styled(Section)`
-    padding-bottom: 20rem;
-  `,
+  MainWrapper: styled(Section)``,
   OverhangComp: styled("ul")`
     display: flex;
     align-items: center;
@@ -40,7 +38,7 @@ S.layout = {
     @media (min-width: 80rem) {
       flex-direction: column !important;
       padding: 0 50px !important;
-      height: ${(props) => `${Number(props.total) * 50}px`};
+      height: ${(props) => `${Number(props.total) * 45}px`};
       blockquote:nth-child(3n + 1) {
         order: 1;
       }

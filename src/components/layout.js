@@ -1,9 +1,10 @@
 import { Navbar, SocialBar } from "components";
+import { commonTransition, navHeight } from "config";
 import { glob as css, styled } from "goober";
 import { useEffect, useState } from "react";
 
 import { Footer } from "components/sections";
-import { commonTransition } from "config";
+import { useRouter } from "next/router";
 
 const StyledMainWrapper = styled("main")`
   display: flex;
@@ -14,6 +15,10 @@ const StyledMainWrapper = styled("main")`
 
   &.blur {
     filter: opacity(0.2);
+  }
+
+  &.adjustForNav {
+    padding-top: ${navHeight}px;
   }
 `;
 
@@ -29,6 +34,8 @@ function Layout({
     blurb: "Designed & Built by Anthony Ngo",
   },
 }) {
+  const { pathname } = useRouter();
+
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     document.body.classList.toggle("noscroll", menuOpen);
@@ -38,10 +45,16 @@ function Layout({
     <>
       <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <StyledMainWrapper
-        className={["container", menuOpen ? "blur" : ""].join(" ")}>
+        className={[
+          "container",
+          menuOpen && "blur",
+          pathname !== "/" && "adjustForNav",
+        ]
+          .filter(Boolean)
+          .join(" ")}>
         {children}
+        <Footer data={footerData} pathname={pathname} />
         <SocialBar />
-        <Footer data={footerData} />
       </StyledMainWrapper>
     </>
   );

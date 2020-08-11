@@ -69,10 +69,10 @@ S.with = {
       color: ${lighten(0.35, colors.quaternary)};
     }
   `,
-  ResumeButton: styled("a")`
+  ResumeButton: styled(BaseLink)`
     margin: 10% auto 0;
     width: max-content;
-    transition: ${commonTransition};
+    font-family: "system", sans-serif;
   `,
 };
 
