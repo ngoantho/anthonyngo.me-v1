@@ -4,7 +4,6 @@ const path = require("path");
 
 module.exports = withPrefresh(
   withOptimizedImages({
-    handleImages: ["jpeg", "png", "svg", "webp", "gif", "ico"],
     webpack(config, { dev, isServer }) {
       // Move Preact into the framework chunk instead of duplicating in routes:
       const splitChunks =
@@ -47,14 +46,6 @@ module.exports = withPrefresh(
       config.resolve.modules = [
         ...config.resolve.modules,
         path.resolve(__dirname, "src"),
-      ];
-
-      config.module.rules = [
-        ...config.module.rules,
-        {
-          test: /\.txt/i,
-          use: "raw-loader",
-        },
       ];
 
       if (!isServer) {
