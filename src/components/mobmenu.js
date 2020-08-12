@@ -72,7 +72,7 @@ S.with = {
   ResumeButton: styled(BaseLink)`
     margin: 10% auto 0;
     width: max-content;
-    font-family: "system", sans-serif;
+    font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   `,
 };
 
