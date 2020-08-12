@@ -13,12 +13,8 @@ function Index({ featuredProjects, allProjects, miscData }) {
   return (
     <>
       <Head>
-        <title key="title">Anthony Ngo</title>
-        <meta
-          key="viewport"
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-        />
+        <title>Anthony Ngo</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Landing id="landing" data={miscData.landing} />
       <Projects id="projects" data={{ featuredProjects, allProjects }} />

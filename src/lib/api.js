@@ -13,6 +13,7 @@ export async function getProjectsFrom(dir) {
   let slugs = await readdir(dir);
   let projects = await Promise.all(
     slugs
+      .filter((slug) => !/^(\.|_)/.test(slug))
       .map((slug) => parse(slug, dir))
       .sort(async (projectA, projectB) => {
         const {
