@@ -6,7 +6,7 @@ import {
 } from "config";
 
 import { Link as BaseLink } from "styles";
-import Link from "next/link";
+import NextLink from "next/link";
 import { colors } from "theme";
 import { lighten } from "polished";
 import { styled } from "goober";
@@ -84,9 +84,9 @@ export default function MobileMenu({ menuOpen, setMenuOpen }) {
           <S.with.NavLinksList>
             {navLinks.map(([name, hash], i) => (
               <S.with.NavLinksItem key={i}>
-                <Link href={{ pathname: "/", hash }} passHref>
+                <NextLink href={{ pathname: "/", hash }} passHref>
                   <BaseLink onClick={() => setMenuOpen(false)}>{name}</BaseLink>
-                </Link>
+                </NextLink>
               </S.with.NavLinksItem>
             ))}
           </S.with.NavLinksList>

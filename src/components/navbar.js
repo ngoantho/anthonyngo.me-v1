@@ -2,8 +2,8 @@ import { Link as BaseLink, Icon } from "styles";
 import { colors, config } from "theme";
 import { useEffect, useState } from "react";
 
-import Link from "next/link";
 import Menu from "./mobmenu";
+import NextLink from "next/link";
 import { lighten } from "polished";
 import { styled } from "goober";
 
@@ -31,7 +31,8 @@ S.layout = {
     padding: 0 ${commonMargin}rem;
     position: fixed;
     transition: ${commonTransition};
-    background: var(--glob-bg);
+    background: ${(props) =>
+      props.scrollDirection === "none" ? "transparent" : "var(--glob-bg)"};
     box-shadow: ${(props) =>
       props.scrollDirection === "up"
         ? "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"
@@ -54,26 +55,34 @@ S.layout = {
     width: 100%;
     font-family: "mono", monospace;
   `,
-  Hamburger: styled("button")`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    cursor: pointer;
-    height: calc(25% + 1rem);
-    border-color: transparent;
-    padding: 0.5rem;
-    margin-bottom: 0;
-    transition: ${commonTransition};
-    @media (min-width: ${hamVisibleCutoff}) {
-      display: none;
-    }
-  `,
   NavLinks: styled("div")`
     display: flex;
     align-items: center;
     @media (max-width: ${hamVisibleCutoff}) {
       display: none;
+    }
+  `,
+  Hamburger: styled("button")`
+    cursor: pointer;
+    border-color: transparent;
+    padding: 0.5rem;
+    margin-bottom: 0;
+    transition: ${commonTransition};
+    height: ${(props) =>
+      props.scrollDirection !== "none"
+        ? "calc(35% + 1rem)"
+        : "calc(25% + 1rem)"};
+    @media (min-width: ${hamVisibleCutoff}) {
+      display: none;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    --base-width: ${hamburgerClamp - 1}rem;
+    &.on {
+      padding-right: ${hamburgerClamp * 3}px;
     }
   `,
 };
@@ -82,7 +91,32 @@ S.with = {
     background: ${colors.tertiary};
     height: ${`${hamHeight}rem`};
     border-radius: ${borderRadius};
-    width: ${(props) => `${hamburgerClamp - props.line / 2}rem`};
+    transition: ${commonTransition};
+
+    &.line1 {
+      width: ${hamburgerClamp - 1 / 2}rem;
+      transform-origin: 100% 0;
+      &.on {
+        width: var(--base-width);
+        transform: rotate(-45deg);
+      }
+    }
+    &.line2 {
+      width: var(--base-width);
+      &.on {
+        transform: translateX(calc(var(--base-width) * -1));
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    &.line3 {
+      width: ${hamburgerClamp - 3 / 2}rem;
+      transform-origin: 100% 0;
+      &.on {
+        width: var(--base-width);
+        transform: rotate(45deg);
+      }
+    }
   `,
   Logo: styled("div")`
     display: grid;
@@ -92,6 +126,7 @@ S.with = {
       margin: auto;
     }
     &.blur {
+      pointer-events: none;
       filter: opacity(${(props) => props.blurAmount});
     }
   `,
@@ -137,7 +172,7 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
       if (scrollDirection !== "up") {
         setScrollDirection("up");
       }
-    } else if (prev < curr && curr > navHeight / 2) {
+    } else if (prev < curr && curr > DELTA) {
       if (scrollDirection !== "down") {
         setScrollDirection("down");
       }
@@ -156,32 +191,34 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
     <S.layout.Container scrollDirection={scrollDirection}>
       <S.layout.MainNav>
         <S.with.Logo
-          tabIndex="-1"
           size="48"
           blurAmount={blurAmount}
           className={[menuOpen && "blur"].filter(Boolean)}>
           {homePage ? (
-            <a href="/">
-              <Icon src={require("public/favicons/favicon48.png")} alt="Home" />
+            <a href="/" tabIndex="-1">
+              <Icon
+                src={require("public/favicons/favicon48.png?inline")}
+                alt="Home"
+              />
             </a>
           ) : (
-            <Link href="/" passHref>
-              <BaseLink>
+            <NextLink href="/" passHref>
+              <BaseLink tabIndex="-1">
                 <Icon
-                  src={require("public/favicons/favicon48.png")}
+                  src={require("public/favicons/favicon48.png?inline")}
                   alt="Home"
                 />
               </BaseLink>
-            </Link>
+            </NextLink>
           )}
         </S.with.Logo>
         <S.layout.NavLinks>
           <S.with.NavLinksList>
             {navLinks.map(([name, hash], i) => (
               <S.with.NavLinksItem key={i}>
-                <Link href={{ pathname: "/", hash }} passHref>
+                <NextLink href={{ pathname: "/", hash }} passHref>
                   <BaseLink>{name}</BaseLink>
-                </Link>
+                </NextLink>
               </S.with.NavLinksItem>
             ))}
           </S.with.NavLinksList>
@@ -195,11 +232,18 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
           </S.with.ResumeButton>
         </S.layout.NavLinks>
         <S.layout.Hamburger
-          className="button-outline"
-          onClick={() => setMenuOpen(!menuOpen)}>
-          <S.with.HamburgerLine line="1" />
-          <S.with.HamburgerLine line="2" />
-          <S.with.HamburgerLine line="3" />
+          className={["button-outline", menuOpen ? "on" : ""].join(" ")}
+          onClick={() => setMenuOpen(!menuOpen)}
+          scrollDirection={scrollDirection}>
+          <S.with.HamburgerLine
+            className={["line1", menuOpen ? "on" : ""].join(" ")}
+          />
+          <S.with.HamburgerLine
+            className={["line2", menuOpen ? "on" : ""].join(" ")}
+          />
+          <S.with.HamburgerLine
+            className={["line3", menuOpen ? "on" : ""].join(" ")}
+          />
         </S.layout.Hamburger>
       </S.layout.MainNav>
       <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
