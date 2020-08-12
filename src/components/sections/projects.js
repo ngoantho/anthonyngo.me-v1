@@ -3,7 +3,7 @@ import { colors, config } from "theme";
 import { css, styled } from "goober";
 import { useEffect, useState } from "react";
 
-import Link from "next/link";
+import NextLink from "next/link";
 import Project from "../project";
 import useMedia from "use-media";
 
@@ -102,14 +102,14 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
           </h2>
         </li>
         <li className="archive-link">
-          <Link href="/archive" passHref>
+          <NextLink href="/archive" passHref>
             <BaseLink
               className={css`
                 color: ${colors.tertiary};
               `}>
               view the archive
             </BaseLink>
-          </Link>
+          </NextLink>
         </li>
       </S.layout.OverhangComp>
       <S.layout.Masonry

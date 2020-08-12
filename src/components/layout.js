@@ -20,9 +20,11 @@ const StyledMainWrapper = styled("main")`
   }
 
   &.homePage {
-    padding-top: 10rem;
-    footer {
-      padding-top: 10rem !important;
+    @media (min-height: 40rem) {
+      padding-top: 10rem;
+      footer {
+        padding-top: 10rem !important;
+      }
     }
   }
 

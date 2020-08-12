@@ -1,3 +1,4 @@
+import Head from "next/head";
 import NProgress from "nprogress";
 import { styled } from "goober";
 import { useEffect } from "react";
@@ -17,6 +18,11 @@ const LoaderOverlay = styled("div")`
 export default function Loader({ onFinishLoading }) {
   let id = 0;
   useEffect(() => {
+    if (process.env.NODE_ENV !== "production") {
+      onFinishLoading();
+      return;
+    }
+
     NProgress.configure({ trickleSpeed: 100 });
     NProgress.start();
 
@@ -28,5 +34,17 @@ export default function Loader({ onFinishLoading }) {
     return () => clearTimeout(id);
   }, []);
 
-  return <LoaderOverlay />;
+  return (
+    <>
+      <Head>
+        <title key="title">Anthony Ngo</title>
+        <meta
+          key="viewport"
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+        />
+      </Head>
+      <LoaderOverlay />
+    </>
+  );
 }
