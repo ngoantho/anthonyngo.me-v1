@@ -1,10 +1,9 @@
-import { Icon, Link } from "styles";
-
+import CommonSocial from "./commonsocials";
 import Side from "./side";
 import { config } from "theme";
 import { styled } from "goober";
 
-const { contactMe, commonMargin } = config;
+const { commonMargin } = config;
 
 const S = {
   List: styled("ul")`
@@ -24,32 +23,13 @@ const S = {
       background-color: darkslategray;
     }
   `,
-  Link: styled(Link)`
-    padding: 1rem;
-
-    img {
-      width: 50%;
-      height: auto;
-    }
-  `,
 };
 
 const SocialBar = () => {
-  const formattedMedia = Object.entries(contactMe);
-
   return (
     <Side>
       <S.List>
-        {formattedMedia.map(([type, { icon, url }], i) => (
-          <li key={i}>
-            <S.Link
-              href={url}
-              target="_blank"
-              rel="nofollow noopener noreferrer">
-              <Icon src={require(`public/${icon}`)} alt={type} title={type} />
-            </S.Link>
-          </li>
-        ))}
+        <CommonSocial isFooter={false} />
       </S.List>
     </Side>
   );

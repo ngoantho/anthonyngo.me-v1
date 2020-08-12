@@ -1,9 +1,10 @@
-import { Icon, Link } from "styles";
 import { colors, config, sizes } from "theme";
 
+import { CommonSocial } from "components";
+import { Link } from "styles";
 import { styled } from "goober";
 
-const { contactMe, commonMargin } = config;
+const { commonMargin } = config;
 
 const S = {};
 S.layout = {
@@ -37,19 +38,9 @@ S.with = {
       display: none;
     }
   `,
-  SocialLink: styled(Link)`
-    padding: 1rem;
-
-    img {
-      width: 25%;
-      height: auto;
-    }
-  `,
 };
 
 const Footer = ({ data }) => {
-  const formattedMedia = Object.entries(contactMe);
-
   return (
     <S.layout.Container className="container">
       <S.layout.Finale>
@@ -61,16 +52,7 @@ const Footer = ({ data }) => {
         </S.with.FinaleGithubLink>
       </S.layout.Finale>
       <S.with.SocialList>
-        {formattedMedia.map(([type, { icon, url }], i) => (
-          <li key={i}>
-            <S.with.SocialLink
-              href={url}
-              target="_blank"
-              rel="nofollow noopener noreferrer">
-              <Icon src={require(`public/${icon}`)} alt={type} title={type} />
-            </S.with.SocialLink>
-          </li>
-        ))}
+        <CommonSocial isFooter={true} />
       </S.with.SocialList>
     </S.layout.Container>
   );

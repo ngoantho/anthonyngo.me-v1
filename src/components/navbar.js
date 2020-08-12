@@ -19,9 +19,8 @@ const {
   borderRadius,
 } = config;
 
-const S = {};
-S.layout = {
-  Container: styled("header")`
+const S = {
+  BaseHeader: styled("header")`
     display: flex;
     justify-content: space-between;
     top: 0;
@@ -31,6 +30,17 @@ S.layout = {
     padding: 0 ${commonMargin}rem;
     position: fixed;
     transition: ${commonTransition};
+  `,
+  BaseHamburger: styled("button")`
+    cursor: pointer;
+    border-color: transparent;
+    padding: 0.5rem;
+    margin-bottom: 0;
+    transition: ${commonTransition};
+  `,
+};
+S.layout = {
+  Container: styled(S.BaseHeader)`
     background: ${(props) =>
       props.scrollDirection === "none" ? "transparent" : "var(--glob-bg)"};
     box-shadow: ${(props) =>
@@ -62,12 +72,7 @@ S.layout = {
       display: none;
     }
   `,
-  Hamburger: styled("button")`
-    cursor: pointer;
-    border-color: transparent;
-    padding: 0.5rem;
-    margin-bottom: 0;
-    transition: ${commonTransition};
+  Hamburger: styled(S.BaseHamburger)`
     height: ${(props) =>
       props.scrollDirection !== "none"
         ? "calc(35% + 1rem)"
