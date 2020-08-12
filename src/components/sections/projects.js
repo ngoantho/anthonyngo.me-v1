@@ -88,6 +88,7 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
     .filter(({ frontMatter: { visibleInProjects } }) => visibleInProjects)
     .slice(0, !moreShown ? masonryInitial : allProjects.length)
     .reverse();
+  const total = visibleFeaturedProjects.length + visibleAllProjects.length;
 
   return (
     <S.layout.MainWrapper {...props}>
@@ -112,9 +113,7 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
           </NextLink>
         </li>
       </S.layout.OverhangComp>
-      <S.layout.Masonry
-        className="row"
-        total={visibleFeaturedProjects.length + visibleAllProjects.length}>
+      <S.layout.Masonry className="row" total={total}>
         {visibleFeaturedProjects.map(({ frontMatter, html }, i) => (
           <Project
             key={i}
@@ -135,27 +134,35 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
             featured={false}
           />
         ))}
+        {total === 0 ? (
+          <blockquote className="column">
+            Nothing to see here. At some point, this will have a list of some of
+            my projects.
+          </blockquote>
+        ) : null}
       </S.layout.Masonry>
       <div
         className={css`
           display: grid;
           margin-top: ${commonMargin}rem;
         `}>
-        <button
-          className={[
-            "button-outline",
-            css`
-              width: 50%;
-              margin: auto;
-              transition: ${commonTransition};
-              @media (min-width: 80rem) {
-                display: none;
-              }
-            `,
-          ].join(" ")}
-          onClick={() => setMoreShown(!moreShown)}>
-          {!moreShown ? "show more" : "show less"}
-        </button>
+        {total > masonryInitial ? (
+          <button
+            className={[
+              "button-outline",
+              css`
+                width: 50%;
+                margin: auto;
+                transition: ${commonTransition};
+                @media (min-width: 80rem) {
+                  display: none;
+                }
+              `,
+            ].join(" ")}
+            onClick={() => setMoreShown(!moreShown)}>
+            {!moreShown ? "show more" : "show less"}
+          </button>
+        ) : null}
       </div>
     </S.layout.MainWrapper>
   );
