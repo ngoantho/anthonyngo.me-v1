@@ -1,9 +1,10 @@
-import { Loader, Navbar, SocialBar } from "components";
+import { Footer, Loader, Navbar } from "components";
 import { commonTransition, navHeight } from "config";
 import { useEffect, useState } from "react";
 
-import { Footer } from "components/sections";
+import dynamic from "next/dynamic";
 import { styled } from "goober";
+import useMedia from "use-media";
 import { useRouter } from "next/router";
 
 const BLUR_AMOUNT = 0.2;
@@ -22,9 +23,6 @@ const StyledMainWrapper = styled("main")`
   &.homePage {
     @media (min-height: 40rem) {
       padding-top: 10rem;
-      footer {
-        padding-top: 10rem !important;
-      }
     }
   }
 
@@ -32,6 +30,8 @@ const StyledMainWrapper = styled("main")`
     padding-top: ${navHeight}px;
   }
 `;
+
+const SocialBar = dynamic(() => import("./socialbar"));
 
 function Layout({
   children,
@@ -45,14 +45,20 @@ function Layout({
     document.body.classList.toggle("noscroll", menuOpen);
   }, [menuOpen]);
 
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    document.body.classList.toggle("noscroll", isLoading);
+  }, [isLoading]);
+
+  const notMobile = useMedia("(min-width: 40rem)");
   const { pathname } = useRouter();
   const homePage = pathname === "/";
-  const [isLoading, setIsLoading] = useState(true);
 
-  return isLoading ? (
-    <Loader onFinishLoading={() => setIsLoading(false)} />
-  ) : (
+  return (
     <>
+      {isLoading ? (
+        <Loader onFinishLoading={() => setIsLoading(false)} />
+      ) : null}
       <Navbar
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
@@ -69,8 +75,8 @@ function Layout({
           .filter(Boolean)
           .join(" ")}>
         {children}
-        <Footer data={footerData} />
-        <SocialBar />
+        <Footer data={footerData} isMobile={!notMobile} />
+        {notMobile ? <SocialBar homePage={homePage} /> : null}
       </StyledMainWrapper>
     </>
   );

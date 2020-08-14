@@ -51,6 +51,7 @@
     "goober": "^2.0.5",
     "goober-autoprefixer": "^1.2.1",
     "gray-matter": "^4.0.2",
+    "jump.js": "^1.0.2",
     "milligram": "^1.4.1",
     "next": "^9.4.0",
     "next-optimized-images": "^2.6.2",

@@ -13,8 +13,12 @@ function Index({ featuredProjects, allProjects, miscData }) {
   return (
     <>
       <Head>
-        <title>Anthony Ngo</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <title key="title">Anthony Ngo</title>
+        <meta
+          key="viewport"
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+        />
       </Head>
       <Landing id="landing" data={miscData.landing} />
       <Projects id="projects" data={{ featuredProjects, allProjects }} />
@@ -42,7 +46,7 @@ export default Index;
 export async function getStaticProps() {
   const featuredProjectsDir = join(process.cwd(), "src/assets/featured");
   const allProjectsDir = join(process.cwd(), "src/assets/projects");
-  let featuredProjects = await getProjectsFrom(featuredProjectsDir);
+  let featuredProjects = await getProjectsFrom(featuredProjectsDir, true);
   let allProjects = await getProjectsFrom(allProjectsDir);
 
   return {

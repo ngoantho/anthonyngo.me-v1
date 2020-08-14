@@ -2,10 +2,15 @@ import { Link, Section } from "styles";
 import { colors, config } from "theme";
 import { css, styled } from "goober";
 import { invert, lighten } from "polished";
+import { useEffect, useState } from "react";
 
-const { email, commonMargin, commonTransition } = config;
+import { cx } from "utils";
 
-const S = {};
+const { email, commonMargin, commonTransition, navDelay } = config;
+
+const S = {
+  timings: [100, 200, 300, 400],
+};
 S.layout = {
   MainWrapper: styled(Section)`
     justify-content: center;
@@ -16,7 +21,6 @@ S.layout = {
   CenterRow: styled("div")`
     flex-direction: column !important;
   `,
-  Core: styled("div")``,
 };
 S.with = {
   SupTitle: styled("h4")`
@@ -52,26 +56,59 @@ S.with = {
 
 const Landing = ({ data, ...props }) => {
   const { frontMatter, html } = data;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const mountId = setTimeout(() => {
+      setMounted(true);
+    }, navDelay / 2);
+    return () => clearTimeout(mountId);
+  }, []);
 
   return (
     <S.layout.MainWrapper {...props}>
       <S.layout.CenterRow className="row">
-        <S.layout.Core className="column">
-          <S.with.SupTitle>{frontMatter.supTitle}</S.with.SupTitle>
-          <S.with.Title>{frontMatter.title}</S.with.Title>
-          <S.with.SubTitle>{frontMatter.subTitle}</S.with.SubTitle>
-          <S.with.Blurb dangerouslySetInnerHTML={{ __html: html }} />
-        </S.layout.Core>
+        <div className="column">
+          <S.with.SupTitle className={cx("fadeup", mounted && "active")}>
+            {frontMatter.supTitle}
+          </S.with.SupTitle>
+          <S.with.Title
+            className={cx("fadeup", mounted && "active")}
+            style={{
+              transitionDelay: `${S.timings[0]}ms`,
+            }}>
+            {frontMatter.title}
+          </S.with.Title>
+          <S.with.SubTitle
+            className={cx("fadeup", mounted && "active")}
+            style={{
+              transitionDelay: `${S.timings[1]}ms`,
+            }}>
+            {frontMatter.subTitle}
+          </S.with.SubTitle>
+          <S.with.Blurb
+            className={cx("fadeup", mounted && "active")}
+            style={{
+              transitionDelay: `${S.timings[2]}ms`,
+            }}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </div>
         <aside className="row">
           <div
-            className={[
+            style={{
+              transitionDelay: `${S.timings[3]}ms`,
+            }}
+            className={cx(
               "column",
+              "fadeup",
+              mounted && "active",
               css`
                 @media (min-width: 40rem) {
                   padding-left: ${commonMargin}rem !important;
                 }
-              `,
-            ].join(" ")}>
+              `
+            )}>
             <Link href={`mailto:${email}`} className="button button-outline">
               get in touch
             </Link>

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import NProgress from "nprogress";
+import { loaderDelay } from "config";
 import { styled } from "goober";
 import { useEffect } from "react";
 
@@ -16,20 +17,16 @@ const LoaderOverlay = styled("div")`
 `;
 
 export default function Loader({ onFinishLoading }) {
-  let id = 0;
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") {
       onFinishLoading();
       return;
     }
 
-    NProgress.configure({ trickleSpeed: 100 });
-    NProgress.start();
-
-    id = setTimeout(() => {
-      NProgress.done();
+    const id = setTimeout(() => {
       onFinishLoading();
-    }, 500);
+      NProgress.done();
+    }, loaderDelay);
 
     return () => clearTimeout(id);
   }, []);

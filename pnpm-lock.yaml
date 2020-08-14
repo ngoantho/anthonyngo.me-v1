@@ -3,6 +3,7 @@ dependencies:
   goober: 2.0.5
   goober-autoprefixer: 1.2.1
   gray-matter: 4.0.2
+  jump.js: 1.0.2
   milligram: 1.4.1
   next: 9.5.1_react-dom@1.0.0+react@1.0.0
   next-optimized-images: 2.6.2
@@ -5501,6 +5502,10 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-z1xSldJ6imESSzOjd3NNkieVJKRlKYSOtMG8SFyCj2FIrvSaSuli/WjpBkEzCBoR9bYYYFgqJw61Xhu7Lcgk+w==
+  /jump.js/1.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-4GQbR/QKOPITnCX9oFAL8o5DAVo=
   /junk/3.1.0:
     dev: true
     engines:
@@ -9988,6 +9993,7 @@ specifiers:
   gray-matter: ^4.0.2
   husky: ^4.2.5
   imagemin-pngquant: ^9.0.0
+  jump.js: ^1.0.2
   lint-staged: ^10.2.11
   milligram: ^1.4.1
   next: ^9.4.0

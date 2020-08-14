@@ -1,5 +1,10 @@
-import { colors } from "theme";
+import { colors, config } from "theme";
+import { useEffect, useState } from "react";
+
+import { cx } from "utils/index";
 import { styled } from "goober";
+
+const { navDelay } = config;
 
 const S = {
   Container: styled("aside")`
@@ -16,8 +21,25 @@ const S = {
   `,
 };
 
-const Side = ({ children }) => {
-  return <S.Container fit="5">{children}</S.Container>;
+const DELAY = navDelay * 1.5;
+
+const Side = ({ children, homePage }) => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const mountId = setTimeout(
+      () => {
+        setMounted(true);
+      },
+      homePage ? DELAY : 0
+    );
+    return () => clearTimeout(mountId);
+  }, []);
+
+  return (
+    <S.Container fit="5" className={cx("fade", mounted && "active")}>
+      {children}
+    </S.Container>
+  );
 };
 
 export default Side;

@@ -36,3 +36,8 @@ input[type="reset"].button-clear,
 input[type="submit"].button-clear {
   color: var(--colors-accent);
 }
+
+.column.column-30 {
+  flex: 0 0 30%;
+  max-width: 30%;
+}

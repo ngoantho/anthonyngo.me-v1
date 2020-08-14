@@ -1,4 +1,5 @@
 import "./fonts";
+import "./transitions";
 
 // for styled-components extension
 import { glob as css } from "goober";

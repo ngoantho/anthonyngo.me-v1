@@ -1,6 +1,7 @@
 import { Icon, Link } from "styles";
 
 import { config } from "theme";
+import { cx } from "utils";
 import { styled } from "goober";
 
 const { contactMe } = config;
@@ -29,7 +30,7 @@ function CommonSocials({ isFooter }) {
         href={url}
         target="_blank"
         rel="nofollow noopener noreferrer"
-        className={[isFooter && "isFooter"].filter(Boolean)}>
+        className={cx(isFooter && "isFooter")}>
         <Icon src={require(`public/${icon}`)} alt={type} title={type} />
       </SharedSocialLink>
     </li>
