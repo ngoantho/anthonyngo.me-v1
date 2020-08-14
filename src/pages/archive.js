@@ -189,7 +189,7 @@ export default function Archive({ projects }) {
   useEffect(() => {
     const mountId = setTimeout(() => {
       setMounted(true);
-    }, navDelay / 2);
+    }, navDelay / 4);
     return () => clearTimeout(mountId);
   }, []);
 

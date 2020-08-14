@@ -97,8 +97,8 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
   const refArchiveLink = useRef(null);
   const refMoreButton = useRef(null);
 
-  const titleOnScreen = useOnScreen(refTitle, "25px");
-  const archiveLinkOnScreen = useOnScreen(refArchiveLink);
+  const titleOnScreen = useOnScreen(refTitle);
+  const archiveLinkOnScreen = useOnScreen(refArchiveLink, "-25px");
   const moreButtonOnScreen = useOnScreen(refMoreButton);
 
   const { featuredProjects, allProjects } = data;

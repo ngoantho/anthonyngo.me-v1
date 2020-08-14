@@ -63,7 +63,7 @@ export default function Custom404() {
 
   useEffect(() => {
     if (typeof repo !== "undefined") {
-      window.location.replace(`https://github.com/${repo.full_name}`);
+      window.location.replace(`https://ngoantho.github.io/${repo.name}`);
     }
   }, [repo]);
 

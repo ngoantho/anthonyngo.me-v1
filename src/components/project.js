@@ -162,7 +162,7 @@ export default function Project({
             <li>
               {frontMatter.github ? (
                 <Link
-                  href={`//github.com/ngoantho/${frontMatter.github}`}
+                  href={`//github.com/${frontMatter.github}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer">
                   <S.with.Icon
