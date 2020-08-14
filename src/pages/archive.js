@@ -1,5 +1,7 @@
 import { ExtPage, Icon, Link } from "styles";
 import { colors, config } from "theme";
+import { cx, useOnScreen } from "utils/index";
+import { useEffect, useRef, useState } from "react";
 
 import Head from "next/head";
 import { getProjectsFrom } from "../lib/api";
@@ -11,6 +13,9 @@ const {
   site: { url },
   commonTransition,
   commonMargin,
+  navDelay,
+  delayTr = 100,
+  delayEntry = 25,
 } = config;
 
 const S = {
@@ -56,6 +61,10 @@ const S = {
       @media (max-width: 40rem) {
         display: none;
       }
+    }
+
+    thead tr {
+      transition-delay: ${delayTr}ms;
     }
 
     tbody tr {
@@ -113,7 +122,77 @@ const S = {
   `,
 };
 
+function ArchiveEntry({ frontMatter, index }) {
+  const { date, title, tags, company, github, external } = frontMatter;
+
+  const ref = useRef(null);
+  const visible = useOnScreen(ref);
+
+  return (
+    <tr
+      tabIndex="0"
+      ref={ref}
+      className={cx("fadeup", visible && "active")}
+      style={{
+        transitionDelay: `${(index + 1) * delayEntry}ms`,
+      }}>
+      <td className="year">{`${new Date(date).getFullYear()}`}</td>
+      <td className="title">{title}</td>
+      <td className="company mobile-hide">
+        {company ? (
+          <span data-type="regular">{company}</span>
+        ) : (
+          <span data-type="noop">-</span>
+        )}
+      </td>
+      <td className="tags mobile-hide">
+        {tags &&
+          tags.map((tag, i) => (
+            <span key={i}>
+              {tag}
+              {""}
+              {i !== tags.length - 1 && (
+                <span className="separator">&middot;</span>
+              )}
+            </span>
+          ))}
+      </td>
+      <td className="links">
+        <span>
+          {github && (
+            <Link
+              href={`//github.com/ngoantho/${github}`}
+              target="_blank"
+              rel="nofollow noopener noreferrer">
+              <Icon
+                src={require("public/icons/github-mark-light.png")}
+                alt={github}
+              />
+            </Link>
+          )}
+          {external && (
+            <Link
+              href={`//${external}`}
+              target="_blank"
+              rel="nofollow noopener noreferrer">
+              <Icon src={require("public/icons/external.png")} alt={external} />
+            </Link>
+          )}
+        </span>
+      </td>
+    </tr>
+  );
+}
+
 export default function Archive({ projects }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const mountId = setTimeout(() => {
+      setMounted(true);
+    }, navDelay / 2);
+    return () => clearTimeout(mountId);
+  }, []);
+
   return (
     <>
       <Head>
@@ -121,7 +200,7 @@ export default function Archive({ projects }) {
         <link rel="canonical" href={`${url}/archive`} />
       </Head>
       <S.MainContainer>
-        <header>
+        <header className={cx("fadeup", mounted && "active")}>
           <S.BigTitle>Archive</S.BigTitle>
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           <S.BigSubtitle>A list of things I've worked on</S.BigSubtitle>
@@ -129,7 +208,7 @@ export default function Archive({ projects }) {
         <S.TableContainer>
           <S.Table>
             <thead>
-              <tr>
+              <tr className={cx("fadeup", mounted && "active")}>
                 <th>Year</th>
                 <th>Title</th>
                 <th className="mobile-hide">Made at</th>
@@ -138,68 +217,9 @@ export default function Archive({ projects }) {
               </tr>
             </thead>
             <tbody>
-              {projects.map(({ frontMatter }, i) => {
-                const {
-                  date,
-                  title,
-                  tags,
-                  company,
-                  github,
-                  external,
-                } = frontMatter;
-                return (
-                  <tr key={i} tabIndex="0">
-                    <td className="year">{`${new Date(
-                      date
-                    ).getFullYear()}`}</td>
-                    <td className="title">{title}</td>
-                    <td className="company mobile-hide">
-                      {company ? (
-                        <span data-type="regular">{company}</span>
-                      ) : (
-                        <span data-type="noop">-</span>
-                      )}
-                    </td>
-                    <td className="tags mobile-hide">
-                      {tags.map((tag, i) => (
-                        <span key={i}>
-                          {tag}
-                          {""}
-                          {i !== tags.length - 1 && (
-                            <span className="separator">&middot;</span>
-                          )}
-                        </span>
-                      ))}
-                    </td>
-                    <td className="links">
-                      <span>
-                        {github && (
-                          <Link
-                            href={`//github.com/ngoantho/${github}`}
-                            target="_blank"
-                            rel="nofollow noopener noreferrer">
-                            <Icon
-                              src={require("public/icons/github-mark-light.png")}
-                              alt={github}
-                            />
-                          </Link>
-                        )}
-                        {external && (
-                          <Link
-                            href={`//${external}`}
-                            target="_blank"
-                            rel="nofollow noopener noreferrer">
-                            <Icon
-                              src={require("public/icons/external.png")}
-                              alt={external}
-                            />
-                          </Link>
-                        )}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
+              {projects.map(({ frontMatter }, i) => (
+                <ArchiveEntry frontMatter={frontMatter} key={i} index={i} />
+              ))}
             </tbody>
           </S.Table>
         </S.TableContainer>

@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { GlobalStyles } from "styles";
 import { Layout } from "components";
 import NProgress from "nprogress";
+import jump from "jump.js";
 import { prefix } from "goober-autoprefixer";
 import { setup } from "goober";
 import { useRouter } from "next/router";
@@ -19,34 +20,45 @@ setup(React.createElement, prefix);
 export default function App({ Component, pageProps }) {
   const { events } = useRouter();
 
-  const handleRouteStart = () => NProgress.start();
-  const handleRouteChange = (url) => {
-    NProgress.done();
-
+  const handleHashChange = () => {
     if (CSS.supports("scroll-behavior: smooth")) return;
     if (
       window.matchMedia("screen and (prefers-reduced-motion: reduce)").matches
     )
       return;
 
-    if (url.includes("#")) {
-      const id = url.substring(2);
-      setTimeout(() => {
+    setTimeout(() => {
+      if (location.hash) {
+        const id = location.hash.substring(1);
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView();
-          el.focus();
+          jump(el, {
+            duration: 500,
+          });
         }
-      }, 0);
-    }
+      }
+    }, 0);
+  };
+  const handleRouteStart = () => NProgress.start();
+  const handleRouteChange = () => {
+    NProgress.done();
+    handleHashChange();
   };
 
   useEffect(() => {
+    if (process.env.NODE_ENV !== "production") {
+      return;
+    }
+    NProgress.start();
+
     events.on("routeChangeStart", handleRouteStart);
     events.on("routeChangeComplete", handleRouteChange);
+    events.on("hashChangeComplete", handleHashChange);
+
     return () => {
       events.off("routeChangeStart", handleRouteStart);
       events.off("routeChangeComplete", handleRouteChange);
+      events.off("hashChangeComplete", handleHashChange);
     };
   }, []);
 

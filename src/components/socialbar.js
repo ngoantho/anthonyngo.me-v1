@@ -25,9 +25,9 @@ const S = {
   `,
 };
 
-const SocialBar = () => {
+const SocialBar = ({ homePage }) => {
   return (
-    <Side>
+    <Side homePage={homePage}>
       <S.List>
         <CommonSocial isFooter={false} />
       </S.List>

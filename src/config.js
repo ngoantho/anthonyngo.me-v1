@@ -46,3 +46,6 @@ export const commonMargin = 2;
 export const commonEasing = "cubic-bezier(0.645, 0.045, 0.355, 1)";
 export const commonTransition =
   "all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)";
+
+export const navDelay = 1250;
+export const loaderDelay = 500;

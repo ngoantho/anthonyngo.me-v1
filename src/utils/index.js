@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 // credit: https://stackoverflow.com/a/7616484
 export function hash(string) {
   let hash = 0;
@@ -17,6 +19,8 @@ export const cx = (...args) => {
     const type = typeof item;
     if (type === "string" && item.length > 0) {
       result.add(item);
+    } else if (type === "boolean" && item) {
+      result.add(item);
     } else if (type === "object" && item !== null) {
       for (const [key, value] of Object.entries(item)) {
         if (value) result.add(key);
@@ -26,3 +30,36 @@ export const cx = (...args) => {
 
   return [...result].join(" ");
 };
+
+export function useOnScreen(ref, rootMargin = "0px", threshold = 1.0) {
+  if (typeof window === "undefined") return true;
+
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio === 1) {
+          setIntersecting(true);
+        }
+      },
+      {
+        root: null,
+        threshold,
+        rootMargin,
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return isIntersecting;
+}

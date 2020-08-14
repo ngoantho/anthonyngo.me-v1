@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import Menu from "./mobmenu";
 import NextLink from "next/link";
+import { cx } from "utils";
 import { lighten } from "polished";
 import { styled } from "goober";
 
@@ -11,6 +12,7 @@ const {
   navHeight,
   navScrollHeight,
   navLinks,
+  navDelay,
   hamburgerClamp,
   hamHeight,
   hamVisibleCutoff,
@@ -73,10 +75,9 @@ S.layout = {
     }
   `,
   Hamburger: styled(S.BaseHamburger)`
-    height: ${(props) =>
-      props.scrollDirection !== "none"
-        ? "calc(35% + 1rem)"
-        : "calc(25% + 1rem)"};
+    height: calc(
+      ${(props) => (props.scrollDirection !== "none" ? "35%" : "25%")} + 1rem
+    );
     @media (min-width: ${hamVisibleCutoff}) {
       display: none;
     }
@@ -158,6 +159,7 @@ S.with = {
 };
 
 const DELTA = 5;
+const navDelayMisc = 100;
 
 function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
   const [scrollDirection, setScrollDirection] = useState("none");
@@ -192,35 +194,42 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
     };
   }, []);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const mountId = setTimeout(
+      () => {
+        setMounted(true);
+      },
+      homePage ? navDelay : 0
+    );
+    return () => clearTimeout(mountId);
+  }, []);
+
   return (
     <S.layout.Container scrollDirection={scrollDirection}>
       <S.layout.MainNav>
         <S.with.Logo
           size="48"
           blurAmount={blurAmount}
-          className={[menuOpen && "blur"].filter(Boolean)}>
-          {homePage ? (
-            <a href="/" tabIndex="-1">
+          className={cx("fadedown", mounted && "active", menuOpen && "blur")}>
+          <NextLink href="/" passHref>
+            <BaseLink>
               <Icon
                 src={require("public/favicons/favicon48.png?inline")}
                 alt="Home"
               />
-            </a>
-          ) : (
-            <NextLink href="/" passHref>
-              <BaseLink tabIndex="-1">
-                <Icon
-                  src={require("public/favicons/favicon48.png?inline")}
-                  alt="Home"
-                />
-              </BaseLink>
-            </NextLink>
-          )}
+            </BaseLink>
+          </NextLink>
         </S.with.Logo>
         <S.layout.NavLinks>
           <S.with.NavLinksList>
             {navLinks.map(([name, hash], i) => (
-              <S.with.NavLinksItem key={i}>
+              <S.with.NavLinksItem
+                key={i}
+                className={cx("fadedown", mounted && "active")}
+                style={{
+                  transitionDelay: `${(i + 1) * navDelayMisc}ms`,
+                }}>
                 <NextLink href={{ pathname: "/", hash }} passHref>
                   <BaseLink>{name}</BaseLink>
                 </NextLink>
@@ -231,24 +240,34 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
             href="/resume.pdf"
             target="_blank"
             rel="nofollow noopener noreferrer"
-            className="button button-outline"
+            className={cx(
+              "button",
+              "button-outline",
+              "fadedown",
+              mounted && "active"
+            )}
+            style={{
+              transitionDelay: `${(navLinks.length + 1) * navDelayMisc}ms`,
+            }}
             title="View my resumé">
             Resumé
           </S.with.ResumeButton>
         </S.layout.NavLinks>
         <S.layout.Hamburger
-          className={["button-outline", menuOpen ? "on" : ""].join(" ")}
+          className={cx(
+            "button-outline",
+            menuOpen && "on",
+            "fadedown",
+            mounted && "active"
+          )}
+          style={{
+            transitionDelay: `${navDelayMisc}ms`,
+          }}
           onClick={() => setMenuOpen(!menuOpen)}
           scrollDirection={scrollDirection}>
-          <S.with.HamburgerLine
-            className={["line1", menuOpen ? "on" : ""].join(" ")}
-          />
-          <S.with.HamburgerLine
-            className={["line2", menuOpen ? "on" : ""].join(" ")}
-          />
-          <S.with.HamburgerLine
-            className={["line3", menuOpen ? "on" : ""].join(" ")}
-          />
+          <S.with.HamburgerLine className={cx("line1", menuOpen && "on")} />
+          <S.with.HamburgerLine className={cx("line2", menuOpen && "on")} />
+          <S.with.HamburgerLine className={cx("line3", menuOpen && "on")} />
         </S.layout.Hamburger>
       </S.layout.MainNav>
       <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
