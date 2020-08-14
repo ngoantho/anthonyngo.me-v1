@@ -32,7 +32,7 @@ export const cx = (...args) => {
 };
 
 export function useOnScreen(ref, rootMargin = "0px", threshold = 1.0) {
-  if (typeof window === "undefined") return true;
+  // if (typeof window === "undefined") return true;
 
   const [isIntersecting, setIntersecting] = useState(false);
 
