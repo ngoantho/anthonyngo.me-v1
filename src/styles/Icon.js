@@ -1,7 +1,7 @@
 import { commonTransition } from "config";
-import { styled } from "goober";
+import { css } from "goober";
 
-export default styled("img")`
+const CommonIcon = css`
   filter: grayscale(100%);
   transition: ${commonTransition};
 
@@ -11,3 +11,22 @@ export default styled("img")`
     transform: translateY(-3px);
   }
 `;
+
+export default function SIcon({
+  src,
+  format = "png",
+  inline = false,
+  ...props
+}) {
+  return (
+    <picture>
+      <source srcSet={require(`public/${src}?webp`)} type="image/webp" />
+      <source srcSet={require(`public/${src}`)} type={`image/${format}`} />
+      <img
+        className={CommonIcon}
+        src={require(`public/${src}${inline ? "?inline" : ""}`)}
+        {...props}
+      />
+    </picture>
+  );
+}

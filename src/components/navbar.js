@@ -214,10 +214,7 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
           className={cx("fadedown", mounted && "active", menuOpen && "blur")}>
           <NextLink href="/" passHref>
             <BaseLink>
-              <Icon
-                src={require("public/favicons/favicon48.png?inline")}
-                alt="Home"
-              />
+              <Icon src="favicons/favicon48.png" alt="Home" />
             </BaseLink>
           </NextLink>
         </S.with.Logo>
