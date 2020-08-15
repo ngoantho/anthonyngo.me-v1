@@ -6,7 +6,7 @@ import { cx, useOnScreen } from "utils/index";
 import { lighten } from "polished";
 import { useRef } from "react";
 
-const { borderRadius, commonTransition } = config;
+const { borderRadius, commonTransition, commonMargin } = config;
 
 const S = {
   layout: {
@@ -20,6 +20,7 @@ const S = {
       &:hover,
       &:focus {
         box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+        transform: translateY(-3px);
       }
       @media (min-width: 40rem) {
         margin-right: 1%;
@@ -47,6 +48,10 @@ const S = {
       grid-row: 1;
       grid-column: 1;
 
+      main {
+        margin: ${commonMargin * 1.5}rem 0;
+      }
+
       &.hasPreview__featured {
         padding-left: 0.5rem;
       }
@@ -68,15 +73,12 @@ const S = {
       color: ${lighten(0.7, "#000000")};
     `,
     Icon: css`
-      width: 100%;
+      width: 50%;
       height: auto;
-      @media (max-width: 40rem) {
-        width: 50%;
-      }
     `,
     FooterTags: styled("li")`
       color: ${lighten(0.7, "#000000")};
-      font-size: ${sizes.xs};
+      font-size: 1.2rem;
     `,
     FooterItem: styled("ul")`
       display: flex !important;
@@ -112,8 +114,8 @@ export default function Project({
     <S.layout.Base
       tabIndex="0"
       className={cx("column", "fadeup", visible && "active", {
-        "column-30": isTablet,
-        "column-25": isDesktop,
+        "column-45": isTablet,
+        "column-30": isDesktop,
       })}
       style={{
         transitionDelay: `${(index + 1) * 10}ms`,

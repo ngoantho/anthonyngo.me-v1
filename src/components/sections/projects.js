@@ -41,24 +41,7 @@ const S = {
       @media (min-width: 80rem) {
         flex-direction: column !important;
         padding: 0 50px !important;
-        height: ${(props) => `${Number(props.total) * 65}px`};
-        blockquote:nth-child(4n + 1) {
-          order: 1;
-        }
-        blockquote:nth-child(4n + 2) {
-          order: 2;
-        }
-        blockquote:nth-child(4n + 3) {
-          order: 3;
-        }
-        blockquote:nth-child(4n) {
-          order: 4;
-        }
-      }
-
-      @media (min-width: 40rem) and (max-width: 80rem) {
-        padding-left: ${(props) =>
-          props.moreShown ? "10%" : "calc(25% + 25px)"} !important;
+        height: ${(props) => `${Number(props.total) * 100}px`};
         blockquote:nth-child(3n + 1) {
           order: 1;
         }
@@ -67,6 +50,16 @@ const S = {
         }
         blockquote:nth-child(3n) {
           order: 3;
+        }
+      }
+
+      @media (min-width: 40rem) and (max-width: 80rem) {
+        padding-left: 10% !important;
+        blockquote:nth-child(2n + 1) {
+          order: 1;
+        }
+        blockquote:nth-child(2n) {
+          order: 2;
         }
       }
 
@@ -140,7 +133,7 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
           </NextLink>
         </li>
       </S.layout.OverhangComp>
-      <S.layout.Masonry className="row" total={total} moreShown={moreShown}>
+      <S.layout.Masonry className="row" total={total}>
         {projectsToShow.map(({ frontMatter, html, featured }, i) => (
           <Project
             key={i}
@@ -152,9 +145,6 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
             index={i}
           />
         ))}
-        <blockquote>
-          Nothing to see here. Someday this will have a list of my projects.
-        </blockquote>
       </S.layout.Masonry>
       <div
         className={css`

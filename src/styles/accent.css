@@ -41,3 +41,8 @@ input[type="submit"].button-clear {
   flex: 0 0 30%;
   max-width: 30%;
 }
+
+.column.column-45 {
+  flex: 0 0 45%;
+  max-width: 45%;
+}
