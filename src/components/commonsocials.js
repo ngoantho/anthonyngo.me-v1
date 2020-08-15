@@ -31,7 +31,7 @@ function CommonSocials({ isFooter }) {
         target="_blank"
         rel="nofollow noopener noreferrer"
         className={cx(isFooter && "isFooter")}>
-        <Icon src={require(`public/${icon}`)} alt={type} title={type} />
+        <Icon src={icon} alt={type} title={type} />
       </SharedSocialLink>
     </li>
   ));

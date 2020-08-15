@@ -164,10 +164,7 @@ function ArchiveEntry({ frontMatter, index }) {
               href={`//github.com/ngoantho/${github}`}
               target="_blank"
               rel="nofollow noopener noreferrer">
-              <Icon
-                src={require("public/icons/github-mark-light.png")}
-                alt={github}
-              />
+              <Icon src="icons/github-mark-light.png" alt={github} />
             </Link>
           )}
           {external && (
@@ -175,7 +172,7 @@ function ArchiveEntry({ frontMatter, index }) {
               href={`//${external}`}
               target="_blank"
               rel="nofollow noopener noreferrer">
-              <Icon src={require("public/icons/external.png")} alt={external} />
+              <Icon src="icons/external.png" alt={external} />
             </Link>
           )}
         </span>

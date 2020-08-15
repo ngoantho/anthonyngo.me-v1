@@ -1,9 +1,9 @@
-import { Icon as BaseIcon, Link } from "styles";
+import { Icon, Link } from "styles";
 import { colors, config, sizes } from "theme";
+import { css, styled } from "goober";
 import { cx, useOnScreen } from "utils/index";
 
 import { lighten } from "polished";
-import { styled } from "goober";
 import { useRef } from "react";
 
 const { borderRadius, commonTransition } = config;
@@ -67,7 +67,7 @@ const S = {
     HeaderText: styled("h6")`
       color: ${lighten(0.7, "#000000")};
     `,
-    Icon: styled(BaseIcon)`
+    Icon: css`
       width: 100%;
       height: auto;
       @media (max-width: 40rem) {
@@ -165,8 +165,9 @@ export default function Project({
                   href={`//github.com/${frontMatter.github}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer">
-                  <S.with.Icon
-                    src={require("public/icons/github-mark-light.png")}
+                  <Icon
+                    className={S.with.Icon}
+                    src="icons/github-mark-light.png"
                     alt={frontMatter.github}
                   />
                 </Link>
@@ -178,8 +179,9 @@ export default function Project({
                   href={`//${frontMatter.external}`}
                   target="_blank"
                   rel="nofollow noopener noreferrer">
-                  <S.with.Icon
-                    src={require("public/icons/external.png")}
+                  <Icon
+                    className={S.with.Icon}
+                    src="icons/external.png"
                     alt={frontMatter.external}
                   />
                 </Link>
