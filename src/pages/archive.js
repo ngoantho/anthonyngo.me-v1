@@ -181,7 +181,7 @@ function ArchiveEntry({ frontMatter, index }) {
   );
 }
 
-export default function Archive({ projects }) {
+export default function Archive({ amalgam }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const mountId = setTimeout(() => {
@@ -214,7 +214,7 @@ export default function Archive({ projects }) {
               </tr>
             </thead>
             <tbody>
-              {projects.map(({ frontMatter }, i) => (
+              {amalgam.map(({ frontMatter }, i) => (
                 <ArchiveEntry frontMatter={frontMatter} key={i} index={i} />
               ))}
             </tbody>
@@ -226,11 +226,12 @@ export default function Archive({ projects }) {
 }
 
 export async function getStaticProps() {
+  const featuredProjectsDir = join(process.cwd(), "src/assets/featured");
   const projectsDir = join(process.cwd(), "src/assets/projects");
 
   return {
     props: {
-      projects: await getProjectsFrom(projectsDir),
+      amalgam: await getProjectsFrom([featuredProjectsDir, projectsDir]),
     },
   };
 }
