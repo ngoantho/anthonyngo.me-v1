@@ -43,30 +43,6 @@ const S = {
 };
 
 export default function Custom404() {
-  const [repo, setRepo] = useState(undefined);
-  let target;
-  useEffect(() => {
-    const id = setTimeout(() => {
-      target = window.location.pathname.substring(1);
-    }, 0);
-    return () => clearTimeout(id);
-  }, []);
-  useEffect(() => {
-    fetch("https://api.github.com/users/ngoantho/repos")
-      .then((response) => response.json())
-      .then((json) => {
-        const found = json.find(({ name }) => name === target);
-        setRepo(found);
-      })
-      .catch((e) => console.error(e));
-  }, []);
-
-  useEffect(() => {
-    if (typeof repo !== "undefined") {
-      window.location.replace(`https://ngoantho.github.io/${repo.name}`);
-    }
-  }, [repo]);
-
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const mountId = setTimeout(() => {
@@ -75,11 +51,7 @@ export default function Custom404() {
     return () => clearTimeout(mountId);
   }, []);
 
-  return typeof repo !== "undefined" ? (
-    <S.MainContainer>
-      <p>Redirecting...</p>
-    </S.MainContainer>
-  ) : (
+  return (
     <>
       <Head>
         <title>404 | Anthony Ngo</title>
