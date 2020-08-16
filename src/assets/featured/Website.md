@@ -10,4 +10,4 @@ tags:
   - Milligram.css
 ---
 
-My personal website, built with Next.js and hosted with Netlify.
+My personal website, built with [Next.js](//nextjs.org){target="_blank"rel="nofollow noopener noreferrer"} and hosted with [Netlify](//www.netlify.com){target="_blank"rel="nofollow noopener noreferrer"}.

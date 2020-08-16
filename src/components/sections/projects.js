@@ -22,13 +22,16 @@ const S = {
       margin: 0;
       padding: 0;
 
+      li.archive-link {
+        transition-delay: 100ms;
+      }
+
       @media (min-width: 40rem) {
         flex-direction: row;
         justify-content: flex-start;
         margin-left: ${commonMargin * 1.25}rem;
 
         li.archive-link {
-          transition-delay: 100ms;
           margin: 0 0 ${commonMargin}rem ${commonMargin}rem;
         }
       }
