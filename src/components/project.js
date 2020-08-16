@@ -50,6 +50,10 @@ const S = {
 
       main {
         margin: ${commonMargin * 1.5}rem 0;
+
+        p > a {
+          transition: ${commonTransition};
+        }
       }
 
       &.hasPreview__featured {
@@ -75,6 +79,12 @@ const S = {
     Icon: css`
       width: 50%;
       height: auto;
+      @media (min-width: 40rem) and (max-width: 80rem) {
+        width: 75%;
+      }
+      @media (min-width: 80rem) {
+        width: 100%;
+      }
     `,
     FooterTags: styled("li")`
       color: ${lighten(0.7, "#000000")};
@@ -87,7 +97,7 @@ const S = {
       &:first-child {
         flex-wrap: wrap;
         li {
-          padding-right: 1.5rem;
+          padding-right: 1rem;
         }
       }
       &:last-child {
@@ -154,13 +164,13 @@ export default function Project({
           }}
         />
         <S.layout.FooterComp className="row">
-          <S.with.FooterItem className="column column-75">
+          <S.with.FooterItem className="column column-80">
             {frontMatter.tags &&
               frontMatter.tags.map((tag, i) => (
                 <S.with.FooterTags key={i}>{tag}</S.with.FooterTags>
               ))}
           </S.with.FooterItem>
-          <S.with.FooterItem className="column column-25">
+          <S.with.FooterItem className="column column-20">
             <li>
               {frontMatter.github ? (
                 <Link

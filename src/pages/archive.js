@@ -161,7 +161,7 @@ function ArchiveEntry({ frontMatter, index }) {
         <span>
           {github && (
             <Link
-              href={`//github.com/ngoantho/${github}`}
+              href={`//github.com/${github}`}
               target="_blank"
               rel="nofollow noopener noreferrer">
               <Icon src="icons/github-mark-light.png" alt={github} />

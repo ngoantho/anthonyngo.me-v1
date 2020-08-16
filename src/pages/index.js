@@ -6,7 +6,7 @@ import { Sections } from "components";
 import { join } from "path";
 import schema from "assets/schema";
 
-const { Landing, Projects } = Sections;
+const { Landing, Projects, About } = Sections;
 const { arrayOf, shape, string } = PropTypes;
 
 function Index({ featuredProjects, allProjects, miscData }) {
@@ -22,6 +22,7 @@ function Index({ featuredProjects, allProjects, miscData }) {
       </Head>
       <Landing id="landing" data={miscData.landing} />
       <Projects id="projects" data={{ featuredProjects, allProjects }} />
+      <About id="about" data={miscData.about} />
     </>
   );
 }
@@ -55,6 +56,7 @@ export async function getStaticProps() {
       allProjects,
       miscData: {
         landing: await getProjectByFile("src/assets/sections/landing.md"),
+        about: await getProjectByFile("src/assets/sections/about.md"),
       },
     },
   };
