@@ -56,8 +56,6 @@ const S = {
   with: {
     AvatarLink: styled("a")`
       border-radius: ${borderRadius};
-      background-color: var(--colors-accent);
-      display: grid;
 
       &:hover,
       &:focus {
@@ -74,7 +72,6 @@ const S = {
         filter: grayscale(100%) contrast(1);
         border-radius: ${borderRadius};
         transition: ${commonTransition};
-        height: 100%;
       }
     `,
   },
@@ -86,7 +83,6 @@ const About = ({ data, ...props }) => {
   const visible = useOnScreen(ref, "75%");
 
   const notMobile = useMedia("(min-width: 40rem)");
-  const breakpoint = useMedia("(min-width: 60rem)");
 
   return (
     <S.layout.MainWrapper
@@ -108,12 +104,7 @@ const About = ({ data, ...props }) => {
             __html: html,
           }}
         />
-        <S.layout.PicComp
-          className={cx("column", {
-            "column-33": notMobile && breakpoint,
-            "column-40": notMobile && !breakpoint,
-            "column-50": !notMobile,
-          })}>
+        <S.layout.PicComp className="column">
           <S.with.AvatarLink href="//github.com/ngoantho">
             <S.with.Avatar>
               <source
