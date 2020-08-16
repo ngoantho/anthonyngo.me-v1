@@ -85,6 +85,7 @@ const About = ({ data, ...props }) => {
   const ref = useRef(null);
   const visible = useOnScreen(ref, "75%");
 
+  const notMobile = useMedia("(min-width: 40rem)");
   const breakpoint = useMedia("(min-width: 60rem)");
 
   return (
@@ -102,13 +103,17 @@ const About = ({ data, ...props }) => {
       </S.layout.Header>
       <div className="row row-center" ref={ref}>
         <div
-          className="column column-50"
+          className={cx("column", notMobile && "column-50")}
           dangerouslySetInnerHTML={{
             __html: html,
           }}
         />
         <S.layout.PicComp
-          className={cx("column", breakpoint ? "column-33" : "column-40")}>
+          className={cx("column", {
+            "column-33": notMobile && breakpoint,
+            "column-40": notMobile && !breakpoint,
+            "column-50": !notMobile,
+          })}>
           <S.with.AvatarLink href="//github.com/ngoantho">
             <S.with.Avatar>
               <source
