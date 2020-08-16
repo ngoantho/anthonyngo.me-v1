@@ -15,7 +15,8 @@
   ### ✨ [ngoantho.netlify.app](ngoantho.netlify.app)
   
   ## Features
-  - 
+  - [Next.js](//nextjs.org) - Engine
+  - [Milligram](//milligram.io/) - Styling
   
   ## Author
 
