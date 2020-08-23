@@ -1,10 +1,8 @@
 import { Icon, Link } from "styles";
 
-import { config } from "theme";
+import { contactMe } from "theme";
 import { cx } from "utils";
 import { styled } from "goober";
-
-const { contactMe } = config;
 
 const SharedSocialLink = styled(Link)`
   padding: 1rem;
@@ -21,7 +19,7 @@ const SharedSocialLink = styled(Link)`
   }
 `;
 
-function CommonSocials({ isFooter }) {
+export default function CommonSocials({ isFooter }) {
   const formattedMedia = Object.entries(contactMe);
 
   return formattedMedia.map(([type, { icon, url }], i) => (
@@ -36,5 +34,3 @@ function CommonSocials({ isFooter }) {
     </li>
   ));
 }
-
-export default CommonSocials;

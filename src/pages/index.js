@@ -1,33 +1,34 @@
 import { getProjectByFile, getProjectsFrom } from "../lib/api";
 
+import { CoreSection } from "styles";
 import Head from "next/head";
 import PropTypes from "prop-types";
 import { Sections } from "components";
 import { join } from "path";
 import schema from "assets/schema";
+import { styled } from "goober";
 
-const { Landing, Projects, About } = Sections;
+const { Projects, Hero, About } = Sections;
 const { arrayOf, shape, string } = PropTypes;
 
-function Index({ featuredProjects, allProjects, miscData }) {
+const StyledContainer = styled(CoreSection)``;
+
+export default function Home({ featuredProjects, allProjects, miscData }) {
   return (
     <>
       <Head>
-        <title key="title">Anthony Ngo</title>
-        <meta
-          key="viewport"
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-        />
+        <title>Anthony Ngo</title>
       </Head>
-      <Landing id="landing" data={miscData.landing} />
-      <Projects id="projects" data={{ featuredProjects, allProjects }} />
-      <About id="about" data={miscData.about} />
+      <StyledContainer>
+        <Hero id="hero" data={miscData.landing} />
+        <Projects id="projects" data={{ featuredProjects, allProjects }} />
+        <About id="about" data={miscData.about} />
+      </StyledContainer>
     </>
   );
 }
 
-Index.propTypes = {
+Home.propTypes = {
   featuredProjects: arrayOf(
     shape({
       html: string,
@@ -40,23 +41,26 @@ Index.propTypes = {
       frontMatter: schema,
     })
   ),
+  miscData: shape({
+    landing: shape({
+      html: string,
+    }),
+    about: shape({
+      html: string,
+    }),
+  }),
 };
-
-export default Index;
 
 export async function getStaticProps() {
   const featuredProjectsDir = join(process.cwd(), "src/assets/featured");
-  const allProjectsDir = join(process.cwd(), "src/assets/projects");
-  let featuredProjects = await getProjectsFrom(featuredProjectsDir, true);
-  let allProjects = await getProjectsFrom(allProjectsDir);
-
+  const projectsDir = join(process.cwd(), "src/assets/projects");
   return {
     props: {
-      featuredProjects,
-      allProjects,
+      featuredProjects: await getProjectsFrom(featuredProjectsDir, true),
+      allProjects: await getProjectsFrom(projectsDir),
       miscData: {
-        landing: await getProjectByFile("src/assets/sections/landing.md"),
-        about: await getProjectByFile("src/assets/sections/about.md"),
+        landing: await getProjectByFile("src/assets/sections/landing.mdx"),
+        about: await getProjectByFile("src/assets/sections/about.mdx"),
       },
     },
   };

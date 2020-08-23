@@ -1,19 +1,27 @@
+/* eslint-disable react/prop-types */
 import { Icon, Link } from "styles";
-import { colors, config, sizes } from "theme";
+import {
+  borderRadius,
+  colors,
+  commonMargin,
+  commonTransition,
+  sizes,
+} from "theme";
 import { css, styled } from "goober";
 import { cx, useOnScreen } from "utils/index";
 
+import { darken } from "polished";
 import { lighten } from "polished";
 import { useRef } from "react";
 
-const { borderRadius, commonTransition, commonMargin } = config;
+const MULT = 0.3;
 
 const S = {
   layout: {
     Base: styled("blockquote")`
       border-radius: ${borderRadius};
       border-left: 0px solid #000000;
-      background-color: ${colors.tintLight};
+      background: ${colors.primary};
       min-height: min-content;
       display: grid !important;
       transition: ${commonTransition};
@@ -71,10 +79,10 @@ const S = {
     HeaderType: styled("em")`
       font-family: "mono", monospace;
       font-size: ${sizes.xs};
-      color: ${colors.tertiary};
+      color: ${darken(0.3, colors.quaternary)};
     `,
     HeaderText: styled("h6")`
-      color: ${lighten(0.7, "#000000")};
+      color: ${lighten(MULT, "#000000")};
     `,
     Icon: css`
       width: 50%;
@@ -87,7 +95,7 @@ const S = {
       }
     `,
     FooterTags: styled("li")`
-      color: ${lighten(0.7, "#000000")};
+      color: ${lighten(MULT * 2, "#000000")};
       font-size: 1.2rem;
     `,
     FooterItem: styled("ul")`
@@ -179,7 +187,7 @@ export default function Project({
                   rel="nofollow noopener noreferrer">
                   <Icon
                     className={S.with.Icon}
-                    src="icons/github-mark-light.png"
+                    src="icons/github-mark.png"
                     alt={frontMatter.github}
                   />
                 </Link>

@@ -1,5 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import { contactMe, name, site } from "config";
+import { contactMe, name, site } from "theme";
 
 import { extractCss } from "goober";
 

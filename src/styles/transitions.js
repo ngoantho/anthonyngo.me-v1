@@ -1,4 +1,4 @@
-import { commonEasing } from "config";
+import { commonEasing } from "theme";
 import { glob as css } from "goober";
 
 css`

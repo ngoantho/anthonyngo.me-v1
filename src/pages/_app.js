@@ -1,13 +1,13 @@
 import "milligram/dist/milligram.css";
-import "styles/accent.css";
 import "styles/nprogress.css";
+import "styles/accent.css";
 
 import React, { useEffect } from "react";
 
 import { GlobalStyles } from "styles";
 import { Layout } from "components";
 import NProgress from "nprogress";
-import jump from "jump.js";
+import PropTypes from "prop-types";
 import { prefix } from "goober-autoprefixer";
 import { setup } from "goober";
 import { useRouter } from "next/router";
@@ -16,49 +16,25 @@ import { useRouter } from "next/router";
 // So to let it know, we run the `setup` function with the
 // `createElement` function and prefixer function.
 setup(React.createElement, prefix);
+const { func, object } = PropTypes;
 
 export default function App({ Component, pageProps }) {
   const { events } = useRouter();
 
-  const handleHashChange = () => {
-    if (CSS.supports("scroll-behavior: smooth")) return;
-    if (
-      window.matchMedia("screen and (prefers-reduced-motion: reduce)").matches
-    )
-      return;
-
-    setTimeout(() => {
-      if (location.hash) {
-        const id = location.hash.substring(1);
-        const el = document.getElementById(id);
-        if (el) {
-          jump(el, {
-            duration: 500,
-          });
-        }
-      }
-    }, 0);
-  };
   const handleRouteStart = () => NProgress.start();
-  const handleRouteChange = () => {
-    NProgress.done();
-    handleHashChange();
-  };
+  const handleRouteChange = () => NProgress.done();
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
-      return;
-    }
-    NProgress.start();
+    if (process.env.NODE_ENV !== "production") return;
 
     events.on("routeChangeStart", handleRouteStart);
     events.on("routeChangeComplete", handleRouteChange);
-    events.on("hashChangeComplete", handleHashChange);
+    events.on("hashChangeComplete", handleRouteChange);
 
     return () => {
       events.off("routeChangeStart", handleRouteStart);
       events.off("routeChangeComplete", handleRouteChange);
-      events.off("hashChangeComplete", handleHashChange);
+      events.off("hashChangeComplete", handleRouteChange);
     };
   }, []);
 
@@ -70,3 +46,8 @@ export default function App({ Component, pageProps }) {
     </GlobalStyles>
   );
 }
+
+App.propTypes = {
+  Component: func,
+  pageProps: object,
+};

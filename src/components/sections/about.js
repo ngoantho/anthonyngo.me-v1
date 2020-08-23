@@ -1,112 +1,89 @@
-import { borderRadius, commonMargin, commonTransition } from "config";
-import { css, styled } from "goober";
-import { cx, useOnScreen } from "utils/index";
+/* eslint-disable react/prop-types */
 
-import { Section } from "styles";
-// import { colors } from "theme"
+import { borderRadius, commonMargin, commonTransition } from "theme";
+import { css, styled } from "goober";
+import { cx, useOnScreen } from "utils";
+
+import { CoreSection } from "styles";
 import useMedia from "use-media";
 import { useRef } from "react";
 
 const S = {
-  layout: {
-    MainWrapper: styled(Section)`
-      .row {
-        @media (min-width: 40rem) {
-          margin-left: ${commonMargin * 1.25}rem;
-          padding-right: ${commonMargin * 2.5}rem;
-        }
-      }
-    `,
-    Header: styled("ul")`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      list-style: none;
-      flex-direction: column;
-      margin: 0;
-      padding: 0;
-
-      li.line {
-        height: 1px;
-        width: 25%;
-        background-color: darkslategray;
-      }
-
+  MainWrapper: styled(CoreSection)`
+    .row {
       @media (min-width: 40rem) {
-        justify-content: flex-start;
-        flex-direction: row;
-        margin-left: ${commonMargin * 1.25}rem;
-
-        li.line {
-          margin: 0 0 ${commonMargin}rem ${commonMargin}rem;
-        }
+        padding: 0 ${commonMargin * 2.5}rem;
       }
-    `,
-    PicComp: styled("div")`
-      display: grid !important;
+    }
+  `,
+  PicComp: styled("div")`
+    display: grid !important;
 
-      a {
-        margin: auto;
-        &:focus {
-          outline: 0;
-        }
-      }
-    `,
-  },
-  with: {
-    AvatarLink: styled("a")`
-      border-radius: ${borderRadius};
-
-      &:hover,
+    a {
+      margin: auto;
       &:focus {
-        picture > img {
-          mix-blend-mode: normal;
-          filter: none;
-          transform: translateY(-3px);
-        }
+        outline: 0;
       }
-    `,
-    Avatar: styled("picture")`
-      & > img {
-        mix-blend-mode: multiply;
-        filter: grayscale(100%) contrast(1);
-        border-radius: ${borderRadius};
-        transition: ${commonTransition};
+    }
+  `,
+  AvatarLink: styled("a")`
+    border-radius: ${borderRadius};
+
+    &:hover,
+    &:focus {
+      picture > img {
+        mix-blend-mode: normal;
+        filter: none;
+        transform: translateY(-3px);
       }
-    `,
-  },
+    }
+  `,
+  Avatar: styled("picture")`
+    & > img {
+      mix-blend-mode: multiply;
+      filter: grayscale(100%) contrast(1);
+      border-radius: ${borderRadius};
+      transition: ${commonTransition};
+    }
+  `,
 };
 
 const About = ({ data, ...props }) => {
   const { frontMatter, html } = data;
-  const ref = useRef(null);
-  const visible = useOnScreen(ref, "75%");
-
   const notMobile = useMedia("(min-width: 40rem)");
+  const ref = useRef(null);
+  const visible = useOnScreen(ref, "50%");
 
   return (
-    <S.layout.MainWrapper
-      className={cx("fadeup", visible && "active")}
-      {...props}>
-      <S.layout.Header>
-        <li
-          className={css`
-            margin-bottom: 0;
-          `}>
-          <h2>{frontMatter.title}</h2>
-        </li>
-        <li className="line" />
-      </S.layout.Header>
+    <S.MainWrapper className={cx("fadeup", visible && "active")} {...props}>
       <div className="row row-center" ref={ref}>
-        <div
-          className={cx("column", notMobile && "column-50")}
-          dangerouslySetInnerHTML={{
-            __html: html,
-          }}
-        />
-        <S.layout.PicComp className="column">
-          <S.with.AvatarLink href="//github.com/ngoantho">
-            <S.with.Avatar>
+        <strong
+          className={cx(
+            !notMobile &&
+              css`
+                &::after {
+                  content: "";
+                  display: inline-block;
+                  position: relative;
+                  top: -1rem;
+                  height: 1px;
+                  width: 100%;
+                  background: darkslategray;
+                }
+              `
+          )}>
+          Q & A
+        </strong>
+        <blockquote className={cx("column", notMobile && "column-50")}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: html,
+            }}
+          />
+        </blockquote>
+        <S.PicComp className="column">
+          <S.AvatarLink href="//github.com/ngoantho">
+            <S.Avatar>
               <source
                 srcSet={require(`public/${frontMatter.avatar}?webp`)}
                 type="image/webp"
@@ -116,11 +93,11 @@ const About = ({ data, ...props }) => {
                 type="image/png"
               />
               <img src={require(`public/${frontMatter.avatar}`)} alt="Me" />
-            </S.with.Avatar>
-          </S.with.AvatarLink>
-        </S.layout.PicComp>
+            </S.Avatar>
+          </S.AvatarLink>
+        </S.PicComp>
       </div>
-    </S.layout.MainWrapper>
+    </S.MainWrapper>
   );
 };
 

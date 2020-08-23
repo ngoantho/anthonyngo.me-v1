@@ -1,45 +1,41 @@
-import { colors, config } from "theme";
+import { colors, navDelay } from "theme";
 import { useEffect, useState } from "react";
 
+import PropTypes from "prop-types";
 import { cx } from "utils/index";
 import { styled } from "goober";
 
-const { navDelay } = config;
+const { node, bool } = PropTypes;
 
-const S = {
-  Container: styled("aside")`
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: ${(props) => `${props.fit}rem`};
-    color: ${colors.primary};
-    display: none;
-    z-index: 2;
-    @media (min-width: 40rem) {
-      display: block;
-    }
-  `,
-};
+const StyledContainer = styled("aside")`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 5rem;
+  z-index: 2;
+  color: ${colors.primary};
+`;
 
-const DELAY = navDelay * 1.5;
-
-const Side = ({ children, homePage }) => {
+export default function Side({ children, homePage }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const mountId = setTimeout(
       () => {
         setMounted(true);
       },
-      homePage ? DELAY : 0
+      homePage ? navDelay : 0
     );
     return () => clearTimeout(mountId);
   }, []);
 
   return (
-    <S.Container fit="5" className={cx("fade", mounted && "active")}>
+    <StyledContainer className={cx("fadedown", mounted && "active")}>
       {children}
-    </S.Container>
+    </StyledContainer>
   );
-};
+}
 
-export default Side;
+Side.propTypes = {
+  children: node,
+  homePage: bool,
+};

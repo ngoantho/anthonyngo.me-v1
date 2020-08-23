@@ -1,16 +1,14 @@
-import { colors, config } from "theme";
+import { colors, commonMargin, commonTransition } from "theme";
 import { useEffect, useState } from "react";
 
-import { ExtPage } from "styles";
+import { CoreSection } from "styles";
 import Head from "next/head";
 import Link from "next/link";
 import { cx } from "utils/index";
 import { styled } from "goober";
 
-const { commonMargin, commonTransition, navDelay } = config;
-
 const S = {
-  MainContainer: styled(ExtPage)`
+  MainContainer: styled(CoreSection)`
     align-items: center;
     justify-content: center;
   `,
@@ -47,7 +45,7 @@ export default function Custom404() {
   useEffect(() => {
     const mountId = setTimeout(() => {
       setMounted(true);
-    }, navDelay / 2);
+    }, 0);
     return () => clearTimeout(mountId);
   }, []);
 
