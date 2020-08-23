@@ -1,11 +1,7 @@
 /* Include this stylesheet after Milligram or merge it with your main.css */
 
 body {
-  --glob-bg: #2c2f34;
-  --glob-color: #f2f2f2;
-  --colors-accent: #7fdbff;
-  background: var(--glob-bg);
-  color: var(--glob-color);
+  color: var(--colors-text);
 }
 
 a {

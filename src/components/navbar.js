@@ -1,37 +1,32 @@
-import { Link as BaseLink, Icon } from "styles";
-import { colors, config } from "theme";
-import { useEffect, useState } from "react";
-
-import Menu from "./mobmenu";
-import NextLink from "next/link";
-import { cx } from "utils";
-import { lighten } from "polished";
-import { styled } from "goober";
-
-const {
-  navHeight,
-  navScrollHeight,
-  navLinks,
-  navDelay,
-  hamburgerClamp,
-  hamHeight,
-  hamVisibleCutoff,
+/* eslint-disable react/prop-types */
+import {
+  borderRadius,
+  colors,
   commonMargin,
   commonTransition,
-  borderRadius,
-} = config;
+  navDelay,
+  navHeight,
+  navLinks,
+  navScrollHeight,
+} from "theme";
+import { useEffect, useState } from "react";
+
+import { Link as BaseLink } from "styles";
+import Menu from "./mobmenu";
+import NextLink from "next/link";
+import { cx } from "utils/index";
+import { styled } from "goober";
 
 const S = {
   BaseHeader: styled("header")`
-    display: flex;
-    justify-content: space-between;
     top: 0;
-    right: 0;
+    right: ${commonMargin / 2}rem;
     z-index: 2;
-    width: 100%;
-    padding: 0 ${commonMargin}rem;
     position: fixed;
     transition: ${commonTransition};
+    @media (min-width: 40rem) {
+      right: ${commonMargin * 1.25}rem;
+    }
   `,
   BaseHamburger: styled("button")`
     cursor: pointer;
@@ -43,34 +38,31 @@ const S = {
 };
 S.layout = {
   Container: styled(S.BaseHeader)`
-    background: ${(props) =>
-      props.scrollDirection === "none" ? "transparent" : "var(--glob-bg)"};
-    box-shadow: ${(props) =>
-      props.scrollDirection === "up"
-        ? "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"
-        : "none"};
     height: ${(props) =>
       props.scrollDirection === "none"
-        ? `${navHeight}px`
+        ? `${props.isMobile ? navHeight : 0}px`
         : `${navScrollHeight}px`};
     transform: translateY(
       ${(props) =>
         props.scrollDirection === "down" ? `-${navScrollHeight}px` : "0px"}
     );
-  `,
-  MainNav: styled("nav")`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    font-family: "mono", monospace;
+    &.lift {
+      z-index: 99;
+    }
   `,
   NavLinks: styled("div")`
     display: flex;
     align-items: center;
-    @media (max-width: ${hamVisibleCutoff}) {
+    z-index: 3;
+    transition: ${commonTransition};
+    padding: ${commonMargin / 2}rem;
+    background: ${(props) =>
+      props.scrollDirection === "none" ? "transparent" : "white"};
+    box-shadow: ${(props) =>
+      props.scrollDirection === "up"
+        ? "-2px 2px 5px 0px rgba(0, 0, 0, 0.25)"
+        : "none"};
+    @media (max-width: 40rem) {
       display: none;
     }
   `,
@@ -78,7 +70,7 @@ S.layout = {
     height: calc(
       ${(props) => (props.scrollDirection !== "none" ? "35%" : "25%")} + 1rem
     );
-    @media (min-width: ${hamVisibleCutoff}) {
+    @media (min-width: 40rem) {
       display: none;
     }
 
@@ -86,21 +78,20 @@ S.layout = {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    --base-width: ${hamburgerClamp - 1}rem;
+    --base-width: 3rem;
     &.on {
-      padding-right: ${hamburgerClamp * 3}px;
+      padding-right: 12px;
     }
   `,
 };
 S.with = {
   HamburgerLine: styled("div")`
     background: ${colors.tertiary};
-    height: ${`${hamHeight}rem`};
+    height: 0.2rem;
     border-radius: ${borderRadius};
     transition: ${commonTransition};
-
     &.line1 {
-      width: ${hamburgerClamp - 1 / 2}rem;
+      width: calc(var(--base-width) + 0.5rem);
       transform-origin: 100% 0;
       &.on {
         width: var(--base-width);
@@ -116,24 +107,12 @@ S.with = {
       }
     }
     &.line3 {
-      width: ${hamburgerClamp - 3 / 2}rem;
+      width: calc(var(--base-width) - 0.5rem);
       transform-origin: 100% 0;
       &.on {
         width: var(--base-width);
         transform: rotate(45deg);
       }
-    }
-  `,
-  Logo: styled("div")`
-    display: grid;
-    height: ${(props) => `${props.size}px`};
-    transition: ${commonTransition};
-    a {
-      margin: auto;
-    }
-    &.blur {
-      pointer-events: none;
-      filter: opacity(${(props) => props.blurAmount});
     }
   `,
   NavLinksList: styled("ul")`
@@ -148,20 +127,17 @@ S.with = {
     a {
       font-weight: 400;
       padding: 1rem 1rem;
-      color: ${lighten(0.5, colors.quaternary)};
     }
   `,
   ResumeButton: styled(BaseLink)`
     font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    margin-left: 1rem;
     margin-bottom: 0px !important;
   `,
 };
 
 const DELTA = 5;
-const navDelayMisc = 100;
 
-function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
+function Navbar({ homePage, menuOpen, setMenuOpen, mobile }) {
   const [scrollDirection, setScrollDirection] = useState("none");
   let prev = 0;
   let curr = 0;
@@ -206,26 +182,19 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
   }, []);
 
   return (
-    <S.layout.Container scrollDirection={scrollDirection}>
-      <S.layout.MainNav>
-        <S.with.Logo
-          size="48"
-          blurAmount={blurAmount}
-          className={cx("fadedown", mounted && "active", menuOpen && "blur")}>
-          <NextLink href="/" passHref>
-            <BaseLink>
-              <Icon src="favicons/favicon48.png" alt="Home" />
-            </BaseLink>
-          </NextLink>
-        </S.with.Logo>
-        <S.layout.NavLinks>
+    <>
+      <S.layout.Container
+        scrollDirection={scrollDirection}
+        isMobile={mobile}
+        className={menuOpen ? "lift" : ""}>
+        <S.layout.NavLinks scrollDirection={scrollDirection}>
           <S.with.NavLinksList>
             {navLinks.map(([name, hash], i) => (
               <S.with.NavLinksItem
                 key={i}
                 className={cx("fadedown", mounted && "active")}
                 style={{
-                  transitionDelay: `${(i + 1) * navDelayMisc}ms`,
+                  transitionDelay: `${(i + 1) * 100}ms`,
                 }}>
                 <NextLink href={{ pathname: "/", hash }} passHref>
                   <BaseLink>{name}</BaseLink>
@@ -239,12 +208,12 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
             rel="nofollow noopener noreferrer"
             className={cx(
               "button",
-              "button-outline",
+              "button-clear",
               "fadedown",
               mounted && "active"
             )}
             style={{
-              transitionDelay: `${(navLinks.length + 1) * navDelayMisc}ms`,
+              transitionDelay: `${(navLinks.length + 1) * 100}ms`,
             }}
             title="View my resumé">
             Resumé
@@ -258,7 +227,7 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
             mounted && "active"
           )}
           style={{
-            transitionDelay: `${navDelayMisc}ms`,
+            transitionDelay: `${100}ms`,
           }}
           onClick={() => setMenuOpen(!menuOpen)}
           scrollDirection={scrollDirection}>
@@ -266,9 +235,9 @@ function Navbar({ menuOpen, setMenuOpen, blurAmount, homePage }) {
           <S.with.HamburgerLine className={cx("line2", menuOpen && "on")} />
           <S.with.HamburgerLine className={cx("line3", menuOpen && "on")} />
         </S.layout.Hamburger>
-      </S.layout.MainNav>
+      </S.layout.Container>
       <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-    </S.layout.Container>
+    </>
   );
 }
 

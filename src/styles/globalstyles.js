@@ -1,6 +1,7 @@
 import "./fonts";
 import "./transitions";
 
+import { colors } from "theme";
 // for styled-components extension
 import { glob as css } from "goober";
 
@@ -35,16 +36,10 @@ css`
     text-rendering: optimizeLegibility;
   }
 
-  @keyframes fadeInUp {
-    from {
-      transform: translateY(100px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0px);
-      opacity: 1;
-      visibility: visible;
-    }
+  /* == ACCENT == */
+  body {
+    --colors-text: ${colors.secondary};
+    --colors-accent: ${colors.tertiary};
   }
 `;
 

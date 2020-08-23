@@ -1,16 +1,18 @@
-import { colors, config, sizes } from "theme";
+import { colors, commonMargin, sizes } from "theme";
 
 import { Link } from "styles";
+import PropTypes from "prop-types";
+import { darken } from "polished";
 import dynamic from "next/dynamic";
 import { styled } from "goober";
 
-const { commonMargin } = config;
+const { bool, shape, string } = PropTypes;
 
 const S = {
   layout: {
     Container: styled("footer")`
       padding-top: ${commonMargin}px !important;
-      padding-bottom: ${commonMargin}rem !important;
+      padding-bottom: ${commonMargin}px !important;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -19,21 +21,18 @@ const S = {
       font-family: "mono", monospace;
       font-size: ${sizes.s};
       line-height: 1;
-      @media (max-width: 40rem) {
-        margin-bottom: ${commonMargin}rem;
-      }
     `,
   },
   with: {
     FinaleGithubLink: styled(Link)`
       padding: 1rem;
-      color: ${colors.primary};
+      color: ${darken(0.3, colors.primary)};
     `,
     SocialList: styled("ul")`
       display: flex;
       justify-content: space-evenly;
       list-style: none;
-      margin-bottom: -25%;
+      margin-bottom: 0;
     `,
   },
 };
@@ -43,6 +42,9 @@ const CommonSocial = dynamic(() => import("./commonsocials"));
 const Footer = ({ data, isMobile }) => {
   return (
     <S.layout.Container className="container">
+      <S.with.SocialList>
+        {isMobile ? <CommonSocial isFooter={true} /> : null}
+      </S.with.SocialList>
       <S.layout.Finale>
         <S.with.FinaleGithubLink
           href={data.github}
@@ -51,11 +53,16 @@ const Footer = ({ data, isMobile }) => {
           {data.blurb}
         </S.with.FinaleGithubLink>
       </S.layout.Finale>
-      <S.with.SocialList>
-        {isMobile ? <CommonSocial isFooter={true} /> : null}
-      </S.with.SocialList>
     </S.layout.Container>
   );
+};
+
+Footer.propTypes = {
+  isMobile: bool,
+  data: shape({
+    github: string,
+    blurb: string,
+  }),
 };
 
 export default Footer;

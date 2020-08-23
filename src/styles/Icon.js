@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
 import { commonTransition } from "config";
 import { css } from "goober";
+const { string, bool } = PropTypes;
 
 const CommonIcon = css`
   filter: grayscale(100%);
@@ -12,7 +14,7 @@ const CommonIcon = css`
   }
 `;
 
-export default function SIcon({
+export default function Icon({
   src,
   format = "png",
   inline = false,
@@ -30,3 +32,9 @@ export default function SIcon({
     </picture>
   );
 }
+
+Icon.propTypes = {
+  src: string,
+  format: string,
+  inline: bool,
+};

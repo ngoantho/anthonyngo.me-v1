@@ -1,25 +1,23 @@
-import { ExtPage, Icon, Link } from "styles";
-import { colors, config } from "theme";
+import { CoreSection, Icon, Link } from "styles";
+import { colors, commonMargin, commonTransition, site } from "theme";
 import { cx, useOnScreen } from "utils/index";
 import { useEffect, useRef, useState } from "react";
 
 import Head from "next/head";
+import PropTypes from "prop-types";
 import { getProjectsFrom } from "../lib/api";
 import { join } from "path";
 import { lighten } from "polished";
+import schema from "assets/schema";
 import { styled } from "goober";
 
-const {
-  site: { url },
-  commonTransition,
-  commonMargin,
-  navDelay,
-  delayTr = 100,
-  delayEntry = 25,
-} = config;
+const { url } = site;
+const { arrayOf, number } = PropTypes;
 
 const S = {
-  MainContainer: styled(ExtPage)`
+  MainContainer: styled(CoreSection)`
+    align-items: center;
+    justify-content: center;
     header {
       margin: 0 auto;
     }
@@ -39,7 +37,7 @@ const S = {
     line-height: 1.5;
     font-size: 100%;
     font-weight: 400;
-    color: ${lighten(0.35, colors.quaternary)};
+    color: var(--colors-accent);
     @media (min-width: 40rem) and (max-width: 80rem) {
       font-size: 125%;
     }
@@ -50,7 +48,7 @@ const S = {
   TableContainer: styled("div")`
     margin: 0 auto;
     @media (min-width: 40rem) {
-      padding-left: ${commonMargin * 1.25}rem;
+      padding-right: ${commonMargin * 1.25}rem;
     }
   `,
   Table: styled("table")`
@@ -64,14 +62,14 @@ const S = {
     }
 
     thead tr {
-      transition-delay: ${delayTr}ms;
+      transition-delay: 100ms;
     }
 
     tbody tr {
       transition: ${commonTransition};
       &:hover,
       &:focus {
-        background-color: ${colors.tintLight};
+        background-color: ${lighten(0.25, colors.quaternary)};
       }
     }
 
@@ -134,7 +132,7 @@ function ArchiveEntry({ frontMatter, index }) {
       ref={ref}
       className={cx("fadeup", visible && "active")}
       style={{
-        transitionDelay: `${(index + 1) * delayEntry}ms`,
+        transitionDelay: `${(index + 1) * 25}ms`,
       }}>
       <td className="year">{`${new Date(date).getFullYear()}`}</td>
       <td className="title">{title}</td>
@@ -164,7 +162,7 @@ function ArchiveEntry({ frontMatter, index }) {
               href={`//github.com/${github}`}
               target="_blank"
               rel="nofollow noopener noreferrer">
-              <Icon src="icons/github-mark-light.png" alt={github} />
+              <Icon src="icons/github-mark.png" alt={github} />
             </Link>
           )}
           {external && (
@@ -181,12 +179,17 @@ function ArchiveEntry({ frontMatter, index }) {
   );
 }
 
+ArchiveEntry.propTypes = {
+  frontMatter: schema,
+  index: number,
+};
+
 export default function Archive({ amalgam }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     const mountId = setTimeout(() => {
       setMounted(true);
-    }, navDelay / 4);
+    }, 0);
     return () => clearTimeout(mountId);
   }, []);
 
@@ -224,6 +227,10 @@ export default function Archive({ amalgam }) {
     </>
   );
 }
+
+Archive.propTypes = {
+  amalgam: arrayOf(schema),
+};
 
 export async function getStaticProps() {
   const featuredProjectsDir = join(process.cwd(), "src/assets/featured");

@@ -12,6 +12,9 @@
     "scss",
     "javascriptreact"
   ],
-  "auto-rename-tag.activationOnLanguage": ["javascript", "javascriptreact"],
+  "auto-rename-tag.activationOnLanguage": [
+    "javascript",
+    "javascriptreact"
+  ],
   "eslint.packageManager": "pnpm"
 }
