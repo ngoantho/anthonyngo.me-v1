@@ -57,7 +57,7 @@ module.exports = withPrefresh(
       config.module.rules = [
         ...config.module.rules,
         {
-          test: /\.(ico|txt)$/,
+          test: /\.(ico|txt|pdf)$/,
           use: {
             loader: "file-loader",
           },

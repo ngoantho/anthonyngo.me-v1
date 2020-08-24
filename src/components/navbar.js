@@ -208,7 +208,7 @@ function Navbar({ homePage, menuOpen, setMenuOpen, mobile }) {
             rel="nofollow noopener noreferrer"
             className={cx(
               "button",
-              "button-clear",
+              "button-outline",
               "fadedown",
               mounted && "active"
             )}

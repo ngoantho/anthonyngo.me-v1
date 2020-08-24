@@ -55,6 +55,7 @@ const S = {
       padding: 0;
       margin: 0;
       width: 100%;
+      list-style: none;
     `,
     NavLinksItem: styled("li")`
       margin: 0 auto ${commonMargin}rem;

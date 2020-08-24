@@ -18,7 +18,7 @@ const StyledMainWrapper = styled("main")`
   transition: ${commonTransition};
 
   @media (max-height: 40rem) {
-    top: ${navScrollHeight}px;
+    top: ${navScrollHeight / 2}px;
   }
 
   &.blur {

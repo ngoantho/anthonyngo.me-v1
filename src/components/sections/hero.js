@@ -47,7 +47,7 @@ const Hero = ({ data, ...props }) => {
   }, []);
 
   return (
-    <StyledContainer className="row">
+    <StyledContainer className="row" {...props}>
       <StyledBlurb
         {...props}
         className={cx("column", "fadeup", mounted && "active")}>
