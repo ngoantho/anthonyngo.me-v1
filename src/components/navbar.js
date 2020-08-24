@@ -194,7 +194,7 @@ function Navbar({ homePage, menuOpen, setMenuOpen, mobile }) {
                 key={i}
                 className={cx("fadedown", mounted && "active")}
                 style={{
-                  transitionDelay: `${(i + 1) * 100}ms`,
+                  transitionDelay: `${(i + 1) * 25}ms`,
                 }}>
                 <NextLink href={{ pathname: "/", hash }} passHref>
                   <BaseLink>{name}</BaseLink>
@@ -213,7 +213,7 @@ function Navbar({ homePage, menuOpen, setMenuOpen, mobile }) {
               mounted && "active"
             )}
             style={{
-              transitionDelay: `${(navLinks.length + 1) * 100}ms`,
+              transitionDelay: `${(navLinks.length + 1) * 25}ms`,
             }}
             title="View my resumé">
             Resumé

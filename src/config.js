@@ -35,6 +35,7 @@ export const contactMe = {
 export const navHeight = 100;
 export const navScrollHeight = 70;
 export const navLinks = [
+  ["Home", ""],
   ["Projects", "#projects"],
   ["About", "#about"],
 ];

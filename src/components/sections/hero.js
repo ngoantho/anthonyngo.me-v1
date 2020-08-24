@@ -16,10 +16,10 @@ const StyledBlurb = styled("blockquote")`
   strong {
     line-height: 2.5;
     @media (min-width: 80rem) {
-      font-size: x-large;
+      font-size: large;
     }
     @media (min-width: 40rem) and (max-width: 80rem) {
-      font-size: large;
+      font-size: larger;
     }
   }
   div > p {
@@ -50,7 +50,7 @@ const Hero = ({ data, ...props }) => {
     <StyledContainer className="row" {...props}>
       <StyledBlurb
         {...props}
-        className={cx("column", "fadeup", mounted && "active")}>
+        className={cx("column", "fadedown", mounted && "active")}>
         <strong>{"Hi, I'm Anthony Ngo."}</strong>
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </StyledBlurb>

@@ -20,7 +20,7 @@ export default function Home({ featuredProjects, allProjects, miscData }) {
         <title>Anthony Ngo</title>
       </Head>
       <StyledContainer>
-        <Hero id="hero" data={miscData.landing} />
+        <Hero id="home" data={miscData.landing} />
         <Projects id="projects" data={{ featuredProjects, allProjects }} />
         <About id="about" data={miscData.about} />
       </StyledContainer>
