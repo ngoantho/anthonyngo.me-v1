@@ -1,5 +1,5 @@
 export const name = "Anthony Ngo";
-export const email = "ngo.anthony.me@gmail.com";
+export const email = "contact@anthonyngo.me";
 export const location = "Seattle, WA";
 
 export const site = {
