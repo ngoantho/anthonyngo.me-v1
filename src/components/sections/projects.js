@@ -31,12 +31,18 @@ const S = {
     }
 
     @media (min-width: 40rem) and (max-width: 80rem) {
-      padding-left: 10% !important;
-      blockquote:nth-child(2n + 1) {
+      padding-left: 5% !important;
+      blockquote:nth-child(4n + 1) {
         order: 1;
       }
-      blockquote:nth-child(2n) {
+      blockquote:nth-child(4n + 2) {
         order: 2;
+      }
+      blockquote:nth-child(4n + 3) {
+        order: 3;
+      }
+      blockquote:nth-child(4n) {
+        order: 4;
       }
     }
 

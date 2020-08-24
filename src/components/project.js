@@ -136,7 +136,7 @@ export default function Project({
         "column-30": isDesktop,
       })}
       style={{
-        transitionDelay: `${(index + 1) * 10}ms`,
+        transitionDelay: `${(index + 1) * 25}ms`,
       }}>
       {frontMatter.preview ? (
         <S.layout.PreviewComp>
