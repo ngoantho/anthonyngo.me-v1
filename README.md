@@ -19,7 +19,7 @@
   
   ## Author
 
-👤 **Anthony Ngo <ngo.anthony.me@gmail.com>**
+👤 **Anthony Ngo <contact@anthonyngo.me>**
 
 - Twitter: [@vadlus](https://twitter.com/@vadlus)
 - Github: [@ngoantho](https://github.com/ngoantho)
@@ -35,6 +35,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2020 [Anthony Ngo <ngo.anthony.me@gmail.com>](https://github.com/ngoantho).<br />
+Copyright © 2020 [Anthony Ngo <contact@anthonyngo.me>](https://github.com/ngoantho).<br />
 This project is [MIT](https://github.com/ngoantho/ngoanthohub.io/blob/master/LICENSE) licensed.
+
 </p>
