@@ -103,7 +103,7 @@ const Projects = ({ data, masonryInitial = 6, ...props }) => {
           display: grid;
           margin-top: ${commonMargin}rem;
         `}>
-        {total >= 0 ? (
+        {total >= masonryInitial ? (
           <button
             ref={refMoreButton}
             className={cx(
