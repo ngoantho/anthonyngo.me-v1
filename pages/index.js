@@ -25,7 +25,13 @@ export default function Home({ filenames }) {
         `}</style>
         {Projects.map((Project, i) => (
           <div key={i} className="col card">
-            <strong>{metas[i].header}</strong>
+            {metas[i].link ? (
+              <a href={metas[i].link}>
+                <strong>{metas[i].header}</strong>
+              </a>
+            ) : (
+              <strong>{metas[i].header}</strong>
+            )}
             <Project />
           </div>
         ))}
