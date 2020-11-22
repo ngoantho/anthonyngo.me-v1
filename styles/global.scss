@@ -29,10 +29,10 @@ h3 {
 
 a {
   text-decoration: none;
-  color: gray;
+  color: black;
 
   &:focus,
   &:hover {
-    text-decoration: underline;
+    color: orange;
   }
 }
