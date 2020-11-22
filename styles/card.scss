@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: whitesmoke;
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  &:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  p:nth-last-child(even) {
+    margin-bottom: 0.5rem;
+  }
+
+  p > em {
+    font-family: "mono";
+    font-size: smaller;
+  }
+}

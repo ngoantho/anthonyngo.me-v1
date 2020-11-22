@@ -1,0 +1,24 @@
+@use "./consts.scss" as *;
+
+.container {
+  @media (max-width: $global-box) {
+    flex-direction: column-reverse;
+  }
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & > div {
+    margin-top: -2rem;
+    justify-content: center;
+  }
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
