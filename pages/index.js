@@ -2,8 +2,7 @@ import Head from "next/head"
 import { common } from "../seo.config"
 import Bio from "../components/bio"
 import dynamic from "next/dynamic"
-import fs from "fs"
-import path from "path"
+import filenames from "./projects/info.json"
 
 export default function Home({ filenames }) {
   const Projects = filenames.map((name) =>
@@ -36,9 +35,6 @@ export default function Home({ filenames }) {
 }
 
 export async function getStaticProps() {
-  const projectsDir = path.join(process.cwd(), "pages/projects")
-  const filenames = fs.readdirSync(projectsDir)
-
   return {
     props: {
       filenames,
