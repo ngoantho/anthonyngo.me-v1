@@ -12,7 +12,7 @@ export default function Projects({ filenames }) {
     <>
       <div>
         <legend>Projects</legend>
-        <hr className="hide-tablet" />
+        <hr />
         <style jsx>{`
           div {
             display: flex;
@@ -27,7 +27,7 @@ export default function Projects({ filenames }) {
             padding-right: 1rem;
           }
           hr {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
             width: 25%;
             height: 1px;
             background: lightgray;
