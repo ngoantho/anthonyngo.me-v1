@@ -24,6 +24,7 @@ devDependencies:
   prettier: 2.1.2
   stylelint: 13.8.0
   stylelint-config-recommended: 3.0.0_stylelint@13.8.0
+  stylelint-scss: 3.18.0_stylelint@13.8.0
 lockfileVersion: 5.2
 packages:
   /@ampproject/toolbox-core/2.6.1:
@@ -6018,6 +6019,21 @@ packages:
       stylelint: '>=10.1.0'
     resolution:
       integrity: sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
+  /stylelint-scss/3.18.0_stylelint@13.8.0:
+    dependencies:
+      lodash: 4.17.20
+      postcss-media-query-parser: 0.2.3
+      postcss-resolve-nested-selector: 0.1.1
+      postcss-selector-parser: 6.0.4
+      postcss-value-parser: 4.1.0
+      stylelint: 13.8.0
+    dev: true
+    engines:
+      node: '>=8'
+    peerDependencies:
+      stylelint: ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+    resolution:
+      integrity: sha512-LD7+hv/6/ApNGt7+nR/50ft7cezKP2HM5rI8avIdGaUWre3xlHfV4jKO/DRZhscfuN+Ewy9FMhcTq0CcS0C/SA==
   /stylelint/13.8.0:
     dependencies:
       '@stylelint/postcss-css-in-js': 0.37.2_4fe96148bf77e6cee792ae366c9083f9
@@ -6812,5 +6828,6 @@ specifiers:
   sass: ^1.29.0
   stylelint: ^13.8.0
   stylelint-config-recommended: ^3.0.0
+  stylelint-scss: ^3.18.0
   use-media: ^1.4.0
   wingcss: ^1.0.0-beta

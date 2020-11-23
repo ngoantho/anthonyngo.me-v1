@@ -8,7 +8,7 @@ import { contact } from "../seo.config"
 export default function Bio() {
   return (
     <div className={cx("row", styles.container)}>
-      <div className={cx("col", "col-7", styles.bio)}>
+      <div className={cx("col", "col-9", styles.bio)}>
         <BioMDX />
         <div className="nav">
           {Object.entries(contact).map(([key, value], i) => (
@@ -23,7 +23,7 @@ export default function Bio() {
           ))}
         </div>
       </div>
-      <div className={cx("col", "col-5", styles.avatar)}>
+      <div className={cx("col", "col-3", styles.avatar)}>
         <Avatar />
       </div>
     </div>

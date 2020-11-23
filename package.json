@@ -19,7 +19,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier-eslint --write",
+      "prettier --write",
       "eslint --fix ."
     ],
     "*.scss": [
@@ -32,7 +32,7 @@
     "start": "next start",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "prettier --check \"src/**/*.js\"",
-    "lint:css": "stylelint \"src/**/*.{js,css}\""
+    "lint:css": "stylelint \"src/**/*.{js,scss}\""
   },
   "devDependencies": {
     "eslint": "^7.13.0",
@@ -43,7 +43,8 @@
     "lint-staged": "^10.5.1",
     "prettier": "^2.1.2",
     "stylelint": "^13.8.0",
-    "stylelint-config-recommended": "^3.0.0"
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-scss": "^3.18.0"
   },
   "dependencies": {
     "@mdx-js/loader": "^1.6.21",
