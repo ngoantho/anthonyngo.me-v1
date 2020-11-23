@@ -1,49 +1,33 @@
 import dynamic from "next/dynamic"
+import Section from "./section"
 
-export default function Projects({ filenames }) {
-  const Projects = filenames.map((name) =>
+export default function Projects({ projects, metas }) {
+  const Projects = projects.map((name) =>
     dynamic(() => import(`../pages/projects/${name}`))
-  )
-  const metas = filenames.map(
-    (name) => require(`../pages/projects/${name}`).meta
   )
 
   return (
     <>
-      <div>
-        <legend>Projects</legend>
-        <hr />
-        <style jsx>{`
-          div {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 1rem;
-          }
-          legend {
-            background: black;
-            color: white;
-            width: fit-content;
-            padding-left: 1rem;
-            padding-right: 1rem;
-          }
-          hr {
-            margin-left: 0.5rem;
-            width: 25%;
-            height: 1px;
-            background: lightgray;
-            border: 1px solid lightgray;
-          }
-        `}</style>
-      </div>
-      <div className="row root">
+      <Section name="Projects" />
+      <div className="root">
         <style jsx>{`
           .root {
-            max-width: 60%;
-            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+          }
+          .item {
+            flex: 1 1 auto;
+            margin: 1rem;
+            width: 25%;
+          }
+          @media (max-width: 40rem) {
+            .item {
+              width: 100%;
+            }
           }
         `}</style>
         {Projects.map((Project, i) => (
-          <div key={i} className="col card">
+          <div key={i} className="item card">
             {metas[i].link ? (
               <a href={metas[i].link}>
                 <strong>{metas[i].header}</strong>

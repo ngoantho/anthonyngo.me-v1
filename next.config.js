@@ -5,6 +5,7 @@ const withMDX = require("@next/mdx")({
 
 module.exports = withPreact(
   withMDX({
+    pageExtensions: ["js", "jsx", "mdx"],
     webpack(config, { isServer }) {
       if (!isServer) {
         config.node = {
