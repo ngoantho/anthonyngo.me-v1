@@ -10,17 +10,30 @@ export default function Bio() {
     <div className={cx("row", styles.container)}>
       <div className={cx("col", "col-9", styles.bio)}>
         <BioMDX />
-        <div className="nav">
-          {Object.entries(contact).map(([key, value], i) => (
-            <a
-              target="_blank"
-              rel="noreferrer"
-              className="nav-item"
-              key={i}
-              href={value.url || value}>
-              {key}
+        <div className="row">
+          <div className="col col-3">
+            <a href="mailto:contact@anthonyngo.me">
+              <input type="submit" value="Get In Touch" className="outline" />
+              <style jsx>{`
+                input[type="submit"]:hover,
+                input[type="submit"]:focus {
+                  background: lightgray;
+                }
+              `}</style>
             </a>
-          ))}
+          </div>
+          <div className="nav col col-9">
+            {Object.entries(contact).map(([key, value], i) => (
+              <a
+                target="_blank"
+                rel="noreferrer"
+                className="nav-item"
+                key={i}
+                href={value.url || value}>
+                {key}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
       <div className={cx("col", "col-3", styles.avatar)}>

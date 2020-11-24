@@ -18,7 +18,7 @@ export default function Projects({ projects, metas }) {
           .item {
             flex: 1 1 auto;
             margin: 1rem;
-            width: 25%;
+            width: calc(100% / 3);
           }
           @media (max-width: 40rem) {
             .item {
