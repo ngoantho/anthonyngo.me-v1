@@ -1,32 +1,29 @@
 import Head from "next/head"
-import { common } from "../seo.config"
-import Bio from "../components/bio"
-import Projects from "../components/projects"
-import fs from "fs"
-import path from "path"
+import Layout from "components/layout"
+import Projects from "sections/projects"
+import Hero from "sections/hero"
+import ProjectsAPI from "utils/projects"
+import { common } from "seo.config"
+import About from "sections/about"
 
-export default function Home({ projects, projectsMeta }) {
+export default function Index({ projects }) {
   return (
     <>
       <Head>
         <title>{common.name}</title>
       </Head>
-      <Bio />
-      <Projects projects={projects} metas={projectsMeta} />
+      <Layout hero={() => <Hero />}>
+        <Projects data={projects} />
+        <About />
+      </Layout>
     </>
   )
 }
 
 export async function getStaticProps() {
-  const projects = fs.readdirSync(path.join(process.cwd(), "pages/projects/"))
-  const projectsMeta = projects.map(
-    (name) => require(`../pages/projects/${name}`).meta
-  )
-
   return {
     props: {
-      projects,
-      projectsMeta,
+      projects: ProjectsAPI(),
     },
   }
 }

@@ -1,19 +1,49 @@
-import { useRouter } from "next/router"
-import Link from "next/link"
+import { styled } from "goober"
+import HeroBanner from "./herobanner"
 
-export default function Layout({ children }) {
-  const { pathname } = useRouter()
+let StyledContent = styled("main")`
+  display: flex;
+  flex-direction: column;
+  counter-reset: count;
 
+  section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    &:first-child {
+      margin-top: 6rem;
+    }
+
+    .heading {
+      font-weight: 400;
+      /* margin-bottom: 0; */
+
+      &::before {
+        counter-increment: count;
+        content: counter(count) ". ";
+        font-size: smaller;
+        color: gray;
+      }
+      &::after {
+        content: "";
+        width: 16rem;
+        display: block;
+        margin-top: 0.25rem;
+        border: 1px solid whitesmoke;
+      }
+    }
+  }
+`
+
+let StyledWrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
+`
+
+export default function Layout({ hero, children }) {
   return (
-    <div id="container">
-      {children}
-      <style jsx>{`
-        #container {
-          max-width: var(--global-box);
-          margin: 0 auto;
-          width: 100%;
-        }
-      `}</style>
-    </div>
+    <StyledWrapper>
+      <HeroBanner hero={hero} />
+      <StyledContent className="container">{children}</StyledContent>
+    </StyledWrapper>
   )
 }

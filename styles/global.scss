@@ -1,9 +1,5 @@
 @use "./fonts.scss";
 
-:root {
-  --global-box: 80rem;
-}
-
 html {
   @supports (scroll-behavior: smooth) {
     scroll-behavior: smooth;
@@ -14,6 +10,8 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -23,19 +21,9 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
   text-rendering: optimizeLegibility;
-}
-
-a {
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: gray;
-  color: black;
-
-  &:focus,
-  &:hover {
-    color: orange;
-    text-decoration: none;
-  }
 }

@@ -1,35 +1,49 @@
-import "wingcss"
-import "../styles/card.scss"
-import "../styles/nprogress.css"
-import "../styles/global.scss"
+import React, { createContext, useContext, useEffect } from "react"
+import { prefix } from "goober-autoprefixer"
+import { setup, glob } from "goober"
 import { DefaultSeo } from "next-seo"
-import SEO from "../seo.config"
-import NProgress from "nprogress"
-import { useEffect } from "react"
-import { useRouter } from "next/router"
-import Layout from "../components/layout"
+import SEO from "seo.config.js"
+import { sizes, useSizes } from "utils"
 
-export default function MyApp({ Component, pageProps }) {
-  const { events } = useRouter()
-  const handleRouteStart = () => NProgress.start()
-  const handleRouteChange = () => NProgress.done()
+import "milligram/dist/milligram.min.css"
+import "styles/global.scss"
 
-  useEffect(() => {
-    events.on("routeChangeStart", handleRouteStart)
-    events.on("routeChangeComplete", handleRouteChange)
-    events.on("hashChangeComplete", handleRouteChange)
+// goober's needs to know how to render the `styled` nodes.
+// So to let it know, we run the `setup` function with the
+// `createElement` function and prefixer function.
+setup(React.createElement, prefix, useSizes)
+glob`
+  html {
+    min-width: ${sizes.mobile};
+  }
 
-    return () => {
-      events.off("routeChangeStart", handleRouteStart)
-      events.off("routeChangeComplete", handleRouteChange)
-      events.off("hashChangeComplete", handleRouteChange)
+  body {
+    --mobile: ${sizes.mobile};
+    --tablet: ${sizes.tablet};
+    --desktop: ${sizes.desktop};
+  }
+`
+
+export default function App({ Component, pageProps }) {
+  const handleExternalLinks = () => {
+    const allLinks = Array.from(document.querySelectorAll("a"))
+    if (allLinks.length > 0) {
+      allLinks.forEach((link) => {
+        if (link.host !== window.location.host) {
+          link.setAttribute("rel", "noopener noreferrer")
+          link.setAttribute("target", "_blank")
+        }
+      })
     }
+  }
+  useEffect(() => {
+    handleExternalLinks()
   }, [])
 
   return (
-    <Layout>
+    <>
       <DefaultSeo {...SEO} />
       <Component {...pageProps} />
-    </Layout>
+    </>
   )
 }

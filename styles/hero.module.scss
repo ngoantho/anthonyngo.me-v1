@@ -1,0 +1,32 @@
+$title-weight: 400;
+$section-padding: 2;
+$section-squeeze: 2rem;
+
+.section {
+  padding-top: #{$section-padding * 4}vh;
+  padding-bottom: #{$section-padding}vh;
+  padding-left: $section-squeeze;
+  padding-right: $section-squeeze;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  h2 {
+    font-weight: $title-weight;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 0;
+  }
+}

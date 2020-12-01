@@ -11,11 +11,21 @@ export const common = {
 }
 
 export const contact = {
-  LinkedIn: "https://www.linkedin.com/in/anthongo/",
-  GitHub: "https://github.com/ngoantho",
-  Instagram: "https://www.instagram.com/ant.ngo_1/",
+  LinkedIn: {
+    url: "https://www.linkedin.com/in/anthongo/",
+    color: "dodgerblue",
+  },
+  GitHub: {
+    url: "https://github.com/ngoantho",
+    color: "lightgray",
+  },
+  Instagram: {
+    url: "https://www.instagram.com/ant.ngo_1/",
+    color: "lightpink",
+  },
   Twitter: {
     url: "https://twitter.com/@vadlus",
+    color: "lightskyblue",
     handle: "@vadlus",
   },
 }

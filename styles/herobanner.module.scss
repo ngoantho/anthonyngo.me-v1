@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+
+  &-item {
+    grid-area: 1/1;
+  }
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  background: whitesmoke;
+}

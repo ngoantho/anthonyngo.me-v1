@@ -1,17 +1,4 @@
-import { useEffect, useState } from "react"
-
-// credit: https://stackoverflow.com/a/7616484
-export function hash(string) {
-  let hash = 0
-  let i
-  let chr
-  for (i = 0; i < string.length; i++) {
-    chr = string.charCodeAt(i)
-    hash = (hash << 5) - hash + chr
-    hash |= 0 // Convert to 32bit integer
-  }
-  return hash
-}
+import { createContext, useContext } from "react"
 
 export const cx = (...args) => {
   const result = new Set()
@@ -30,3 +17,12 @@ export const cx = (...args) => {
 
   return [...result].join(" ")
 }
+
+export const sizes = {
+  mobile: "40rem",
+  tablet: "80rem",
+  desktop: "120rem",
+}
+
+export const SizesContext = createContext(sizes)
+export const useSizes = () => useContext(SizesContext)
