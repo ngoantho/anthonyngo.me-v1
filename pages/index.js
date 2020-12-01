@@ -1,10 +1,10 @@
-import Head from "next/head"
 import Layout from "components/layout"
-import Projects from "sections/projects"
-import Hero from "sections/hero"
-import ProjectsAPI from "utils/projects"
-import { common } from "seo.config"
+import Head from "next/head"
 import About from "sections/about"
+import Hero from "sections/hero"
+import Projects from "sections/projects"
+import { common } from "seo.config"
+import ProjectsAPI from "utils/projects"
 
 export default function Index({ projects }) {
   return (

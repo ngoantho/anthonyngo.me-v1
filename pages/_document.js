@@ -1,5 +1,6 @@
-import Document, { Html, Head, Main, NextScript } from "next/document"
 import { extractCss } from "goober"
+import Document, { Head, Html, Main, NextScript } from "next/document"
+import { common } from "seo.config"
 
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }) {
@@ -11,7 +12,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang={common.language}>
         <Head>
           <style
             id={"_goober"}

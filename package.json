@@ -23,6 +23,11 @@
       "eslint --fix ."
     ]
   },
+  "importSort": {
+    ".js, .jsx, .es6, .es": {
+      "style": "module"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
