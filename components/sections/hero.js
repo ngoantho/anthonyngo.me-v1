@@ -1,9 +1,10 @@
-/* eslint-disable react/no-unescaped-entities */
-import Avatar from "../avatar"
-import styles from "styles/hero.module.scss"
-import { cx, useSizes } from "utils"
 import { styled } from "goober"
 import { common } from "seo.config"
+import styles from "styles/hero.module.scss"
+import { cx, useSizes } from "utils"
+
+/* eslint-disable react/no-unescaped-entities */
+import Avatar from "../avatar"
 
 let StyledSection = styled("section")`
   @media (max-width: ${(props) => props.mobile}) {
@@ -24,6 +25,12 @@ let StyledBanner = styled("div")`
 let StyledContact = styled("ul")`
   margin-top: 1rem;
   list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  li:last-child {
+    margin-left: 1rem;
+  }
 `
 
 export default function Hero() {
@@ -42,6 +49,11 @@ export default function Hero() {
                 href={`mailto:${common.email}`}
                 className="button button-outline">
                 Get In Touch
+              </a>
+            </li>
+            <li>
+              <a href="/resume.pdf" className="button">
+                My Resume
               </a>
             </li>
           </StyledContact>
