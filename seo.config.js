@@ -32,7 +32,7 @@ export const contact = {
 
 export default {
   description: common.description,
-  canonical: `http://${common.url}`,
+  canonical: `https://${common.url}`,
   twitter: {
     cardType: "summary",
     site: contact.Twitter.handle,
