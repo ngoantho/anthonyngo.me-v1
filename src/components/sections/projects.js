@@ -1,6 +1,5 @@
 import styled from "astroturf";
-
-import ProjectsCMS from "../../../ngoantho/projects.md";
+import ProjectsCMS from "cms/projects.md";
 
 let Styles = styled("section")`
   @import "../../styles/mixins.scss";

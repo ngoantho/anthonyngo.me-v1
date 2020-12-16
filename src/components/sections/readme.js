@@ -1,6 +1,5 @@
 import styled from "astroturf";
-
-import ReadMeCMS from "../../../ngoantho/readme.md";
+import ReadMeCMS from "cms/readme.md";
 
 let Styles = styled("section")`
   @import "../../styles/mixins.scss";
