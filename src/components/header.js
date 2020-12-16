@@ -1,6 +1,7 @@
 import styled from "astroturf";
-import ContactLinks, { count as contactCount } from "cms/contact.md";
-import NavLinks, { count as navCount } from "cms/menu.md";
+
+import ContactLinks, { count as contactCount } from "../../ngoantho/contact.md";
+import NavLinks, { count as navCount } from "../../ngoantho/menu.md";
 
 let Table = styled("table")`
   table-layout: auto;
