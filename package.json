@@ -35,7 +35,7 @@
     "start": "next start",
     "prep:sminit": "git submodule update --init",
     "prep:copy": "cp -rf ngoantho/ src/components/cms/",
-    "netlify": "npm run prep:sminit || npm run prep:copy && npm run build:out",
+    "netlify": "npm run prep:sminit && npm run prep:copy && npm run build:out",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "prettier --check \"src/**/*.js\""
   },
