@@ -1,5 +1,6 @@
 import styled from "astroturf";
-import ProjectsCMS from "cms/projects.md";
+
+import ProjectsCMS from "../projects.md";
 
 let Styles = styled("section")`
   @import "../../styles/mixins.scss";
