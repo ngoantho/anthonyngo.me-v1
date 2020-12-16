@@ -1,0 +1,3 @@
+[submodule "ngoantho"]
+	path = ngoantho
+	url = https://github.com/ngoantho/ngoantho

@@ -4,3 +4,11 @@
   src: local("SFMono-Regular"), local("Menlo"), local("Monaco"),
     local("Consolas"), local("Liberation Mono"), local("Courier New");
 }
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
