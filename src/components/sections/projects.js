@@ -1,6 +1,6 @@
 import styled from "astroturf";
 
-import ProjectsCMS from "../projects.md";
+import ProjectsCMS from "../cms/projects.md";
 
 let Styles = styled("section")`
   @import "../../styles/mixins.scss";
@@ -8,20 +8,17 @@ let Styles = styled("section")`
     @include squeezeLess();
   }
 
-  h2 {
-    margin-top: 12px;
-    margin-bottom: 0px;
-    text-align: center;
-  }
-
   table {
     table-layout: auto;
 
     thead > tr > th {
-      &:not(:first-child):not(:last-child) {
-        a {
-          color: var(--text-main);
-        }
+      h1 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        transform: scale(0.75) translate(-15%, 15%);
+      }
+      &:last-child {
+        vertical-align: bottom;
       }
     }
 

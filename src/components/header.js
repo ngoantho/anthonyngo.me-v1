@@ -1,7 +1,6 @@
 import styled from "astroturf";
 
-import ContactLinks, { count as contactCount } from "./contact.md";
-import NavLinks, { count as navCount } from "./menu.md";
+import NavLinks, { count } from "./cms/menu.md";
 
 let Table = styled("table")`
   table-layout: auto;
@@ -11,7 +10,7 @@ let Table = styled("table")`
 let HeaderStyle = styled("header")`
   @import "../styles/mixins.scss";
   @media (--not-mobile) {
-    @include squeezeLess();
+    @include squeeze();
   }
 
   background: var(--background-body);
@@ -26,17 +25,11 @@ let LinksContainer = styled("th")`
     margin: 0;
 
     li {
-      text-align: center;
+      text-align: right;
       & > a {
         color: var(--text-main);
         font-weight: normal;
       }
-    }
-  }
-
-  &:last-child {
-    ul > li {
-      text-align: right;
     }
   }
 `;
@@ -50,15 +43,9 @@ export default function Header() {
             <th>Anthony Ngo</th>
             <LinksContainer
               style={{
-                "--count": navCount,
+                "--count": count,
               }}>
               <NavLinks />
-            </LinksContainer>
-            <LinksContainer
-              style={{
-                "--count": contactCount,
-              }}>
-              <ContactLinks />
             </LinksContainer>
           </tr>
         </thead>
