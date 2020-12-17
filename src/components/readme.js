@@ -1,9 +1,9 @@
 import styled from "astroturf";
 
-import ReadMeCMS from "../cms/readme.md";
+import ReadMeCMS from "./cms/readme.md";
 
 let Styles = styled("section")`
-  @import "../../styles/mixins.scss";
+  @import "../styles/mixins.scss";
   @include flexColumn();
   @media (--not-mobile) {
     @include squeeze();
