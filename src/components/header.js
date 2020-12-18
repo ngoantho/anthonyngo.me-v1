@@ -1,6 +1,5 @@
 import styled from "astroturf";
-
-import NavLinks, { count } from "./cms/menu.md";
+import NavLinks, { count } from "cms/menu.md";
 
 let Table = styled("table")`
   table-layout: auto;

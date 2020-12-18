@@ -1,6 +1,5 @@
 import styled from "astroturf";
-
-import ContactLinks, { count } from "./cms/contact.md";
+import ContactLinks, { count } from "cms/contact.md";
 
 let StyledFooter = styled("footer")`
   padding-top: 15px;
@@ -14,6 +13,11 @@ let StyledFooter = styled("footer")`
     columns: var(--count);
     list-style: none;
     margin: 0;
+    padding: 0;
+
+    li {
+      text-align: center;
+    }
   }
 `;
 

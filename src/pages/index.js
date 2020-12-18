@@ -1,9 +1,11 @@
 import Layout from "components/layout";
-import Projects from "components/projects";
-import ReadMe from "components/readme";
 import Head from "next/head";
 
+import Sections from "../components/sections/*";
+
 export default function IndexPage() {
+  const [Projects, ReadMe] = Sections;
+
   return (
     <>
       <Head>

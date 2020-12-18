@@ -1,16 +1,4 @@
 export let contact = {
-  LinkedIn: {
-    url: "https://www.linkedin.com/in/anthongo/",
-    color: "dodgerblue",
-  },
-  GitHub: {
-    url: "https://github.com/ngoantho",
-    color: "lightgray",
-  },
-  Instagram: {
-    url: "https://www.instagram.com/ant.ngo_1/",
-    color: "lightpink",
-  },
   Twitter: {
     url: "https://twitter.com/@vadlus",
     color: "lightskyblue",

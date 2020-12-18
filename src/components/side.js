@@ -1,6 +1,5 @@
 import styled from "astroturf";
-
-import ContactLinks from "./cms/contact.md";
+import ContactLinks from "cms/contact.md";
 
 let StyledAside = styled("aside")`
   position: absolute;
