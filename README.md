@@ -12,7 +12,7 @@
   
   > Source code of my personal portfolio built with Next.js
   
-  ### ✨ [ngoantho.netlify.app](ngoantho.netlify.app)
+  ### ✨ [http://anthonyngo.me](http://anthonyngo.me)
   
   ## Features
   - [Next.js](//nextjs.org) - Engine
