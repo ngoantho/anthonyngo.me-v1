@@ -1,19 +1,22 @@
-export let contact = {
-  Twitter: {
-    url: "https://twitter.com/@vadlus",
-    color: "lightskyblue",
-    handle: "@vadlus",
-  },
-};
+import sitemap from "../next-sitemap"
+
+export let socials = {
+  twitter: "@vadlus",
+  ograph: "ngoantho",
+  email: "hi@anthonyngo.me",
+}
 
 export default {
-  name: "Anthony Ngo",
-  email: "contact@anthonyngo.me",
+  first: "Anthony",
+  last: "Ngo",
+  name: function () {
+    return `${this.first} ${this.last}`
+  },
+  email: socials.email,
   location: "Seattle, WA",
   language: "en-US",
-  description:
-    "Anthony Ngo is a current computer science student studying at Seattle University, who is passionate about making open source software, creating technology to help others, and building a better future.",
   keywords:
-    "Anthony Ngo, Anthony, Ngo, ngoantho, internship, software engineer, javascript, SeattleU",
-  url: "anthonyngo.me",
-};
+    "Anthony Ngo, Anthony, Ngo, ngoantho, internship, software engineer, SeattleU",
+  description: "",
+  url: sitemap.siteUrl,
+}

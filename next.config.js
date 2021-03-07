@@ -1,22 +1,17 @@
-const gemoji = require("remark-gemoji");
-const withCSS = require("@zeit/next-css");
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [gemoji],
+})
+
+module.exports = withMDX({
+  pageExtensions: ["js", "jsx", "mdx"],
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      Object.assign(config.resolve.alias, {
+        react: "preact/compat",
+        "react-dom": "preact/compat",
+      })
+    }
+
+    return config
   },
-});
-
-module.exports = withMDX(
-  withCSS({
-    cssModules: true,
-    webpack: (config) => {
-      config.module.rules.push({
-        test: /\.js$/,
-        use: ["astroturf/loader"],
-      });
-
-      return config;
-    },
-  })
-);
+})

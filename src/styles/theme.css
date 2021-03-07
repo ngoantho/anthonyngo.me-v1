@@ -1,0 +1,18 @@
+/* Include this stylesheet after Milligram or merge it with your main.css */
+
+:root {
+  --link-color: midnightblue;
+  --link-bg: lightcyan;
+}
+
+a {
+  color: var(--link-color);
+  background: var(--link-bg);
+}
+
+a.special {
+  background: initial;
+}
+a.special:hover {
+  text-decoration: underline;
+}

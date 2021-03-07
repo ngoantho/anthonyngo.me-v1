@@ -16,11 +16,10 @@
   
   ## Features
   - [Next.js](//nextjs.org) - Engine
-  - [Milligram](//milligram.io/) - Styling
   
   ## Author
 
-👤 **Anthony Ngo <contact@anthonyngo.me>**
+👤 **Anthony Ngo <hi@anthonyngo.me>**
 
 - Twitter: [@vadlus](https://twitter.com/@vadlus)
 - Github: [@ngoantho](https://github.com/ngoantho)

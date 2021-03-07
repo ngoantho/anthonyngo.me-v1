@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const cx = (...args) => {
   const result = new Set();
   for (const item of args) {

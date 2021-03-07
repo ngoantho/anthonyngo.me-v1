@@ -1,17 +1,24 @@
 {
+  "extends": ["prettier", "prettier/react"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "env": {
     "browser": true
   },
-  "extends": ["alloy", "alloy/react"],
   "globals": {
-    "React": "writable",
-    "process": true
+    "React": "writable"
   },
   "settings": {
     "react": {
       "version": "latest"
     }
   },
+  "plugins": ["react", "react-hooks"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",

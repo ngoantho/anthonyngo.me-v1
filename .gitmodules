@@ -1,0 +1,6 @@
+[submodule "src/projects"]
+	path = src/projects
+	url = /Users/anthony/Projects/.history
+[submodule "src/readme"]
+	path = src/readme
+	url = https://github.com/ngoantho/ngoantho
