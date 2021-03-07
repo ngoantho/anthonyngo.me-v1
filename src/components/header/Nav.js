@@ -19,11 +19,16 @@ let Nav = ({ mobile, closeMenu }) => {
             garden
           </a>
         </li>
+        <li onClick={mobile && closeMenu}>
+          <Link href="/contact">
+            <a>contact</a>
+          </Link>
+        </li>
       </ul>
       <style jsx>{`
         #list {
           list-style: none;
-          columns: 3;
+          columns: 4;
           margin: 2rem 0;
           font-family: monospace;
 
