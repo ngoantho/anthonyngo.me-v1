@@ -15,11 +15,6 @@ let Nav = ({ mobile, closeMenu }) => {
           </Link>
         </li>
         <li onClick={mobile && closeMenu}>
-          <a href="//wiki.anthonyngo.me" target="_blank">
-            garden
-          </a>
-        </li>
-        <li onClick={mobile && closeMenu}>
           <Link href="/contact">
             <a>contact</a>
           </Link>
@@ -28,15 +23,13 @@ let Nav = ({ mobile, closeMenu }) => {
       <style jsx>{`
         #list {
           list-style: none;
-          columns: 4;
+          columns: 3;
           margin: 2rem 0;
           font-family: monospace;
 
           & li:nth-of-type(2) {
-            margin-right: 1.25rem;
-          }
-          & li:nth-of-type(3) {
-            margin-left: 1.25rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
           }
 
           & a:hover {
