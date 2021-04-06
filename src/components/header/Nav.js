@@ -28,8 +28,11 @@ let Nav = ({ mobile, closeMenu }) => {
           font-family: monospace;
 
           & li:nth-of-type(2) {
-            margin-left: 1rem;
-            margin-right: 1rem;
+            padding-right: 1rem;
+          }
+
+          & li:nth-of-type(3) {
+            padding-left: 1rem;
           }
 
           & a:hover {
